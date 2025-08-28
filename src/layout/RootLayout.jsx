@@ -28,33 +28,33 @@ const RootLayout = () => {
     // ===== nav links as JSX fragment (reuse in sidebar UL) =====
     const navLinks = (
         <>
-            <li>
-                <Link to="/dashboard" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+            <li className="">
+                <Link to="/dashboard" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Dashboard
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/schedule" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+                <Link to="/dashboard/schedule" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Schedule
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/budget" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+                <Link to="/dashboard/budget" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Budget
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/notes" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+                <Link to="/dashboard/notes" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Notes
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/tasks" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+                <Link to="/dashboard/tasks" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Tasks
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/settings" className="rounded-md px-2 py-1 hover:bg-secondary/30">
+                <Link to="/dashboard/settings" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Settings
                 </Link>
             </li>

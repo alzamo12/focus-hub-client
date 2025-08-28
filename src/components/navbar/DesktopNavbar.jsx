@@ -2,7 +2,7 @@ import React from 'react';
 
 const DesktopNavbar = ({timeString, dateString}) => {
     return (
-          <header className="hidden md:flex items-center justify-between h-16 px-6 border-b border-base-200 bg-base-100">
+          <header className="hidden md:flex items-center justify-between h-16 px-6 border-b border-primary bg-base-100">
                     {/* Left: empty or breadcrumbs (keeps outlet width aligned) */}
                     <div className="flex items-center gap-4">
                         {/* optional space for page title if needed */}
