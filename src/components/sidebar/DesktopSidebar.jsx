@@ -1,0 +1,28 @@
+
+const DesktopSidebar = ({navLinks}) => {
+    return (
+           <aside className="hidden md:flex md:flex-col w-64 min-w-[240px] bg-primary text-base-100 shadow-lg">
+            <div className="p-4 flex items-center gap-3 border-b border-primary/30">
+                {/* PLACE YOUR LOGO + SITE NAME HERE */}
+                {/* Example: <img src="/logo.png" alt="StudentLife" className="w-8 h-8 rounded" /> */}
+                <div>
+                    <div className="text-xl font-bold">[LOGO]</div>
+                    <div className="text-sm font-semibold">StudentLife</div>
+                </div>
+            </div>
+
+            <nav className="flex-1 overflow-auto p-4">
+                <ul className="space-y-2 text-sm">{navLinks}</ul>
+            </nav>
+
+            <div className="p-4 border-t border-primary/30">
+                {/* small footer / version or logout */}
+                <button className="btn btn-ghost btn-sm w-full justify-start text-base-100/90">
+                    Logout
+                </button>
+            </div>
+        </aside>
+    );
+};
+
+export default DesktopSidebar;
