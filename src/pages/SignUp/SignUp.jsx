@@ -1,11 +1,131 @@
-import React from 'react';
+// src/pages/SignUp.jsx
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 
 const SignUp = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
+    const { createUser, updateUser } = useAuth();
+
+    function onSubmit(data) {
+        // Design-only: do nothing
+        // console.log(data);
+        const { email, name, password, photo } = data;
+        createUser(email, password)
+            .then(() => {
+                updateUser(name, photo)
+                // console.log(result)
+            })
+            .catch(err => {
+                console.log(err)
+                // todo: show an error msg to the user
+            })
+    }
+
     return (
-        <div>
-            <h2 className="card-title">This is SignUp Page</h2>
+        <div className="card bg-base-100 shadow-lg rounded-2xl p-6">
+            <h1 className="text-2xl font-semibold text-neutral-900 mb-1">Sign Up</h1>
+            <p className="text-sm text-neutral-700 mb-6">Create a new account for Focus Hub</p>
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                {/* Name */}
+                <div>
+                    <label htmlFor="name" className="text-sm font-medium text-neutral-800 block mb-2">
+                        Full Name
+                    </label>
+                    <input
+                        id="name"
+                        {...register("name", { required: true })}
+                        type="text"
+                        placeholder="Your Name"
+                        className="input input-bordered w-full rounded-lg bg-white"
+                    />
+                    {errors.name && <span className="text-xs text-red-500">Name is required</span>}
+                </div>
+
+                {/* Email */}
+                <div>
+                    <label htmlFor="email" className="text-sm font-medium text-neutral-800 block mb-2">
+                        Email
+                    </label>
+                    <input
+                        id="email"
+                        {...register("email", { required: true })}
+                        type="email"
+                        placeholder="you@example.com"
+                        className="input input-bordered w-full rounded-lg bg-white"
+                    />
+                    {errors.email && <span className="text-xs text-red-500">Email is required</span>}
+                </div>
+
+                {/* Photo URL */}
+                <div>
+                    <label htmlFor="photo" className="text-sm font-medium text-neutral-800 block mb-2">
+                        Photo URL
+                    </label>
+                    <input
+                        id="photo"
+                        {...register("photo")}
+                        type="url"
+                        placeholder="https://example.com/photo.jpg"
+                        className="input input-bordered w-full rounded-lg bg-white"
+                    />
+                </div>
+
+                {/* Password */}
+                <div>
+                    <label htmlFor="password" className="text-sm font-medium text-neutral-800 block mb-2">
+                        Password
+                    </label>
+                    <div className="relative">
+                        <input
+                            id="password"
+                            {...register("password", { required: true })}
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            className="input input-bordered w-full rounded-lg pr-12 bg-white"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword((s) => !s)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm h-8 w-10 p-0 rounded"
+                        >
+                            {showPassword ? "🙈" : "👁️"}
+                        </button>
+                    </div>
+                    {errors.password && <span className="text-xs text-red-500">Password is required</span>}
+                </div>
+
+                {/* Sign Up button */}
+                <div>
+                    <button type="submit" className="btn btn-primary w-full rounded-lg text-white">
+                        Sign Up
+                    </button>
+                </div>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-base-200" />
+                    <div className="text-xs text-neutral-500">or</div>
+                    <div className="flex-1 h-px bg-base-200" />
+                </div>
+
+                {/* Google login */}
+                <GoogleLogin />
+            </form>
+
+            {/* Bottom navigator -> Sign In */}
+            <div className="mt-6 text-center text-sm text-neutral-700">
+                Already have an account?{" "}
+                <Link to="/signin" className="font-medium text-primary hover:underline">
+                    Sign In
+                </Link>
+            </div>
         </div>
     );
 };
 
-export default SignUp;
+export default SignUp

@@ -1,7 +1,7 @@
 
 const DesktopSidebar = ({navLinks}) => {
     return (
-           <aside className="hidden md:flex md:flex-col w-64 min-w-[240px] bg-primary text-base-100 shadow-lg">
+           <aside className="hidden text-gray-700 md:flex md:flex-col w-64 min-w-[240px] bg-primary shadow-lg">
             <div className="p-4 flex items-center gap-3 border-b border-primary/30">
                 {/* PLACE YOUR LOGO + SITE NAME HERE */}
                 {/* Example: <img src="/logo.png" alt="StudentLife" className="w-8 h-8 rounded" /> */}
@@ -17,7 +17,7 @@ const DesktopSidebar = ({navLinks}) => {
 
             <div className="p-4 border-t border-primary/30">
                 {/* small footer / version or logout */}
-                <button className="btn btn-ghost btn-lg w-full justify-start text-base-100/90">
+                <button className="btn btn-ghost btn-lg w-full justify-start text-gray-700 hover:bg-accent">
                     Logout
                 </button>
             </div>
