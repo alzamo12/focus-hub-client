@@ -1,6 +1,8 @@
 import { Menu } from 'lucide-react';
+import useAuth from '../../hooks/useAuth';
 
 const MobileNavbar = ({setDrawerOpen, timeString, dateString}) => {
+    const {user} = useAuth();
     return (
         <header className="md:hidden flex items-center justify-between h-14 px-4 bg-base-100 border-b border-base-200">
             {/* Hamburger */}
@@ -21,7 +23,7 @@ const MobileNavbar = ({setDrawerOpen, timeString, dateString}) => {
             {/* Small avatar (tap for profile) */}
             <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-xs font-bold text-neutral-900">
-                    AZ
+                    <img src={user?.photoURL} className='w-8 h-8 rounded-full' alt="" />
                 </div>
             </div>
         </header>

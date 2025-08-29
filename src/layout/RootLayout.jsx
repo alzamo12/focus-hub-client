@@ -5,12 +5,13 @@ import DesktopNavbar from "../components/navbar/DesktopNavbar";
 import MobileNavbar from "../components/navbar/MobileNavbar";
 import DesktopSidebar from "../components/sidebar/desktopSidebar";
 import MobileSidebar from "../components/sidebar/MobileSidebar";
+import useAuth from "../hooks/useAuth";
 
 
 const RootLayout = () => {
     // mobile drawer open state
     const [drawerOpen, setDrawerOpen] = useState(false);
-
+    const {logout} = useAuth();
     // live date/time
     const [now, setNow] = useState(new Date());
     useEffect(() => {
@@ -64,7 +65,7 @@ const RootLayout = () => {
     return (
         <div className="flex h-screen bg-base-100 text-neutral-900">
             {/* sidebar for md+ devices */}
-            <DesktopSidebar navLinks={navLinks} />
+            <DesktopSidebar logout={logout} navLinks={navLinks} />
 
             {/* proper outlet + navbar*/}
             <div className="flex-1 flex flex-col">
@@ -79,7 +80,7 @@ const RootLayout = () => {
 
                 {/* Mobile sidebar drawer */}
                 {drawerOpen && (
-                    <MobileSidebar setDrawerOpen={setDrawerOpen} navLinks={navLinks} />
+                    <MobileSidebar logout={logout} setDrawerOpen={setDrawerOpen} navLinks={navLinks} />
                 )}
 
                 {/* Outlet area (content) */}

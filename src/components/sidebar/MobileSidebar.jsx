@@ -1,13 +1,13 @@
 import { X } from "lucide-react";
 
-const MobileSidebar = ({ setDrawerOpen, navLinks }) => {
+const MobileSidebar = ({ setDrawerOpen, navLinks, logout }) => {
     return (
         <div className="fixed inset-0 z-50 flex md:hidden">
             <div className="w-72 bg-primary text-base-100 shadow-xl flex flex-col">
                 <div className="p-4 flex items-center justify-between border-b border-primary/30">
                     <div>
                         <div className="text-lg font-bold">[LOGO]</div>
-                        <div className="text-sm font-semibold">StudentLife</div>
+                        <div className="text-sm font-semibold">Focus Hub</div>
                     </div>
                     <button
                         aria-label="Close menu"
@@ -23,7 +23,10 @@ const MobileSidebar = ({ setDrawerOpen, navLinks }) => {
                 </nav>
 
                 <div className="p-4 border-t border-primary/30">
-                    <button className="btn btn-ghost btn-sm w-full justify-start text-base-100/90">
+                    <button onClick={() => {
+                        logout()
+                        setDrawerOpen(false)
+                    }} className="btn btn-ghost btn-sm w-full justify-start text-base-100/90">
                         Logout
                     </button>
                 </div>

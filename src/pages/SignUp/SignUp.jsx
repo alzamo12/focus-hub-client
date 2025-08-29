@@ -4,20 +4,24 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateUser } = useAuth();
+    const axiosPublic = useAxiosPublic();
 
     function onSubmit(data) {
         // Design-only: do nothing
         // console.log(data);
         const { email, name, password, photo } = data;
         createUser(email, password)
-            .then(() => {
+            .then(async() => {
                 updateUser(name, photo)
                 // console.log(result)
+                const res = await axiosPublic.post('/user', data);
+                console.log(res?.data)
             })
             .catch(err => {
                 console.log(err)

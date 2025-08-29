@@ -1,26 +1,27 @@
-import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const GoogleLogin = () => {
-      const { googleLogin } = useAuth();
+    const { googleLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/";
     // const { mutate } = useCreateUser(from);
+    const axiosPublic = useAxiosPublic();
 
     const handleSocialLogin = () => {
         googleLogin()
-            .then((result) => {
+            .then(async (result) => {
                 const user = result?.user;
                 const userData = {
                     name: user?.displayName,
                     email: user?.email,
                     photoURL: user?.photoURL
                 };
+                const res = await axiosPublic.post("/user", userData);
+                console.log(res?.data)
                 navigate(from)
-                // console.log(user)
-                // mutate({userData})
             })
             .catch(err => {
                 console.error(err)
@@ -29,10 +30,9 @@ const GoogleLogin = () => {
     return (
         <div>
             <button
-            onClick={handleSocialLogin}
+                onClick={handleSocialLogin}
                 type="button"
                 className="btn btn-outline w-full rounded-lg flex items-center justify-center gap-3"
-            // design-only: connect Google auth onClick
             >
                 {/* Google icon */}
                 <svg width="18" height="18" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
