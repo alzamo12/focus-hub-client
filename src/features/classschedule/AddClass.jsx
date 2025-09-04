@@ -23,8 +23,6 @@ const classSchema = z.object({
     // color: z.string().regex(/^#([0-9A-Fa-f]{6})$/),
     // userEmail: z.string().email(),
 });
-
-
 function TimeInput({ value, onChange, name }) {
     const [showClock, setShowClock] = useState(false);
 
@@ -57,12 +55,14 @@ function TimeInput({ value, onChange, name }) {
             )}
         </div>
     );
-}
+};
+
+// main add class component of the files
 const AddClass = () => {
     const queryClient = useQueryClient();
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
-    // const axiosSecure = useAxiosSecure();
+
     // Fetch Classes
     // Add Class
     const { mutateAsync } = useMutation({
