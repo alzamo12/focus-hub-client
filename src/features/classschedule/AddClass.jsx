@@ -8,6 +8,8 @@ import Timekeeper from "react-timekeeper";
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast, ToastContainer } from 'react-toastify';
+import useAuth from '../../hooks/useAuth';
 
 const Days = ["monday", "tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -28,6 +30,7 @@ function TimeInput({ value, onChange, name }) {
 
     return (
         <div className="">
+            {/* <ToastContainer /> */}
             {/* Input */}
             <input
                 type="text"
@@ -58,6 +61,7 @@ function TimeInput({ value, onChange, name }) {
 const AddClass = () => {
     const queryClient = useQueryClient();
     const axiosPublic = useAxiosPublic();
+    const { user } = useAuth();
     // const axiosSecure = useAxiosSecure();
     // Fetch Classes
     // Add Class
@@ -69,6 +73,9 @@ const AddClass = () => {
         onSuccess: (result) => {
             queryClient.invalidateQueries(["classes"]);
             console.log(result)
+            if (result?.acknowledged) {
+                toast.success('Your data has inserted successfully')
+            }
         },
     });
 
@@ -80,7 +87,7 @@ const AddClass = () => {
         formState: { errors },
     } = useForm({
         // resolver: zodResolver(classSchema),
-        defaultValues: { userEmail: "test@email.com" },
+        defaultValues: { userEmail: user?.email },
     });
 
     const subjects = [
@@ -106,8 +113,8 @@ const AddClass = () => {
     ];
 
     const onSubmit = (data) => {
-        // mutateAsync(data);
-        console.log(data)
+        mutateAsync(data);
+        // console.log(data)
     };
     return (
         <div className="p-6 w-full mx-auto bg-[--color-base-100] h-auto">
@@ -119,13 +126,6 @@ const AddClass = () => {
                     placeholder="Module Name"
                     className="input input-bordered w-full bg-white border-[--color-accent]"
                 />
-                {/* prev subject input */}
-                {/* <input
-                    {...register("subject")}
-                    placeholder="Subject"
-                    className="input input-bordered w-full bg-white border-[--color-accent]"
-                />
-                {errors.subject && <p className="text-red-500">{errors.subject.message}</p>} */}
                 <Controller
                     name="subject"
                     required={true}
@@ -174,25 +174,6 @@ const AddClass = () => {
                     )}
                 />
 
-
-                {/* day comment */}
-                {/* <select
-                    {...register("day")}
-                    className="select select-bordered w-full bg-white border-[--color-accent]"
-                >
-                    <option value="">Select Day</option>
-                    {Days.map((d) => (
-                        <option key={d} value={d}>{d}</option>
-                    ))}
-                </select> */}
-                {/* <Select options={days} isMulti placeholder="Select Day"></Select> */}
-
-                {/* <input
-                    {...register("startTime")}
-                    type="time"
-                    placeholder='Select start time'
-                    className="input input-bordered bg-white border-[--color-accent]"
-                /> */}
                 <Controller
                     name="startTime"
                     control={control}
@@ -205,7 +186,6 @@ const AddClass = () => {
                     )}
                 />
 
-
                 <Controller
                     name="endTime"
                     control={control}
@@ -217,12 +197,6 @@ const AddClass = () => {
                         <TimeInput {...field} />
                     )}
                 />
-
-                {/* <input
-                    {...register("endTime")}
-                    type="time"
-                    className="input input-bordered bg-white border-[--color-accent]"
-                /> */}
 
                 <input
                     {...register("instructor")}
@@ -240,7 +214,7 @@ const AddClass = () => {
                     className="input input-bordered w-full bg-white border-[--color-accent]"
                 />
 
-               
+
 
                 <button
                     type="submit"

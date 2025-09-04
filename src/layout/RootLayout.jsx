@@ -6,12 +6,13 @@ import MobileNavbar from "../components/navbar/MobileNavbar";
 import DesktopSidebar from "../components/sidebar/desktopSidebar";
 import MobileSidebar from "../components/sidebar/MobileSidebar";
 import useAuth from "../hooks/useAuth";
+import { ToastContainer } from 'react-toastify';
 
 
 const RootLayout = () => {
     // mobile drawer open state
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const {logout} = useAuth();
+    const { logout } = useAuth();
     // live date/time
     const [now, setNow] = useState(new Date());
     useEffect(() => {
@@ -64,6 +65,7 @@ const RootLayout = () => {
 
     return (
         <div className="flex h-screen bg-base-100 text-neutral-900">
+            <ToastContainer />
             {/* sidebar for md+ devices */}
             <DesktopSidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} logout={logout} navLinks={navLinks} />
 

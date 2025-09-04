@@ -60,62 +60,13 @@ export default function Classes() {
         <div className="p-6 max-w-4xl mx-auto bg-[--color-base-100] min-h-screen">
             <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="grid md:grid-cols-2 gap-4 mb-6">
-                <input
-                    {...register("subject")}
-                    placeholder="Subject"
-                    className="input input-bordered w-full bg-white border-[--color-accent]"
-                />
-                {errors.subject && <p className="text-red-500">{errors.subject.message}</p>}
-
-                <select
-                    {...register("day")}
-                    className="select select-bordered w-full bg-white border-[--color-accent]"
-                >
-                    <option value="">Select Day</option>
-                    {Days.map((d) => (
-                        <option key={d} value={d}>{d}</option>
-                    ))}
-                </select>
-
-                <input
-                    {...register("startTime")}
-                    type="time"
-                    className="input input-bordered bg-white border-[--color-accent]"
-                />
-                <input
-                    {...register("endTime")}
-                    type="time"
-                    className="input input-bordered bg-white border-[--color-accent]"
-                />
-
-                <input
-                    {...register("instructor")}
-                    placeholder="Instructor"
-                    className="input input-bordered w-full bg-white border-[--color-accent]"
-                />
-
-                <input
-                    {...register("color")}
-                    type="color"
-                    className="input w-full h-12"
-                />
-
-                <button
-                    type="submit"
-                    className="btn col-span-2 text-black bg-[--color-primary] hover:bg-[--color-accent]"
-                >
-                    Add Class
-                </button>
-            </form>
 
             {/* Class List */}
             <div className="grid gap-4">
                 {classes.map((cls) => (
                     <div
                         key={cls._id}
-                        className="p-4 rounded-xl shadow-md flex justify-between items-center shadow-2xl"
+                        className="p-4 rounded-xl flex justify-between items-center shadow-2xl bg-primary"
                         // style={{ backgroundColor: cls.color || "var(--color-secondary)" }}
                     >
                         <div>
