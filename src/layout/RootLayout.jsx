@@ -30,32 +30,32 @@ const RootLayout = () => {
     const navLinks = (
         <>
             <li className="">
-                <Link to="/dashboard" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Dashboard
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/schedule" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/class-schedule-tracker" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Schedule
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/budget" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/budget" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Budget
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/notes" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/notes" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Notes
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/tasks" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/tasks" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Tasks
                 </Link>
             </li>
             <li>
-                <Link to="/dashboard/settings" className="rounded-md px-4 py-1 hover:bg-secondary/30">
+                <Link to="/settings" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Settings
                 </Link>
             </li>
@@ -65,23 +65,18 @@ const RootLayout = () => {
     return (
         <div className="flex h-screen bg-base-100 text-neutral-900">
             {/* sidebar for md+ devices */}
-            <DesktopSidebar logout={logout} navLinks={navLinks} />
+            <DesktopSidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} logout={logout} navLinks={navLinks} />
 
             {/* proper outlet + navbar*/}
             <div className="flex-1 flex flex-col">
                 {/* Desktop navbar (visible md+) - occupies outlet width only */}
-                <DesktopNavbar timeString={timeString} dateString={dateString} />
+                <DesktopNavbar setDrawerOpen={setDrawerOpen} timeString={timeString} dateString={dateString} />
 
                 {/* Mobile navbar (visible < md) */}
-                <MobileNavbar setDrawerOpen={setDrawerOpen}
+                {/* <MobileNavbar setDrawerOpen={setDrawerOpen}
                     timeString={timeString}
                     dateString={dateString}
-                />
-
-                {/* Mobile sidebar drawer */}
-                {drawerOpen && (
-                    <MobileSidebar logout={logout} setDrawerOpen={setDrawerOpen} navLinks={navLinks} />
-                )}
+                /> */}
 
                 {/* Outlet area (content) */}
                 <main className="flex-1 overflow-auto p-4 md:p-6">
