@@ -5,7 +5,7 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
     const { user } = useAuth();
     const { displayName = 'user', photoURL = 'photo-url' } = user || {};
     return (
-        <header className="flex items-center justify-between h-16 px-6 border-b border-primary bg-base-100">
+        <nav className="flex items-center justify-between h-16 px-6 border-b border-primary bg-base-100">
             {/* Left: empty or breadcrumbs (keeps outlet width aligned) */}
             <div className="flex items-center gap-4">
                 <button
@@ -37,7 +37,7 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
                     </div>
                 </div>
             </div>
-        </header>
+        </nav>
     );
 };
 

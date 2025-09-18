@@ -14,7 +14,9 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                 <ul key={extraNavs.length} className="space-y-2 border text-lg font-medium mt-4 border-t border-[--color-accent] pt-2">
                     <li className="cursor-pointer">Extra Link 1</li>
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                    <li>                    <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>open modal</button></li>
+                    <li>
+                        <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>open modal</button>
+                    </li>
 
                 </ul>
             );
@@ -38,7 +40,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
         { value: "geography", label: "Geography" }
     ];
     return (
-        <aside className={` text-gray-700 md:flex md:relative md:translate-x-0 transition flex-col w-64 md:min-w-[240px] bg-primary shadow-lg  fixed inset-x-0 z-50 
+        <aside className={` text-gray-700 md:flex md:relative md:translate-x-0 flex-col w-64 md:min-w-[240px] bg-primary shadow-lg fixed z-50 
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
             <div className="p-4 flex items-center gap-3 border-b border-primary/30">
                 {/* PLACE YOUR LOGO + SITE NAME HERE */}

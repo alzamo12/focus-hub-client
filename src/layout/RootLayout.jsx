@@ -64,22 +64,23 @@ const RootLayout = () => {
     );
 
     return (
-        <div className="flex h-screen bg-base-100 text-neutral-900">
+        <div className="flex min-h-screen bg-base-100 text-neutral-900">
             <ToastContainer />
-            {/* sidebar for md+ devices */}
-            <DesktopSidebar setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} logout={logout} navLinks={navLinks} />
-
+            {/* sidebar */}
+            <DesktopSidebar setDrawerOpen={setDrawerOpen}
+                drawerOpen={drawerOpen}
+                logout={logout}
+                navLinks={navLinks}
+                 />
             {/* proper outlet + navbar*/}
             <div className="flex-1 flex flex-col">
-                {/* Desktop navbar (visible md+) - occupies outlet width only */}
-                <DesktopNavbar setDrawerOpen={setDrawerOpen} timeString={timeString} dateString={dateString} />
-
-                {/* Mobile navbar (visible < md) */}
-                {/* <MobileNavbar setDrawerOpen={setDrawerOpen}
-                    timeString={timeString}
-                    dateString={dateString}
-                /> */}
-
+                {/* navbar */}
+                <header>
+                    <DesktopNavbar
+                        setDrawerOpen={setDrawerOpen}
+                        timeString={timeString}
+                        dateString={dateString} />
+                </header>
                 {/* Outlet area (content) */}
                 <main className="flex-1 overflow-auto p-4 md:p-6">
                     <Outlet />
