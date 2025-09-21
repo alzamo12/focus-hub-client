@@ -7,6 +7,7 @@ import { da } from "zod/v4/locales";
 import AddClass from "../../features/classschedule/AddClass";
 import ClassCard from "../../components/Class/ClassCard";
 import { data, UNSAFE_createClientRoutesWithHMRRevalidationOptOut } from "react-router";
+import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
 
 export default function Classes() {
     const axiosPublic = useAxiosPublic();
@@ -15,7 +16,7 @@ export default function Classes() {
     const queryClient = useQueryClient();
     // const axiosSecure = useAxiosSecure();
     // Fetch Classes
-    const { data: classes = [] } = useQuery({
+    const { data: classes = [], isLoading } = useQuery({
         queryKey: ["classes", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/classes?email=${user?.email}`);
@@ -44,6 +45,12 @@ export default function Classes() {
 
     const handleEdit = (id) => {
         document.getElementById(`my_module_${id}`).showModal()
+    };
+
+    // console.log(isLoading)
+    if (isLoading) {
+        return <LoadingSpinner />
+
     }
 
     return (

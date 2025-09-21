@@ -1,5 +1,5 @@
 import useAuth from '../../hooks/useAuth';
-import { useLocation, useNavigate } from 'react-router';
+import {  useLocation, useNavigate } from 'react-router';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const GoogleLogin = () => {
@@ -10,6 +10,7 @@ const GoogleLogin = () => {
     // const { mutate } = useCreateUser(from);
     const axiosPublic = useAxiosPublic();
 
+
     const handleSocialLogin = () => {
         googleLogin()
             .then(async (result) => {
@@ -19,9 +20,16 @@ const GoogleLogin = () => {
                     email: user?.email,
                     photoURL: user?.photoURL
                 };
-                const res = await axiosPublic.post("/user", userData);
-                console.log(res?.data)
-                navigate(from)
+                try {
+                    const res = await axiosPublic.post("/user", userData);
+                    console.log(res?.data)
+                }
+                catch {
+                    // console.log(err)
+                }
+                finally {
+                    navigate(from)
+                }
             })
             .catch(err => {
                 console.error(err)

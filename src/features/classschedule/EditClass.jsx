@@ -5,6 +5,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import AddClassForm from '../../components/Class/AddClassForm';
+import { toast } from 'react-toastify';
 
 
 const subjects = [
@@ -19,9 +20,9 @@ const subjects = [
     { value: "economics", label: "Economics" },
     { value: "geography", label: "Geography" }
 ];
-const EditClass = ({cls}) => {
-    const { module, instructor, room, building, subject, date, startTime, endTime } = cls;
-    console.log(cls)
+const EditClass = ({ cls }) => {
+    const { _id, userEmail, module, instructor, room, building, subject, date, startTime, endTime } = cls;
+    // console.log(cls)
     const queryClient = useQueryClient();
     // const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -46,17 +47,27 @@ const EditClass = ({cls}) => {
         },
     });
 
-    const { mutateAsync } = useMutation({
-        mutationFn: async (id) => {
-            const res = await axiosSecure.patch(`/class/${id}`)
+    const { mutateAsync: classEditAsync } = useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosSecure.patch(`/class/${_id}`, data);
+            return res?.data
+        },
+        onSuccess: async (data) => {
+            toast.success("class updated successfully");
+            console.log(data)
+            queryClient.invalidateQueries({ queryKey: ["classes"] })
+        },
+        onError: (err) => {
+            console.log(err)
         }
     })
 
     const onSubmit = (data) => {
-        const newData = {
-            ...data,
-            userEmail: user.email
-        };
+        // console.log(data)
+        if (user.email !== userEmail) {
+            return alert("you can't change this class")
+        }
+        classEditAsync(data)
         // mutateAsync(newData);
         // console.log(data)
     };

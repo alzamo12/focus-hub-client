@@ -5,6 +5,7 @@ import RootLayout from "../layout/RootLayout";
 import AuthLayout from "../layout/AuthLayout";
 import Home from "../pages/home/Home";
 import ClassScheduleTracker from "../pages/classScheduleTracker/ClassScheduleTracker";
+import GenerateQuestions from "../pages/GenerateQuestions/GenerateQuestions";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: 'class-schedule-tracker',
                 Component: ClassScheduleTracker
+            },
+            {
+                path: "generate-questions",
+                Component: GenerateQuestions
             }
         ]
     },
