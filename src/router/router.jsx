@@ -6,6 +6,7 @@ import AuthLayout from "../layout/AuthLayout";
 import Home from "../pages/home/Home";
 import ClassScheduleTracker from "../pages/classScheduleTracker/ClassScheduleTracker";
 import GenerateQuestions from "../pages/GenerateQuestions/GenerateQuestions";
+import Budget from "../pages/Budget/Budget";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: "generate-questions",
                 Component: GenerateQuestions
+            },
+            {
+                path: "budget",
+                Component: Budget
             }
         ]
     },
