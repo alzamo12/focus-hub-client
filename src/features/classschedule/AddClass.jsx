@@ -1,29 +1,25 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import z from 'zod';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Select from "react-select";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { useForm } from 'react-hook-form';
 import Timekeeper from "react-timekeeper";
 import { useState } from 'react';
-import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import useAuth from '../../hooks/useAuth';
 import AddClassForm from '../../components/Class/AddClassForm';
 
 const Days = ["monday", "tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
-const classSchema = z.object({
-    subject: z.string().min(1).max(100),
-    day: z.enum(Days),
-    startTime: z.string().regex(HHMM),
-    endTime: z.string().regex(HHMM),
-    instructor: z.string().min(1).max(100),
-    // color: z.string().regex(/^#([0-9A-Fa-f]{6})$/),
-    // userEmail: z.string().email(),
-});
+// const classSchema = z.object({
+//     subject: z.string().min(1).max(100),
+//     day: z.enum(Days),
+//     startTime: z.string().regex(HHMM),
+//     endTime: z.string().regex(HHMM),
+//     instructor: z.string().min(1).max(100),
+//     // color: z.string().regex(/^#([0-9A-Fa-f]{6})$/),
+//     // userEmail: z.string().email(),
+// });
 export function TimeInput({ value, onChange, name }) {
     const [showClock, setShowClock] = useState(false);
 
@@ -61,14 +57,15 @@ export function TimeInput({ value, onChange, name }) {
 // main add class component of the files
 const AddClass = () => {
     const queryClient = useQueryClient();
-    const axiosPublic = useAxiosPublic();
+    // const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     // console.log(user)
     // Fetch Classes
     // Add Class
     const { mutateAsync } = useMutation({
         mutationFn: async (newClass) => {
-            const res = await axiosPublic.post("/class", newClass);
+            const res = await axiosSecure.post("/class", newClass);
             return res.data;
         },
         onSuccess: (result) => {
@@ -85,7 +82,7 @@ const AddClass = () => {
         register,
         handleSubmit,
         control,
-        formState: { errors },
+        // formState: { errors },
     } = useForm({
         // resolver: zodResolver(classSchema),
         defaultValues: {
@@ -105,15 +102,15 @@ const AddClass = () => {
         { value: "economics", label: "Economics" },
         { value: "geography", label: "Geography" }
     ];
-    const days = [
-        { value: "monday", label: "Monday" },
-        { value: "tuesday", label: "Tuesday" },
-        { value: "wednesday", label: "Wednesday" },
-        { value: "thursday", label: "Thursday" },
-        { value: "friday", label: "Friday" },
-        { value: "saturday", label: "Saturday" },
-        { value: "sunday", label: "Sunday" }
-    ];
+    // const days = [
+    //     { value: "monday", label: "Monday" },
+    //     { value: "tuesday", label: "Tuesday" },
+    //     { value: "wednesday", label: "Wednesday" },
+    //     { value: "thursday", label: "Thursday" },
+    //     { value: "friday", label: "Friday" },
+    //     { value: "saturday", label: "Saturday" },
+    //     { value: "sunday", label: "Sunday" }
+    // ];
 
     const onSubmit = (data) => {
         const newData = {

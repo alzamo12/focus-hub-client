@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddExpenseForm = ({ onAdd }) => {
+const AddExpenseForm = ({ onAdd, onSubmit }) => {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("Books");
@@ -10,12 +10,20 @@ const AddExpenseForm = ({ onAdd }) => {
         e.preventDefault();
         if (!title || !amount || !date) return alert("Please fill all fields");
 
+        const data = {
+            title,
+            amount: parseFloat(amount),
+            category,
+            date
+        };
+
         onAdd({
             title,
             amount: parseFloat(amount),
             category,
             date,
         });
+        onSubmit(data)
 
         // reset form
         setTitle("");

@@ -13,7 +13,7 @@ const ExpenseList = ({ expenses }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.length > 0 ? (
+                    {expenses?.length > 0 ? (
                         expenses.map((exp, index) => (
                             <tr key={index}>
                                 <td>{exp.title}</td>
