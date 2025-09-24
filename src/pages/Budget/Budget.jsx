@@ -21,7 +21,7 @@ const Budget = () => {
     // console.log(month)
     const { mutateAsync: addBudgetAsync } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.post("/budget", data);
+            const res = await axiosSecure.put("/budget", data);
             return res.data
         },
         onSuccess: (data) => {

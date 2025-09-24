@@ -36,7 +36,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
             <input
                 type="month"
                 name="month"
-                value={month}
+                defaultValue={month}
                 onChange={handleChange}
                 required
                 className="w-full border p-2 rounded"
