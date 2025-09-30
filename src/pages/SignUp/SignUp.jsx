@@ -124,7 +124,7 @@ const SignUp = () => {
             {/* Bottom navigator -> Sign In */}
             <div className="mt-6 text-center text-sm text-neutral-700">
                 Already have an account?{" "}
-                <Link to="/signin" className="font-medium text-primary hover:underline">
+                <Link to="/auth/signin" className="font-medium text-primary hover:underline">
                     Sign In
                 </Link>
             </div>

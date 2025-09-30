@@ -2,51 +2,48 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
+import QuestionForm from '../../components/GenerateQuestions/QuestionsForm';
 
 const GenerateQuestions = () => {
-    const [sub, setSub] = useState('');
-    // const [questions, setQuestions] = useState(null);
+    // const [sub, setSub] = useState('');
+    const [questionInfo, setQuestionInfo] = useState(null);
     const [loading, setLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
 
-    const { data: questions } = useQuery({
-        queryKey: ['question', sub],
+    const { data: questions, refetch } = useQuery({
+        queryKey: ['question', questionInfo],
         queryFn: async () => {
-            const res = await axiosSecure.post(`/gemini`, { sub });
-            console.log(res.data);
+            const res = await axiosSecure.post(`/gemini`, questionInfo);
             setLoading(false)
             return res.data
         },
-        enabled: !!sub,
+        enabled: !!questionInfo,
         refetchOnWindowFocus: false
     })
 
 
-    const handleSubmit = value => {
+    const handleSubmit = (subject, subTopic, level, language) => {
         setLoading(true)
-        setSub(value);
-        // refetch()
+        const questionInfo = {
+            subject: subject.value,
+            subTopic: subTopic.value,
+            level: level.value,
+            language: language.value
+        };
+        setQuestionInfo(questionInfo);
     };
+    console.log(questionInfo)
 
     return (
         <div>
             <h2 className="card-title">Generate questions</h2>
-            <div className='my-10 flex gap-5 '>
-                <button onClick={() => handleSubmit("Math")} className="btn btn-neutral">Math</button>
-                <button onClick={() => handleSubmit("English")} className="btn btn-primary">English</button>
-                <button onClick={() => handleSubmit("Bangla")} className="btn bg-green-700">Bangla</button>
-                <button onClick={() => handleSubmit("History")} className="btn btn-accent">History</button>
-                <button onClick={() => handleSubmit("Physics")} className="btn btn-info">Physics</button>
-                <button onClick={() => handleSubmit("Chemistry")} className="btn btn-success">Chemistry</button>
-                <button onClick={() => handleSubmit("Biology")} className="btn btn-warning">Biology</button>
-                <button onClick={() => handleSubmit("ICt")} className="btn btn-error">ICT</button>
-            </div>
+            <QuestionForm onSubmit={handleSubmit} />
             <div className='whitespace-pre-line'>
                 {
                     loading ?
                         <LoadingSpinner />
                         :
-                        questions?.reply
+                        questions
                 }
             </div>
         </div>
