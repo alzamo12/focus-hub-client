@@ -105,7 +105,7 @@ const QuestionForm = ({ onSubmit }) => {
     const [subTopic, setSubTopic] = useState(null);
     const [language, setLanguages] = useState("");
     return (
-        <div className="w-full mx-auto mt-5 p-6 bg-white shadow-lg rounded-xl grid grid-cols-2 gap-5">
+        <div className="w-full mx-auto mt-5 p-6 bg-white shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div className="mb-4 w-full">
                 <label className="block mb-2 font-medium">Subject</label>
                 <Select
@@ -140,7 +140,7 @@ const QuestionForm = ({ onSubmit }) => {
             <LanguageSelector onChange={setLanguages} />
 
             <button
-                className="w-1/3 cursor-pointer bg-secondary font-bold py-2 px-4 rounded text-black transition"
+                className="w-64 cursor-pointer bg-secondary font-bold py-2 px-4 rounded text-black transition"
                 onClick={() => onSubmit(subject, subTopic, level, language)}
                 disabled={!subject || !level || !subTopic}
             >
