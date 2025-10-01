@@ -7,11 +7,12 @@ import Home from "../pages/home/Home";
 import ClassScheduleTracker from "../pages/classScheduleTracker/ClassScheduleTracker";
 import GenerateQuestions from "../pages/GenerateQuestions/GenerateQuestions";
 import Budget from "../pages/Budget/Budget";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <RootLayout />,
+        element: <PrivateRoute><RootLayout /></PrivateRoute>,
         children: [
             {
                 index: true,

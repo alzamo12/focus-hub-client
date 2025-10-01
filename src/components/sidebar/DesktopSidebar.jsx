@@ -40,7 +40,8 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
         { value: "geography", label: "Geography" }
     ];
     return (
-        <aside className={` text-gray-700 md:flex md:relative md:translate-x-0 flex-col w-64 md:min-w-[240px] bg-primary shadow-lg fixed z-50 
+        <aside className={` text-gray-700 md:flex md:translate-x-0 flex-col w-64 
+            md:min-w-[240px] bg-primary shadow-lg z-50 h-screen fixed md:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
             <div className="p-4 flex items-center gap-3 border-b border-primary/30">
                 {/* PLACE YOUR LOGO + SITE NAME HERE */}

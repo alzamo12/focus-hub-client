@@ -28,7 +28,7 @@ const GenerateQuestions = () => {
             subject: subject.value,
             subTopic: subTopic.value,
             level: level.value,
-            language: language.value
+            language: language.label
         };
         setQuestionInfo(questionInfo);
     };
@@ -36,14 +36,17 @@ const GenerateQuestions = () => {
 
     return (
         <div>
-            <h2 className="card-title">Generate questions</h2>
+            <h2 className="card-title text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <QuestionForm onSubmit={handleSubmit} />
-            <div className='whitespace-pre-line'>
+            <div className='my-10'>
                 {
                     loading ?
                         <LoadingSpinner />
                         :
-                        questions
+                        <div>
+                            <h2 className="card-title font-bold mb-4">Here is the answer:</h2>
+                            <p className='whitespace-pre-line'>{questions}</p>
+                        </div>
                 }
             </div>
         </div>

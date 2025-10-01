@@ -84,9 +84,9 @@ function LanguageSelector({ onChange }) {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-6 p-4 bg-white shadow rounded-md">
+        <div className="mb-4 full">
             <label className="block mb-2 font-medium">Language</label>
-            <AsyncSelect
+            < AsyncSelect
                 cacheOptions
                 loadOptions={loadOptions}
                 defaultOptions={defaultOptions}
@@ -105,10 +105,8 @@ const QuestionForm = ({ onSubmit }) => {
     const [subTopic, setSubTopic] = useState(null);
     const [language, setLanguages] = useState("");
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-            <h2 className="text-2xl font-bold mb-4 text-center">Generate Questions</h2>
-
-            <div className="mb-4">
+        <div className="w-full mx-auto mt-5 p-6 bg-white shadow-lg rounded-xl grid grid-cols-2 gap-5">
+            <div className="mb-4 w-full">
                 <label className="block mb-2 font-medium">Subject</label>
                 <Select
                     options={subjects}
@@ -118,7 +116,7 @@ const QuestionForm = ({ onSubmit }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 w-full">
                 <label className="block mb-2 font-medium">Level</label>
                 <Select
                     options={levels}
@@ -128,7 +126,7 @@ const QuestionForm = ({ onSubmit }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Sub-topic</label>
                 <Select
                     options={subject ? subTopics[subject.value] : []}
@@ -138,12 +136,11 @@ const QuestionForm = ({ onSubmit }) => {
                     isDisabled={!subject}
                 />
             </div>
-            <div className="mb-4">
-                <LanguageSelector onChange={setLanguages} />
-            </div>
+
+            <LanguageSelector onChange={setLanguages} />
 
             <button
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+                className="w-1/3 cursor-pointer bg-secondary font-bold py-2 px-4 rounded text-black transition"
                 onClick={() => onSubmit(subject, subTopic, level, language)}
                 disabled={!subject || !level || !subTopic}
             >
