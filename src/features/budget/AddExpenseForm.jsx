@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddExpenseForm = ({ onAdd, onSubmit }) => {
+const AddExpenseForm = ({  onSubmit }) => {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("Books");
@@ -17,12 +17,12 @@ const AddExpenseForm = ({ onAdd, onSubmit }) => {
             date
         };
 
-        onAdd({
-            title,
-            amount: parseFloat(amount),
-            category,
-            date,
-        });
+        // onAdd({
+        //     title,
+        //     amount: parseFloat(amount),
+        //     category,
+        //     date,
+        // });
         onSubmit(data)
 
         // reset form

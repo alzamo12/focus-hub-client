@@ -4,9 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { da } from "zod/v4/locales";
-import AddClass from "../../features/classschedule/AddClass";
 import ClassCard from "../../components/Class/ClassCard";
-import { data, UNSAFE_createClientRoutesWithHMRRevalidationOptOut } from "react-router";
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
 
 export default function Classes() {
@@ -20,7 +18,7 @@ export default function Classes() {
         queryKey: ["classes", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/classes?email=${user?.email}`);
-            console.log(res?.data)
+            // console.log(res?.data)
             return res.data;
         },
     });
@@ -47,21 +45,22 @@ export default function Classes() {
         document.getElementById(`my_module_${id}`).showModal()
     };
 
-    // console.log(isLoading)
     if (isLoading) {
         return <LoadingSpinner />
 
     }
 
     return (
-        <div className="p-6 max-w-4xl mx-auto bg-[--color-base-100] min-h-screen">
+        <div className="p-6 w-full mx-auto bg-[--color-base-100] min-h-screen">
             <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
+            
             {/* Class List */}
-            <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
                 {classes.map((cls) => (
                     <ClassCard key={cls._id} cls={cls} handleDelete={handleDelete} handleEdit={handleEdit} />
                 ))}
             </div>
+
         </div>
     );
 }

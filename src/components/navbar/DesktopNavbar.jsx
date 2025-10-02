@@ -11,14 +11,14 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
     return (
         // <div className='fixed top-0 w-screen z-50'>
             <nav className="flex items-center justify-between h-16 
-         px-6 border-b border-primary bg-base-100
+         w-11/12 mx-auto border-primary bg-base-100
                  ">
                 {/* Left: empty or breadcrumbs (keeps outlet width aligned) */}
                 <div className="flex items-center gap-4">
                     <button
                         aria-label="Open menu"
                         onClick={() => setDrawerOpen(true)}
-                        className="p-2 flex md:hidden rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60"
+                        className="p-2 flex lg:hidden rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60"
                     >
                         <Menu className="w-6 h-6 text-neutral-900" />
                     </button>

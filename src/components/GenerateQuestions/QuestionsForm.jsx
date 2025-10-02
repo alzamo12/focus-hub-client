@@ -56,7 +56,7 @@ function LanguageSelector({ onChange }) {
         []
     );
 
-    const defaultOptions = useMemo(() => allLanguages.slice(0, 20), [allLanguages]);
+    const defaultOptions = useMemo(() => allLanguages.slice(0, 50), [allLanguages]);
 
     // loadOptions can use callback OR return a Promise
     const loadOptions = (inputValue, callback) => {
