@@ -6,19 +6,21 @@ import { toast } from "react-toastify";
 import { da } from "zod/v4/locales";
 import ClassCard from "../../components/Class/ClassCard";
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
+import { useState } from "react";
 
 export default function Classes() {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
-    // const axiosSecure = useAxiosSecure();
+    const [activeTab, setActiveTab] = useState("next");
+
     // Fetch Classes
     const { data: classes = [], isLoading } = useQuery({
-        queryKey: ["classes", user?.email],
+        queryKey: ["classes", user?.email, activeTab],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/classes?email=${user?.email}`);
-            // console.log(res?.data)
+            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}`);
+            console.log(res?.data)
             return res.data;
         },
     });
@@ -51,11 +53,33 @@ export default function Classes() {
     }
 
     return (
-        <div className="p-6 w-full mx-auto bg-[--color-base-100] min-h-screen">
+        <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen">
+            {/* name of each tab group should be unique */}
+            <div className="tabs tabs-border mb-10">
+                <input
+                    type="radio"
+                    name="my_tabs_2"
+                    checked={activeTab === "next"}
+                    onChange={() => setActiveTab("next")}
+                    className="tab"
+                    aria-label="Next Classes" />
+                {/* <div className="tab-content border-base-300 bg-base-100 p-10">Next Classes</div> */}
+
+                <input
+                    type="radio"
+                    name="my_tabs_2"
+                    checked={activeTab === "prev"}
+                    onChange={() => setActiveTab("prev")}
+                    className="tab"
+                    aria-label="Previous Classes"
+                />
+                {/* <div className="tab-content border-base-300 bg-base-100 p-10">Previous Classes</div> */}
+
+            </div>
             <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
-            
+
             {/* Class List */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {classes.map((cls) => (
                     <ClassCard key={cls._id} cls={cls} handleDelete={handleDelete} handleEdit={handleEdit} />
                 ))}

@@ -29,6 +29,12 @@ const router = createBrowserRouter([
             {
                 path: "budget",
                 Component: Budget
+            },
+            {
+                path: "tasks"
+            },
+            {
+                path: "notes"
             }
         ]
     },

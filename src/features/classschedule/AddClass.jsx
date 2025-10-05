@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useAuth from '../../hooks/useAuth';
 import AddClassForm from '../../components/Class/AddClassForm';
+import combineDateTime from '../../utils/combineDateTime';
 
 const Days = ["monday", "tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -117,6 +118,9 @@ const AddClass = () => {
             ...data,
             userEmail: user.email
         };
+        newData.startTime = combineDateTime(data.date, data.startTime);
+        newData.endTime = combineDateTime(data.date, data.endTime);
+        // console.log(newData)
         mutateAsync(newData);
         // console.log(data)
     };

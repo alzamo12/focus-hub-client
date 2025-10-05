@@ -75,7 +75,7 @@ const AddExpenseForm = ({  onSubmit }) => {
                 />
             </div>
 
-            <button type="submit" className="btn btn-primary mt-4">
+            <button type="submit" className="btn bg-secondary text-gray-600 cursor-pointer font-bold mt-4">
                 Add Expense
             </button>
         </form>

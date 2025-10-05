@@ -1,6 +1,15 @@
+import { format } from 'date-fns';
 import EditClass from '../../features/classschedule/EditClass';
+import { formatTime } from '../../utils/formatTime';
 
 const ClassCard = ({ cls, handleDelete, handleEdit }) => {
+    const startTime = formatTime(cls?.startTime);
+    const endTime = formatTime(cls?.endTime);
+    // const customLocaleDate = cls?.date.toLocaleDateString('en-US', {
+    //     year: 'numeric',
+    //     month: 'long',
+    //     day: 'numeric'
+    // });
     return (
         <div>
             <div
@@ -10,7 +19,7 @@ const ClassCard = ({ cls, handleDelete, handleEdit }) => {
             >
                 <div>
                     <h3 className="font-bold text-lg text-[--color-primary]">{cls.subject}</h3>
-                    <p className="text-[--color-accent]">{cls.day} | {cls.startTime} - {cls.endTime}</p>
+                    <p className="text-[--color-accent]">{format(cls?.date, 'MM/dd/yyyy')} | {startTime} - {endTime}</p>
                     <p className="text-sm text-[--color-accent]">Instructor: {cls.instructor}</p>
                 </div>
                 <div className="flex flex-col  gap-2">

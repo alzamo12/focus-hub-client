@@ -63,10 +63,9 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
 
             <button
                 type="submit"
-                // disabled={mutation.isLoading}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                className= "bg-secondary text-gray-600 cursor-pointer font-bold px-4 py-2 rounded "
             >
-                {/* {mutation.isLoading ? "Adding..." : "Add Budget"} */}Add Budget
+                Add Budget
             </button>
         </form>
     );
