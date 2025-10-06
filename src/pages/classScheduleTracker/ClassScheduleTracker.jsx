@@ -49,7 +49,6 @@ export default function Classes() {
 
     if (isLoading) {
         return <LoadingSpinner />
-
     }
 
     return (

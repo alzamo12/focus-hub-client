@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import AddClassForm from '../../components/Class/AddClassForm';
 import { toast } from 'react-toastify';
+import { formatTime } from '../../utils/formatTime';
 
 
 const subjects = [
@@ -42,8 +43,8 @@ const EditClass = ({ cls }) => {
             building: building,
             subject: subject,
             date: date,
-            startTime: startTime,
-            endTime: endTime
+            startTime: formatTime(startTime),
+            endTime: formatTime(endTime)
         },
     });
 

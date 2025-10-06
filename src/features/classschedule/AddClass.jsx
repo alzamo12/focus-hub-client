@@ -61,9 +61,9 @@ const AddClass = () => {
     // const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    // console.log(user)
-    // Fetch Classes
-    // Add Class
+
+
+    // Add Class Api
     const { mutateAsync } = useMutation({
         mutationFn: async (newClass) => {
             const res = await axiosSecure.post("/class", newClass);
@@ -76,6 +76,11 @@ const AddClass = () => {
                 toast.success('Your data has inserted successfully')
             }
         },
+        onError: (err) => {
+            console.log(err)
+            const message = err?.response?.data?.message || "Server error occurred. Please try again later"
+            toast.error(message)
+        }
     });
 
     // Form
