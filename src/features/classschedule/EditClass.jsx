@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import AddClassForm from '../../components/Class/AddClassForm';
 import { toast } from 'react-toastify';
 import { formatTime } from '../../utils/formatTime';
+import combineDateTime from '../../utils/combineDateTime';
 
 
 const subjects = [
@@ -21,7 +20,7 @@ const subjects = [
     { value: "economics", label: "Economics" },
     { value: "geography", label: "Geography" }
 ];
-const EditClass = ({ cls }) => {
+const EditClass = ({ cls, activeTab }) => {
     const { _id, userEmail, module, instructor, room, building, subject, date, startTime, endTime } = cls;
     // console.log(cls)
     const queryClient = useQueryClient();
@@ -32,7 +31,7 @@ const EditClass = ({ cls }) => {
         register,
         handleSubmit,
         control,
-        formState: { errors },
+        // formState: { errors },
     } = useForm({
         // resolver: zodResolver(classSchema),
         defaultValues: {
@@ -56,7 +55,7 @@ const EditClass = ({ cls }) => {
         onSuccess: async (data) => {
             toast.success("class updated successfully");
             console.log(data)
-            queryClient.invalidateQueries({ queryKey: ["classes"] })
+            queryClient.invalidateQueries(["classes", user?.email, activeTab])
         },
         onError: (err) => {
             console.log(err)
@@ -68,7 +67,14 @@ const EditClass = ({ cls }) => {
         if (user.email !== userEmail) {
             return alert("you can't change this class")
         }
-        classEditAsync(data)
+
+        const newData = {
+            ...data,
+            startTime: combineDateTime(data.date, data.startTime),
+            endTime: combineDateTime(data.date, data.endTime)
+        }
+
+        classEditAsync(newData)
         // mutateAsync(newData);
         // console.log(data)
     };

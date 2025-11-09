@@ -8,6 +8,7 @@ import ClassScheduleTracker from "../pages/classScheduleTracker/ClassScheduleTra
 import GenerateQuestions from "../pages/GenerateQuestions/GenerateQuestions";
 import Budget from "../pages/Budget/Budget";
 import PrivateRoute from "./PrivateRoute";
+import Notes from "../pages/Note/Notes";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
                 path: "tasks"
             },
             {
-                path: "notes"
+                path: "notes",
+                Component: Notes
+            },
+            {
+                path: "settings"
             }
         ]
     },

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
     const { user, logout } = useAuth();
-
+    // console.log(user)
     const handleLogout = () => {
         logout();
     }

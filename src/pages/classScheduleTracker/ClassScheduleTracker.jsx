@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { da } from "zod/v4/locales";
 import ClassCard from "../../components/Class/ClassCard";
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export default function Classes() {
     const axiosPublic = useAxiosPublic();
@@ -22,8 +22,9 @@ export default function Classes() {
             const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}`);
             console.log(res?.data)
             return res.data;
-        },
+        }
     });
+
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
@@ -39,17 +40,18 @@ export default function Classes() {
         }
     })
 
-    const handleDelete = (id) => {
-        deleteAsync(id)
-    };
+    const handleDelete = useCallback((id) => {
+        deleteAsync(id);
+    }, [deleteAsync]);
 
-    const handleEdit = (id) => {
-        document.getElementById(`my_module_${id}`).showModal()
-    };
+    const handleEdit = useCallback((id) => {
+        document.getElementById(`my_module_${id}`).showModal();
+    }, []);
 
     if (isLoading) {
         return <LoadingSpinner />
     }
+
 
     return (
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen">
@@ -79,9 +81,13 @@ export default function Classes() {
 
             {/* Class List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {classes.map((cls) => (
-                    <ClassCard key={cls._id} cls={cls} handleDelete={handleDelete} handleEdit={handleEdit} />
-                ))}
+               {classes?.length > 0 ? 
+                classes?.map((cls) => (
+                    <ClassCard key={cls._id} activeTab={activeTab} cls={cls} handleDelete={handleDelete} handleEdit={handleEdit} />
+                ))
+            :
+            <div>No classes available here</div>
+            }
             </div>
 
         </div>

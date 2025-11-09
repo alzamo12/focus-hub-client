@@ -1,10 +1,12 @@
 import { format } from 'date-fns';
 import EditClass from '../../features/classschedule/EditClass';
 import { formatTime } from '../../utils/formatTime';
+import React from 'react';
 
-const ClassCard = ({ cls, handleDelete, handleEdit }) => {
+const ClassCard = ({ cls, handleDelete, handleEdit, activeTab }) => {
     const startTime = formatTime(cls?.startTime);
     const endTime = formatTime(cls?.endTime);
+    console.log("memorization is not working")
     // const customLocaleDate = cls?.date.toLocaleDateString('en-US', {
     //     year: 'numeric',
     //     month: 'long',
@@ -36,7 +38,7 @@ const ClassCard = ({ cls, handleDelete, handleEdit }) => {
             {/* Edit Class Modal */}
             <dialog id={`my_module_${cls._id}`} className="modal">
                 <div className="modal-box max-w-4xl mx-auto">
-                    <EditClass cls={cls} />
+                    <EditClass activeTab={activeTab} cls={cls} />
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

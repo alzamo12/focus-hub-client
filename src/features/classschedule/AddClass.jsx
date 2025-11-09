@@ -58,9 +58,7 @@ export function TimeInput({ value, onChange, name }) {
 // main add class component of the files
 const AddClass = () => {
     const queryClient = useQueryClient();
-    // const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
 
 
     // Add Class Api
@@ -119,14 +117,14 @@ const AddClass = () => {
     // ];
 
     const onSubmit = (data) => {
-        const newData = {
+
+        const updatedData = {
             ...data,
-            userEmail: user.email
-        };
-        newData.startTime = combineDateTime(data.date, data.startTime);
-        newData.endTime = combineDateTime(data.date, data.endTime);
-        // console.log(newData)
-        mutateAsync(newData);
+            startTime: combineDateTime(data.date, data.startTime),
+            endTime: combineDateTime(data.date, data.endTime)
+        }
+        // console.log(data)
+        mutateAsync(updatedData);
         // console.log(data)
     };
     return (
