@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.snow.css";
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import NoteCard from '../../features/notes/NoteCard';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxiosSecure from "../../hooks/useAxiosSecure"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import useAuth from '../../hooks/useAuth';
+import "react-quill-new/dist/quill.snow.css";
+import "quill-better-table/dist/quill-better-table.css";
+
+import Quill from "quill";
+import Table from "quill/modules/table";
+Quill.register("modules/table", Table);
+
 
 const Notes = () => {
     // const [notes, setNotes] = useState([]);
@@ -16,6 +22,7 @@ const Notes = () => {
     const [showCanvas, setShowCanvas] = useState(false);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+
 
     const { mutateAsync } = useMutation({
         mutationFn: async (noteData) => {
@@ -54,15 +61,35 @@ const Notes = () => {
 
     };
 
+    // const modules = {
+    //     toolbar: [
+    //         [{ header: [1, 2, 3, false] }],
+    //         ["bold", "italic", "underline"],
+    //         [{ color: [] }, { background: [] }],
+    //         [{ list: "ordered" }, { list: "bullet" }],
+    //         ['link', 'image'],
+    //         ["clean"],
+    //         ["table"]
+    //     ],
+    //     table: true
+    // };
     const modules = {
-        toolbar: [
-            [{ header: [1, 2, 3, false] }],
-            ["bold", "italic", "underline"],
-            [{ color: [] }, { background: [] }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["table"],
-            ["clean"]
-        ],
+        toolbar: {
+            container: [
+                [{ header: [1, 2, 3, false] }],
+                ["bold", "italic", "underline", "strike"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["link", "image"],
+                ["table"],
+                ["clean"],
+            ],
+            handlers: {
+                table() {
+                    this.quill.getModule("table").insertTable(3, 3);
+                },
+            },
+        },
+        table: true,
     };
 
     const formats = [
@@ -73,7 +100,9 @@ const Notes = () => {
         "color",
         "background",
         "list",
-        // "bullet",
+        "bullet",
+        "link",
+        "image",
         "table",
     ]
 
@@ -132,7 +161,7 @@ const Notes = () => {
                 ) : (
                     notes?.map((note) => (
                         <NoteCard
-                        key={note._id}
+                            key={note._id}
                             note={note}
                             handleEditNote={handleEditNote}
                             handleDeleteNote={handleDeleteNote}

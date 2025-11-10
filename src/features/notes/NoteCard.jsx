@@ -25,7 +25,7 @@ const NoteCard = ({ note, handleDeleteNote, handleEditNote }) => {
                 </div>
             </div>
             <div
-                className="prose max-w-none"
+                className="prose max-w-none  ql-editor"
                 dangerouslySetInnerHTML={{ __html: cleanHTML }}
             />
             <p className="text-gray-400 text-sm">
