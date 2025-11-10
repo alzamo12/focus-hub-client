@@ -14,3 +14,14 @@
     --color-accent: "#D5C7A3", ;
     --color-base-100: "#F6F0F0";
 }
+
+/* ensures mini-toolbar is visible */
+.ql-increaseImageSize::before {
+  content: "I+"; /* text shown on button */
+  /* font-size: 12px; */
+  color: black;
+}
+.ql-decreaseImageSize::before {
+  content: "I-";
+  color: black;
+}

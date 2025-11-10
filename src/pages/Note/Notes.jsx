@@ -11,8 +11,23 @@ import "quill-better-table/dist/quill-better-table.css";
 
 import Quill from "quill";
 import Table from "quill/modules/table";
-Quill.register("modules/table", Table);
+import ImageResize from "quill-image-resize-module-react";
+import axios from 'axios';
 
+import DOMPurify from "dompurify";
+
+Quill.register("modules/table", Table);
+Quill.register("modules/imageResize", ImageResize)
+
+function dataURLtoFile(dataurl, filename) {
+    const arr = dataurl.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) u8arr[n] = bstr.charCodeAt(n);
+    return new File([u8arr], filename, { type: mime });
+}
 
 const Notes = () => {
     // const [notes, setNotes] = useState([]);
@@ -45,11 +60,44 @@ const Notes = () => {
     })
 
 
-    const handleSaveNote = () => {
-        console.log('data is of note', subject, currentNote)
+    const handleSaveNote = async () => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(currentNote, "text/html");
+
+        const images = doc.querySelectorAll("img");
+        console.log("Total images:", images.length);
+
+        for (let img of images) {
+            const src = img.src;
+            if (src.startsWith('http')) continue;
+
+            const file = dataURLtoFile(src, "note-image.png");
+
+
+            // 4. Upload to Cloudinary
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "focus-hub");
+
+            const response = await axios.post(
+                "https://api.cloudinary.com/v1_1/djdhkulah/image/upload",
+                formData
+            );
+
+            // 5. Replace src with Cloudinary URL
+            img.src = response.data.secure_url;
+            console.log(img.src)
+        }
+        let updatedHtml = doc.body.innerHTML;
+
+        // 7. Sanitize before storing
+        updatedHtml = DOMPurify.sanitize(updatedHtml);
+
+
+        console.log('data is of note', subject, updatedHtml)
         mutateAsync({
             subject,
-            content: currentNote
+            content: updatedHtml
         })
     };
 
@@ -81,15 +129,50 @@ const Notes = () => {
                 [{ list: "ordered" }, { list: "bullet" }],
                 ["link", "image"],
                 ["table"],
+                ["increaseImageSize", "decreaseImageSize"],
                 ["clean"],
             ],
             handlers: {
                 table() {
                     this.quill.getModule("table").insertTable(3, 3);
                 },
+                increaseImageSize() {
+                    const range = this.quill.getSelection();
+                    if (!range) return;
+                    const [blot] = this.quill.getLeaf(range.index);
+                    if (blot && blot.domNode.tagName === "IMG") {
+                        const img = blot.domNode;
+                        const currentWidth = img.width;
+                        img.width = currentWidth + 20; // increase width by 20px
+                        img.style.height = "auto"; // maintain aspect ratio
+                    }
+                },
+                decreaseImageSize() {
+                    const range = this.quill.getSelection();
+                    if (!range) return;
+                    const [blot] = this.quill.getLeaf(range.index);
+                    if (blot && blot.domNode.tagName === "IMG") {
+                        const img = blot.domNode;
+                        const currentWidth = img.width;
+                        img.width = currentWidth - 100; // decrease width by 20px
+                        img.style.height = "auto";
+                    }
+                },
             },
         },
         table: true,
+        imageResize: {
+            parchment: Quill.import("parchment"),
+            modules: ["Resize", "DisplaySize"], // "Toolbar" not supported in v2
+            handleStyle: {
+                border: "2px solid #4A90E2",
+                width: "12px",
+                height: "12px",
+                backgroundColor: "white",
+                borderRadius: "50%",
+            },
+        },
+
     };
 
     const formats = [
@@ -107,7 +190,7 @@ const Notes = () => {
     ]
 
     return (
-        <div className='max-w-screen-2xl '>
+        <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
             <div className="bg-white shadow-lg rounded-2xl p-6 space-y-4">
                 <input
@@ -169,7 +252,7 @@ const Notes = () => {
                     ))
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 
