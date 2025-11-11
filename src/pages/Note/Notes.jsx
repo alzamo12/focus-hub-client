@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react';
 import ReactQuill from "react-quill-new";
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import NoteCard from '../../features/notes/NoteCard';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from "../../hooks/useAxiosSecure"
 import { toast } from "react-toastify"
 import useAuth from '../../hooks/useAuth';
 import "react-quill-new/dist/quill.snow.css";
 import "quill-better-table/dist/quill-better-table.css";
+import Select from "react-select";
+import Swal from 'sweetalert2'
 
 import Quill from "quill";
 import Table from "quill/modules/table";
@@ -17,7 +19,14 @@ import axios from 'axios';
 import DOMPurify from "dompurify";
 
 Quill.register("modules/table", Table);
-Quill.register("modules/imageResize", ImageResize)
+Quill.register("modules/imageResize", ImageResize);
+
+const subjects = [
+    { value: "Physics", label: "Physics" },
+    { value: "Math", label: "Math" },
+    { value: "Chemistry", label: "Chemistry" },
+    { value: "History", label: "History" },
+];
 
 function dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(",");
@@ -27,18 +36,16 @@ function dataURLtoFile(dataurl, filename) {
     const u8arr = new Uint8Array(n);
     while (n--) u8arr[n] = bstr.charCodeAt(n);
     return new File([u8arr], filename, { type: mime });
-}
+};
 
 const Notes = () => {
-    // const [notes, setNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState("");
-    const [subject, setSubject] = useState("");
+    const [title, settTitle] = useState("");
     const [isEditing, setIsEditing] = useState(null);
-    const [showCanvas, setShowCanvas] = useState(false);
+    const [sub, setSub] = useState(null);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-
-
+    const queryClient = useQueryClient();
     const { mutateAsync } = useMutation({
         mutationFn: async (noteData) => {
             const res = await axiosSecure.post(`/note`, noteData);
@@ -46,8 +53,25 @@ const Notes = () => {
         }, onSuccess: (data) => {
             toast.success("note added successfully")
             console.log(data)
+            queryClient.invalidateQueries({ queryKey: ['note'] })
         }, onError: (err) => {
             console.log(err)
+        }
+    });
+
+    const { mutateAsync: deleteNoteAsync } = useMutation({
+        mutationFn: async (id) => {
+            const res = await axiosSecure.delete(`/note/${id}`);
+            return res.data
+        },
+        onSuccess: async (data) => {
+            console.log(data);
+            toast.success("Note deleted Successfully");
+            queryClient.invalidateQueries({ queryKey: ['note'] })
+        },
+        onError: async (err) => {
+            console.log(err);
+            toast.error("Couldn't delete note. Please try again later")
         }
     });
 
@@ -57,12 +81,17 @@ const Notes = () => {
             const res = await axiosSecure.get(`/notes?email=${user?.email}`);
             return res.data
         }
-    })
+    });
 
 
     const handleSaveNote = async () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(currentNote, "text/html");
+        console.log(doc.body.textContent)
+        if (!sub) return toast.error("Please select a subject")
+        if (!title) return toast.error("Please give a title")
+        if (!doc.body.textContent) return toast.error("Please write something on your note")
+
 
         const images = doc.querySelectorAll("img");
         console.log("Total images:", images.length);
@@ -80,7 +109,7 @@ const Notes = () => {
             formData.append("upload_preset", "focus-hub");
 
             const response = await axios.post(
-                "https://api.cloudinary.com/v1_1/djdhkulah/image/upload",
+                import.meta.env.VITE_cloudinary_url,
                 formData
             );
 
@@ -94,9 +123,10 @@ const Notes = () => {
         updatedHtml = DOMPurify.sanitize(updatedHtml);
 
 
-        console.log('data is of note', subject, updatedHtml)
+        console.log('data is of note', title, sub, updatedHtml)
         mutateAsync({
-            subject,
+            subject: sub?.value,
+            title,
             content: updatedHtml
         })
     };
@@ -105,7 +135,20 @@ const Notes = () => {
 
     };
 
-    const handleDeleteNote = () => {
+    const handleDeleteNote = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteNoteAsync(id)
+            }
+        });
 
     };
 
@@ -129,35 +172,35 @@ const Notes = () => {
                 [{ list: "ordered" }, { list: "bullet" }],
                 ["link", "image"],
                 ["table"],
-                ["increaseImageSize", "decreaseImageSize"],
+                // ["increaseImageSize", "decreaseImageSize"],
                 ["clean"],
             ],
             handlers: {
                 table() {
                     this.quill.getModule("table").insertTable(3, 3);
                 },
-                increaseImageSize() {
-                    const range = this.quill.getSelection();
-                    if (!range) return;
-                    const [blot] = this.quill.getLeaf(range.index);
-                    if (blot && blot.domNode.tagName === "IMG") {
-                        const img = blot.domNode;
-                        const currentWidth = img.width;
-                        img.width = currentWidth + 20; // increase width by 20px
-                        img.style.height = "auto"; // maintain aspect ratio
-                    }
-                },
-                decreaseImageSize() {
-                    const range = this.quill.getSelection();
-                    if (!range) return;
-                    const [blot] = this.quill.getLeaf(range.index);
-                    if (blot && blot.domNode.tagName === "IMG") {
-                        const img = blot.domNode;
-                        const currentWidth = img.width;
-                        img.width = currentWidth - 100; // decrease width by 20px
-                        img.style.height = "auto";
-                    }
-                },
+                // increaseImageSize() {
+                //     const range = this.quill.getSelection();
+                //     if (!range) return;
+                //     const [blot] = this.quill.getLeaf(range.index);
+                //     if (blot && blot.domNode.tagName === "IMG") {
+                //         const img = blot.domNode;
+                //         const currentWidth = img.width;
+                //         img.width = currentWidth + 20; // increase width by 20px
+                //         img.style.height = "auto"; // maintain aspect ratio
+                //     }
+                // },
+                // decreaseImageSize() {
+                //     const range = this.quill.getSelection();
+                //     if (!range) return;
+                //     const [blot] = this.quill.getLeaf(range.index);
+                //     if (blot && blot.domNode.tagName === "IMG") {
+                //         const img = blot.domNode;
+                //         const currentWidth = img.width;
+                //         img.width = currentWidth - 100; // decrease width by 20px
+                //         img.style.height = "auto";
+                //     }
+                // }
             },
         },
         table: true,
@@ -192,14 +235,26 @@ const Notes = () => {
     return (
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
-            <div className="bg-white shadow-lg rounded-2xl p-6 space-y-4">
-                <input
-                    type="text"
-                    className="w-full border rounded-lg p-2 text-lg"
-                    placeholder="Enter subject..."
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                />
+            {/* note add form */}
+            <div className="bg-white shadow-lg rounded-2xl p-6 space-y-4 w-full">
+                <div className='flex flex-col md:flex-row gap-4 w-full'>
+                    <div className='w-full md:w-1/2'>
+                        <Select
+                            options={subjects}
+                            value={sub}
+                            onChange={setSub}
+                            placeholder="Please select your subject"
+                            className='w-full input-lg rounded-md'
+                        />
+                    </div>
+                    <input
+                        type="text"
+                        className="w-full md:w-1/2 border border-gray-300 rounded-md input-lg px-2 text-lg"
+                        placeholder="Enter subject..."
+                        value={title}
+                        onChange={(e) => settTitle(e.target.value)}
+                    />
+                </div>
 
                 <ReactQuill
                     theme='snow'
@@ -213,24 +268,7 @@ const Notes = () => {
                     placeholder='Write your note here ....'
                 />
 
-                <button
-                    onClick={() => setShowCanvas(!showCanvas)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                >
-                    {showCanvas ? "Hide Drawing Canvas" : "Show Drawing Canvas"}
-                </button>
 
-                {showCanvas && (
-                    <div className='border rounded-lg p-2 bg-gray-50'>
-                        <ReactSketchCanvas
-                            strokeWidth={3}
-                            strokeColor='black'
-                            width='100%'
-                            height="800px"
-                            style={{ borderRadius: "12px" }}
-                        />
-                    </div>
-                )}
                 <button
                     onClick={handleSaveNote}
                     className="w-full mt-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
@@ -238,6 +276,8 @@ const Notes = () => {
                     {isEditing ? "Update Note" : "Save Note"}
                 </button>
             </div>
+
+            {/* previous note history */}
             <div className="space-y-4">
                 {notes?.length === 0 ? (
                     <p className="text-center text-gray-500">No notes yet.</p>
