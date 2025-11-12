@@ -9,6 +9,8 @@ import GenerateQuestions from "../pages/GenerateQuestions/GenerateQuestions";
 import Budget from "../pages/Budget/Budget";
 import PrivateRoute from "./PrivateRoute";
 import Notes from "../pages/Note/Notes";
+import NoteDetails from "../pages/NoteDetails/NoteDetails";
+import EditNote from "../pages/EditNote/EditNote";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
             {
                 path: "notes",
                 Component: Notes
+            },
+            {
+                path: "note/:id",
+                Component: NoteDetails
+            },
+            {
+                path: "editNote/:id",
+                Component: EditNote
             },
             {
                 path: "settings"
