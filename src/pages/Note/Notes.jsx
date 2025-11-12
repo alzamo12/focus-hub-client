@@ -13,6 +13,7 @@ import axios from 'axios';
 
 import DOMPurify from "dompurify";
 import NoteForm from '../../components/Forms/NoteForm';
+import Select from "react-select";
 
 
 function dataURLtoFile(dataurl, filename) {
@@ -24,12 +25,19 @@ function dataURLtoFile(dataurl, filename) {
     while (n--) u8arr[n] = bstr.charCodeAt(n);
     return new File([u8arr], filename, { type: mime });
 };
-
+const subjects = [
+    { value: "Physics", label: "Physics" },
+    { value: "Math", label: "Math" },
+    { value: "Chemistry", label: "Chemistry" },
+    { value: "History", label: "History" },
+    { value: "All", label: "All" },
+];
 const Notes = () => {
     const [currentNote, setCurrentNote] = useState("");
     const [title, setTitle] = useState("");
     const [isEditing, setIsEditing] = useState(null);
     const [sub, setSub] = useState(null);
+    const [selectedSub, setSelectedSub] = useState(null);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
@@ -63,9 +71,9 @@ const Notes = () => {
     });
 
     const { data: notes } = useQuery({
-        queryKey: ['note', user.email],
+        queryKey: ['note', user.email, selectedSub],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/notes?email=${user?.email}`);
+            const res = await axiosSecure.get(`/notes?email=${user?.email}&subject=${selectedSub?.value}`);
             return res.data
         }
     });
@@ -156,19 +164,28 @@ const Notes = () => {
             />
 
             {/* previous note history */}
-            <div className="space-y-4">
-                {notes?.length === 0 ? (
-                    <p className="text-center text-gray-500">No notes yet.</p>
-                ) : (
-                    notes?.map((note) => (
-                        <NoteCard
-                            key={note._id}
-                            note={note}
-                            handleEditNote={handleEditNote}
-                            handleDeleteNote={handleDeleteNote}
-                        />
-                    ))
-                )}
+            <div className='mt-10'>
+                <Select
+                    options={subjects}
+                    value={selectedSub}
+                    onChange={setSelectedSub}
+                    placeholder="Please select your subject"
+                    className='w-full md:w-1/3 input-lg rounded-md'
+                />
+                <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 justify-between my-8">
+                    {notes?.length === 0 ? (
+                        <p className="text-center text-gray-500">No notes yet.</p>
+                    ) : (
+                        notes?.map((note) => (
+                            <NoteCard
+                                key={note._id}
+                                note={note}
+                                handleEditNote={handleEditNote}
+                                handleDeleteNote={handleDeleteNote}
+                            />
+                        ))
+                    )}
+                </div>
             </div>
         </div >
     );
