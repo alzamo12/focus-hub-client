@@ -4,7 +4,7 @@ const BudgetOverview = ({ budget, expenses }) => {
     const balance = budget?.amount - totalSpent;
 
     return (
-        <div className="p-6 rounded-2xl shadow-lg bg-primary text-black flex justify-between items-center">
+        <div className="p-6 rounded-2xl shadow-lg bg-primary text-gray-700 flex justify-between items-center">
             <div>
                 <h2 className="text-xl font-bold">Monthly Budget</h2>
                 <p className="mt-1">Budget: {budget?.amount} BDT</p>

@@ -128,7 +128,7 @@ const AddClass = () => {
         // console.log(data)
     };
     return (
-        <div className="p-6 w-full mx-auto bg-[--color-base-100] h-auto">
+        <div className="p-6 w-full mx-auto h-auto">
             <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
 
             <AddClassForm

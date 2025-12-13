@@ -1,26 +1,29 @@
-import Quill from "quill";
-import Table from "quill/modules/table";
-import ImageResize from "quill-image-resize-module-react";
-import ReactQuill from "react-quill-new";
 import Select from "react-select";
+import React from "react";
 
-Quill.register("modules/table", Table);
-Quill.register("modules/imageResize", ImageResize);
+
+const ReactQuill = React.lazy(() => import('react-quill-new'));
+
+// Quill.register("modules/table", Table);
+// Quill.register("modules/imageResize", ImageResize);
 const subjects = [
     { value: "Physics", label: "Physics" },
     { value: "Math", label: "Math" },
     { value: "Chemistry", label: "Chemistry" },
     { value: "History", label: "History" },
+    // { value: "History", label: "History" },
 ];
-const NoteForm = ({currentNote, setCurrentNote, title, setTitle, sub, setSub, handleEditNote}) => {
+const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote }) => {
     const modules = {
         toolbar: {
             container: [
                 [{ header: [1, 2, 3, false] }],
                 ["bold", "italic", "underline", "strike"],
+                [{ color: [] }, { background: [] }], // <-- Add this line for color
                 [{ list: "ordered" }, { list: "bullet" }],
                 ["link", "image"],
                 ["table"],
+
                 // ["increaseImageSize", "decreaseImageSize"],
                 ["clean"],
             ],
@@ -31,17 +34,17 @@ const NoteForm = ({currentNote, setCurrentNote, title, setTitle, sub, setSub, ha
             },
         },
         table: true,
-        imageResize: {
-            parchment: Quill.import("parchment"),
-            modules: ["Resize", "DisplaySize"], // "Toolbar" not supported in v2
-            handleStyle: {
-                border: "2px solid #4A90E2",
-                width: "12px",
-                height: "12px",
-                backgroundColor: "white",
-                borderRadius: "50%",
-            },
-        },
+        // imageResize: {
+        //     parchment: Quill.import("parchment"),
+        //     modules: ["Resize", "DisplaySize"], // "Toolbar" not supported in v2
+        //     handleStyle: {
+        //         border: "2px solid #4A90E2",
+        //         width: "12px",
+        //         height: "12px",
+        //         backgroundColor: "white",
+        //         borderRadius: "50%",
+        //     },
+        // },
 
     };
 
@@ -59,7 +62,7 @@ const NoteForm = ({currentNote, setCurrentNote, title, setTitle, sub, setSub, ha
         "table",
     ];
 
-    console.log(sub)
+    // console.log(sub)
     return (
         <div className="bg-white shadow-lg rounded-2xl p-6 space-y-4 w-full">
             <div className='flex flex-col md:flex-row gap-4 w-full'>
@@ -93,9 +96,8 @@ const NoteForm = ({currentNote, setCurrentNote, title, setTitle, sub, setSub, ha
                 placeholder='Write your note here ....'
             />
 
-
             <button
-                onClick={handleEditNote}
+                onClick={handleNote}
                 className="w-full mt-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
             >
                 Edit Note

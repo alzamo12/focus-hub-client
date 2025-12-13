@@ -2,23 +2,33 @@ import { useState } from "react";
 import Classes from "../../pages/classScheduleTracker/ClassScheduleTracker";
 import { X } from "lucide-react";
 import AddClass from "../../features/classschedule/AddClass";
+import { AnimatePresence, motion } from "motion/react"
+import AddTask from "../../features/Tasks/AddTask";
 
 const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
     const [extraNavs, setExtraNavs] = useState([]);
-    const [showClock, setShowClock] = useState(false);
-
+    // const [showClock, setShowClock] = useState(false);
+    const [showNav, setShowNav] = useState(false);
     const handleAddNav = () => {
         // Example: Add a new UL with some placeholder items
         if (extraNavs.length <= 0) {
             const newNav = (
-                <ul key={extraNavs.length} className="space-y-2 border text-lg font-medium mt-4 border-t border-[--color-accent] pt-2">
-                    <li className="cursor-pointer">Extra Link 1</li>
-                    {/* Open the modal using document.getElementById('ID').showModal() method */}
-                    <li>
-                        <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>open modal</button>
-                    </li>
+                <AnimatePresence>
+                    <motion.ul
+                        key={extraNavs.length}
+                        initial={{ opacity: 0, y: -20, }}   // starts slightly up and transparent
+                        animate={{ opacity: 1, y: 0 }}     // slides down and fades in
+                        exit={{ opacity: 0, y: -20, }}      // slides up and fades out
+                        transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-accent">
+                        <li>
+                            {/* <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button> */}
+                        </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
+                        <li>
+                            <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                        </li>
 
-                </ul>
+                    </motion.ul>
+                </AnimatePresence >
             );
             setExtraNavs([...extraNavs, newNav]);
         }
@@ -63,18 +73,45 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
 
             <nav className="flex-1 overflow-auto p-4">
                 <ul className="space-y-5 text-lg font-medium mb-10">{navLinks}</ul>
-                {extraNavs.map((ul) => ul)}
+                {/* {extraNavs.map((ul) => ul)} */}
+                <AnimatePresence>
+                    {showNav &&
+                        <motion.ul
+                            key={extraNavs.length}
+                            initial={{ opacity: 0, y: -20, }}   // starts slightly up and transparent
+                            animate={{ opacity: 1, y: 0 }}     // slides down and fades in
+                            exit={{ opacity: 0, y: -20, }}      // slides up and fades out
+                            transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-accent">
+                            <li>
+                                <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
+                            </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
+                            <li>
+                                <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                            </li>
 
-                <button onClick={handleAddNav} className="btn btn-neutral rounded-2xl w-32 mx-auto">Add New</button>
+                        </motion.ul>}
+                </AnimatePresence >
+
+                <button onClick={() => setShowNav(!showNav)} className="btn btn-accent text-white w-32 mx-auto ml-3">Add New</button>
             </nav>
-            <dialog id="my_modal_2" className="modal">
-                <div className="modal-box max-w-4xl mx-auto">
+         
+            <dialog id="my_modal_2" className="modal bg-primary">
+                <div className="modal-box max-w-4xl mx-auto bg-secondary">
                     <AddClass />
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
                 </form>
             </dialog>
+            <dialog id="my_modal_1" className="modal bg-primary">
+                <div className="modal-box max-w-4xl mx-auto bg-secondary">
+                    <AddTask />
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
 
             <div className="p-4 border-t border-primary/30">
                 {/* small footer / version or logout */}

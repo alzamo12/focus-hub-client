@@ -4,17 +4,18 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from "../../hooks/useAxiosSecure"
 import { toast } from "react-toastify"
 import useAuth from '../../hooks/useAuth';
-import "react-quill-new/dist/quill.snow.css";
-import "quill-better-table/dist/quill-better-table.css";
 import Swal from 'sweetalert2'
 
 
 import axios from 'axios';
 
 import DOMPurify from "dompurify";
-import NoteForm from '../../components/Forms/NoteForm';
+// import NoteForm from '../../components/Forms/NoteForm';
 import Select from "react-select";
 
+const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
+import 'react-quill-new/dist/quill.snow.css';
+// import 'quill-better-table/dist/quill-better-table.css';
 
 function dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(",");
@@ -88,12 +89,13 @@ const Notes = () => {
         if (!doc.body.textContent) return toast.error("Please write something on your note")
 
 
-        const images = doc.querySelectorAll("img");
+        // const images = doc.querySelectorAll("img");
+        const images = Array.from(doc.querySelectorAll("img"));
         console.log("Total images:", images.length);
 
-        for (let img of images) {
+        const uploadImages = images.map(async (img) => {
             const src = img.src;
-            if (src.startsWith('http')) continue;
+            if (src.startsWith('http')) return;
 
             const file = dataURLtoFile(src, "note-image.png");
 
@@ -111,7 +113,31 @@ const Notes = () => {
             // 5. Replace src with Cloudinary URL
             img.src = response.data.secure_url;
             console.log(img.src)
-        }
+        });
+
+        await Promise.all(uploadImages)
+
+        // for (let img of images) {
+        //     const src = img.src;
+        //     if (src.startsWith('http')) continue;
+
+        //     const file = dataURLtoFile(src, "note-image.png");
+
+
+        //     // 4. Upload to Cloudinary
+        //     const formData = new FormData();
+        //     formData.append("file", file);
+        //     formData.append("upload_preset", "focus-hub");
+
+        //     const response = await axios.post(
+        //         import.meta.env.VITE_cloudinary_url,
+        //         formData
+        //     );
+
+        //     // 5. Replace src with Cloudinary URL
+        //     img.src = response.data.secure_url;
+        //     console.log(img.src)
+        // }
         let updatedHtml = doc.body.innerHTML;
 
         // 7. Sanitize before storing
@@ -125,7 +151,8 @@ const Notes = () => {
             content: updatedHtml
         };
         console.log(noteData)
-        mutateAsync(noteData)
+        console.log(images)
+        // P(noteData)
     };
 
     const handleEditNote = () => {
@@ -160,7 +187,7 @@ const Notes = () => {
                 setTitle={setTitle}
                 sub={sub}
                 setSub={setSub}
-                handleSaveNote={handleSaveNote}
+                handleNote={handleSaveNote}
             />
 
             {/* previous note history */}
@@ -172,7 +199,7 @@ const Notes = () => {
                     placeholder="Please select your subject"
                     className='w-full md:w-1/3 input-lg rounded-md'
                 />
-                <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 justify-between my-8">
+                <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 justify-between my-8 md:gap-20">
                     {notes?.length === 0 ? (
                         <p className="text-center text-gray-500">No notes yet.</p>
                     ) : (

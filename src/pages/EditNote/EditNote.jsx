@@ -68,7 +68,7 @@ const EditNote = () => {
                 setTitle={setTitle}
                 sub={sub}
                 setSub={setSub}
-                handleEditNote={handleEditNote}
+                handleNote={handleEditNote}
             />
         </div >
     );

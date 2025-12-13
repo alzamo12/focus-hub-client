@@ -75,7 +75,7 @@ const AddExpenseForm = ({  onSubmit }) => {
                 />
             </div>
 
-            <button type="submit" className="btn bg-secondary text-gray-600 cursor-pointer font-bold mt-4">
+            <button type="submit" className="btn bg-accent text-white cursor-pointer font-bold mt-4">
                 Add Expense
             </button>
         </form>

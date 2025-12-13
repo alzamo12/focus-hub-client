@@ -29,7 +29,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="p-4 bg-white shadow-md rounded-lg space-y-3 w-full"
+            className="p-4 bg-white shadow-md rounded-lg space-y-3 w-full text-gray-700"
         >
             <h2 className="text-lg font-semibold">Add Budget</h2>
 
@@ -63,7 +63,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
 
             <button
                 type="submit"
-                className= "bg-secondary text-gray-600 cursor-pointer font-bold px-4 py-2 rounded "
+                className= "btn btn-accent text-white cursor-pointer font-bold px-4 py-2 rounded "
             >
                 Add Budget
             </button>

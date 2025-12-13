@@ -7,7 +7,7 @@ const NoteCard = ({ note, handleDeleteNote, handleEditNote }) => {
     const clean = DOMPurify.sanitize(cut);
     // console.log(note)
     return (
-        <div className="card bg-primary text-neutral w-96 h-44">
+        <div className="card bg-primary text-neutral w-full h-44">
             <div className="card-body items-center text-center">
                 <h2 className="card-title text-xl">{note?.title}</h2>
                 <h2 className="card-title  text-base">Subject: {note?.subject}</h2>

@@ -31,7 +31,7 @@ const Budget = () => {
             }
         },
         onError: async (err) => {
-            toast.error("Something happened to the server")
+            toast.error(err.message)
             console.log(err)
         }
     });
