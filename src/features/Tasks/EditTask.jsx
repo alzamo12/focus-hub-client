@@ -2,9 +2,15 @@ import React from 'react';
 import AddTaskForm from './AddTaskForm';
 import { useForm } from 'react-hook-form';
 import { formatTime } from '../../utils/formatTime';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { useMutation } from '@tanstack/react-query';
+import combineDateTime from '../../utils/combineDateTime';
+import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const EditTask = ({ task }) => {
-    const { module, subject, startTime, endTime, date, level, description } = task;
+    const { module, subject, startTime, endTime, date, level, description, userEmail } = task;
+    const { user } = useAuth();
     const {
         control,
         register,
@@ -20,9 +26,29 @@ const EditTask = ({ task }) => {
             endTime: formatTime(endTime)
         }
     });
+    const axiosSecure = useAxiosSecure();
+    const { mutateAsync } = useMutation({
+        mutationFn: async (data) => {
+            const res = await axiosSecure.patch(`/task/${task._id}`, data);
+            return res.data
+        },
+        onSuccess: async (data) => {
+            toast.success("Data updated Successfully")
+            console.log(data)
+        }
+    })
 
-    const handleEditTask = () => {
+    const handleEditTask = (data) => {
+        if (user.email !== userEmail) {
+            return alert("you can't change this class")
+        }
 
+        const newData = {
+            ...data,
+            startTime: combineDateTime(data.date, data.startTime),
+            endTime: combineDateTime(data.date, data.endTime)
+        }
+        mutateAsync(newData)
     }
 
     return (
