@@ -13,7 +13,7 @@ const Tasks = () => {
     const queryClient = useQueryClient();
     const [activeTab, setActiveTab] = useState("next");
     // get the tasks data
-    const { data: tasks, isLoading } = useQuery({
+    const { data: tasks, isLoading:tasksLoading } = useQuery({
         queryKey: ['task', user?.email, activeTab],
         queryFn: async () => {
             const res = await axiosSecure.get(`/tasks?email=${user?.email}&type=${activeTab}`);
@@ -30,15 +30,13 @@ const Tasks = () => {
         onSuccess: (data) => {
             if (data.deletedCount > 0) {
                 toast.success('your task has deleted successfully');
-                queryClient.invalidateQueries({queryKey: ['task']})
+                queryClient.invalidateQueries({ queryKey: ['task'] })
             }
             // queryClient.invalidateQueries(['task'])
             console.log(data)
         }
     })
-    if (isLoading) {
-        return <LoadingSpinner />
-    };
+
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -62,9 +60,13 @@ const Tasks = () => {
     };
 
     const handleEdit = (id) => {
-        console.log(id)
+        // console.log(id)
+        document.getElementById(`my_module_${id}`).showModal();
     };
 
+    if (tasksLoading) {
+        return <LoadingSpinner />
+    };
     return (
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen">
             {/* name of each tab group should be unique */}

@@ -1,8 +1,9 @@
 import { format } from 'date-fns';
 import EditClass from '../../features/classschedule/EditClass';
 import { formatTime } from '../../utils/formatTime';
+import EditTask from './EditTask';
 
-const TaskCard = ({ task, handleDelete, handleEdit, activeTab }) => {
+const TaskCard = ({ task, handleDelete, handleEdit }) => {
     const startTime = formatTime(task?.startTime);
     const endTime = formatTime(task?.endTime);
     return (
@@ -29,14 +30,14 @@ const TaskCard = ({ task, handleDelete, handleEdit, activeTab }) => {
             </div>
 
             {/* Edit Class Modal */}
-            {/* <dialog id={`my_module_${task._id}`} className="modal">
+            <dialog id={`my_module_${task._id}`} className="modal">
                 <div className="modal-box max-w-4xl mx-auto">
-                    <EditClass activeTab={activeTab} task={task} />
+                    <EditTask  task={task} />
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
                 </form>
-            </dialog> */}
+            </dialog>
         </div>
     );
 };

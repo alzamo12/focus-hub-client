@@ -5,24 +5,7 @@ import { useForm } from "react-hook-form";
 import combineDateTime from "../../utils/combineDateTime";
 import AddTaskForm from "./AddTaskForm";
 
-const subjects = [
-    { value: "math", label: "Math" },
-    { value: "english", label: "English" },
-    { value: "bangla", label: "Bangla" },
-    { value: "physics", label: "Physics" },
-    { value: "chemistry", label: "Chemistry" },
-    { value: "biology", label: "Biology" },
-    { value: "ict", label: "ICT" },
-    { value: "religion", label: "Religion" },
-    { value: "economics", label: "Economics" },
-    { value: "geography", label: "Geography" }
-];
-const level = [
-    { value: "easy", label: "Easy" },
-    { value: "medium", label: "Medium" },
-    { value: "hard", label: "Hard" },
-    { value: "complex", label: "Complex" },
-]
+
 const AddTask = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
@@ -76,8 +59,8 @@ const AddTask = () => {
                 handleSubmit={handleSubmit}
                 register={register}
                 control={control}
-                subjects={subjects}
-                level={level}
+                // subjects={subjects}
+                // level={level}
             />
         </div>
     );

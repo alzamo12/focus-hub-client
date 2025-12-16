@@ -29,7 +29,25 @@ const formats = [
     "list",
     "bullet",
 ];
-const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, subjects, level }) => {
+const subjects = [
+    { value: "math", label: "Math" },
+    { value: "english", label: "English" },
+    { value: "bangla", label: "Bangla" },
+    { value: "physics", label: "Physics" },
+    { value: "chemistry", label: "Chemistry" },
+    { value: "biology", label: "Biology" },
+    { value: "ict", label: "ICT" },
+    { value: "religion", label: "Religion" },
+    { value: "economics", label: "Economics" },
+    { value: "geography", label: "Geography" }
+];
+const level = [
+    { value: "easy", label: "Easy" },
+    { value: "medium", label: "Medium" },
+    { value: "hard", label: "Hard" },
+    { value: "complex", label: "Complex" },
+];
+const AddTaskForm = ({ register, handleSubmit, handleAddTask, control }) => {
     // const [currentNote, setCurrentNote] = useState("");
     // console.log(currentNote);
     return (
