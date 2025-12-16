@@ -6,7 +6,7 @@ import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import TaskCard from '../../features/Tasks/TaskCard';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-
+import Swal from 'sweetalert2'
 const Tasks = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -30,8 +30,9 @@ const Tasks = () => {
         onSuccess: (data) => {
             if (data.deletedCount > 0) {
                 toast.success('your task has deleted successfully');
-                queryClient.invalidateQueries(['classes'])
+                queryClient.invalidateQueries({queryKey: ['task']})
             }
+            // queryClient.invalidateQueries(['task'])
             console.log(data)
         }
     })
@@ -40,8 +41,26 @@ const Tasks = () => {
     };
 
     const handleDelete = (id) => {
-        deleteAsync(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                deleteAsync(id);
+            }
+        });
     };
+
     const handleEdit = (id) => {
         console.log(id)
     };
