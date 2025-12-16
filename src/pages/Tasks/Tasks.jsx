@@ -1,57 +1,50 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuth from "../../hooks/useAuth";
-import { toast } from "react-toastify";
-import { da } from "zod/v4/locales";
-import ClassCard from "../../components/Class/ClassCard";
-import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
-import { useCallback, useMemo, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React from 'react';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
+import TaskCard from '../../features/Tasks/TaskCard';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
-export default function Classes() {
-    const axiosPublic = useAxiosPublic();
-    const axiosSecure = useAxiosSecure();
+const Tasks = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const [activeTab, setActiveTab] = useState("next");
-
-    // Fetch Classes
-    const { data: classes = [], isLoading } = useQuery({
-        queryKey: ["classes", user?.email, activeTab],
+    // get the tasks data
+    const { data: tasks, isLoading } = useQuery({
+        queryKey: ['task', user?.email, activeTab],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}`);
-            console.log(res?.data)
-            return res.data;
+            const res = await axiosSecure.get(`/tasks?email=${user?.email}&type=${activeTab}`);
+            return res.data
         }
     });
-
+    console.log(tasks);
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
-            const res = await axiosSecure.delete(`/class/${id}`);
+            const res = await axiosSecure.delete(`/task/${id}`);
             return res.data
         },
         onSuccess: (data) => {
             if (data.deletedCount > 0) {
-                toast.success('your class has deleted successfully');
+                toast.success('your task has deleted successfully');
                 queryClient.invalidateQueries(['classes'])
             }
-            console.log(da)
+            console.log(data)
         }
     })
+    if (isLoading) {
+        return <LoadingSpinner />
+    };
 
     const handleDelete = (id) => {
         deleteAsync(id);
     };
-
-    const handleEdit = useCallback((id) => {
-        document.getElementById(`my_module_${id}`).showModal();
-    }, []);
-
-    if (isLoading) {
-        return <LoadingSpinner />
-    }
-
+    const handleEdit = (id) => {
+        console.log(id)
+    };
 
     return (
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen">
@@ -81,9 +74,9 @@ export default function Classes() {
 
             {/* Class List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {classes?.length > 0 ?
-                    classes?.map((cls) => (
-                        <ClassCard key={cls._id} activeTab={activeTab} cls={cls} handleDelete={handleDelete} handleEdit={handleEdit} />
+                {tasks?.length > 0 ?
+                    tasks?.map((task) => (
+                        <TaskCard key={task._id} activeTab={activeTab} task={task} handleDelete={handleDelete} handleEdit={handleEdit} />
                     ))
                     :
                     <div>No classes available here</div>
@@ -92,4 +85,6 @@ export default function Classes() {
 
         </div>
     );
-}
+};
+
+export default Tasks;

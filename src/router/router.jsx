@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import Notes from "../pages/Note/Notes";
 import NoteDetails from "../pages/NoteDetails/NoteDetails";
 import EditNote from "../pages/EditNote/EditNote";
+import Tasks from "../pages/Tasks/Tasks";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,8 @@ const router = createBrowserRouter([
                 Component: Budget
             },
             {
-                path: "tasks"
+                path: "tasks",
+                Component: Tasks
             },
             {
                 path: "notes",

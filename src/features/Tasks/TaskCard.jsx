@@ -1,47 +1,44 @@
 import { format } from 'date-fns';
 import EditClass from '../../features/classschedule/EditClass';
 import { formatTime } from '../../utils/formatTime';
-import React from 'react';
 
-const ClassCard = ({ cls, handleDelete, handleEdit, activeTab }) => {
-    const startTime = formatTime(cls?.startTime);
-    const endTime = formatTime(cls?.endTime);
-    // console.log("memorization is not working")
+const TaskCard = ({ task, handleDelete, handleEdit, activeTab }) => {
+    const startTime = formatTime(task?.startTime);
+    const endTime = formatTime(task?.endTime);
     return (
         <div>
             <div
-                key={cls._id}
+                key={task._id}
                 className="p-4 rounded-xl flex justify-between items-center shadow-2xl bg-primary"
             // style={{ backgroundColor: cls.color || "var(--color-secondary)" }}
             >
                 <div>
-                    <h3 className="font-bold text-lg text-[--color-primary]">{cls.subject}</h3>
-                    <p className="text-[--color-accent]">{format(cls?.date, 'MM/dd/yyyy')} | {startTime} - {endTime}</p>
-                    <p className="text-sm text-[--color-accent]">Instructor: {cls.instructor}</p>
+                    <h3 className="font-bold text-lg text-[--color-primary]">{task.subject}</h3>
+                    <p className="text-[--color-accent]">{format(task?.date, 'MM/dd/yyyy')} | {startTime} - {endTime}</p>
+                    <p className="text-sm text-[--color-accent]">Instructor: {task.instructor}</p>
                 </div>
                 <div className="flex flex-col  gap-2">
                     <button
-                        onClick={() => handleDelete(cls._id)}
+                        onClick={() => handleDelete(task._id)}
                         className="btn btn-sm bg-red-500 text-white hover:bg-red-600">Delete</button>
 
                     <button
-                        onClick={() => handleEdit(cls._id)}
+                        onClick={() => handleEdit(task._id)}
                         className="btn btn-sm bg-red-500 text-white hover:bg-red-600">Edit</button>
                 </div>
             </div>
 
             {/* Edit Class Modal */}
-            <dialog id={`my_module_${cls._id}`} className="modal">
+            {/* <dialog id={`my_module_${task._id}`} className="modal">
                 <div className="modal-box max-w-4xl mx-auto">
-                    {/*  */}
-                    <EditClass activeTab={activeTab} cls={cls} />
+                    <EditClass activeTab={activeTab} task={task} />
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
                 </form>
-            </dialog>
+            </dialog> */}
         </div>
     );
 };
 
-export default ClassCard;
+export default TaskCard;

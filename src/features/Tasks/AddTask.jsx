@@ -17,6 +17,12 @@ const subjects = [
     { value: "economics", label: "Economics" },
     { value: "geography", label: "Geography" }
 ];
+const level = [
+    { value: "easy", label: "Easy" },
+    { value: "medium", label: "Medium" },
+    { value: "hard", label: "Hard" },
+    { value: "complex", label: "Complex" },
+]
 const AddTask = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
@@ -59,6 +65,7 @@ const AddTask = () => {
             endTime: combineDateTime(data.date, data.endTime)
         }
         addTaskAsync(updatedData);
+        console.log(updatedData)
     };
     return (
         <div>
@@ -70,6 +77,7 @@ const AddTask = () => {
                 register={register}
                 control={control}
                 subjects={subjects}
+                level={level}
             />
         </div>
     );

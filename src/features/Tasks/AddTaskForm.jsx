@@ -29,9 +29,9 @@ const formats = [
     "list",
     "bullet",
 ];
-const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, subjects }) => {
-    const [currentNote, setCurrentNote] = useState("");
-    console.log(currentNote);
+const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, subjects, level }) => {
+    // const [currentNote, setCurrentNote] = useState("");
+    // console.log(currentNote);
     return (
         <form onSubmit={handleSubmit(handleAddTask)} className="grid md:grid-cols-2 gap-4 mb-6">
             <input
@@ -92,17 +92,28 @@ const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, subjects 
                 )}
             />
 
-            <input
-                {...register("instructor")}
-                placeholder="Instructor"
-                className="input input-bordered w-full bg-white border-[--color-accent]"
+            <Controller
+                name="level"
+                required={true}
+                control={control}
+                render={({ field }) => (
+                    <Select {...field}
+                        onChange={(selectedOption) => field.onChange(selectedOption?.value)} // only store value
+                        value={level.find((l) => l.value === field.value) || null}
+                        options={level} placeholder="Choose Subject" />
+                )}
             />
             {/* <input
                 {...register("description")}
                 placeholder="Task Description"
                 className="textarea w-full col-span-2 bg-white border-[--color-accent]"
             /> */}
-            <ReactQuill
+            <input
+                {...register("description")}
+                placeholder="Task Description"
+                className="textarea w-full col-span-2 bg-white border-[--color-accent]"
+            />
+            {/* <ReactQuill
                 theme='snow'
                 value={currentNote}
                 onChange={setCurrentNote}
@@ -112,7 +123,7 @@ const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, subjects 
                 style={{ height: "250px" }}
                 className='bg-white  rounded-xl col-span-2 border-0'
                 placeholder='Write your note here ....'
-            />
+            /> */}
 
 
             <button
