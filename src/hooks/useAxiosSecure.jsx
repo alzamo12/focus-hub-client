@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
     baseURL: "http://localhost:5000",
-    // baseURL: "https://disco-zone-server.vercel.app"
     // baseURL: "https://focus-hub-server.vercel.app/"
 })
 const useAxiosSecure = () => {

@@ -3,7 +3,7 @@ import AddTaskForm from './AddTaskForm';
 import { useForm } from 'react-hook-form';
 import { formatTime } from '../../utils/formatTime';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import combineDateTime from '../../utils/combineDateTime';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -27,13 +27,15 @@ const EditTask = ({ task }) => {
         }
     });
     const axiosSecure = useAxiosSecure();
-    const { mutateAsync } = useMutation({
+    const queryClient = useQueryClient();
+    const { mutateAsync:editAsync } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.patch(`/task/${task._id}`, data);
             return res.data
         },
         onSuccess: async (data) => {
             toast.success("Data updated Successfully")
+            queryClient.invalidateQueries({queryKey: ['task']});
             console.log(data)
         }
     })
@@ -48,7 +50,7 @@ const EditTask = ({ task }) => {
             startTime: combineDateTime(data.date, data.startTime),
             endTime: combineDateTime(data.date, data.endTime)
         }
-        mutateAsync(newData)
+        editAsync(newData)
     }
 
     return (
