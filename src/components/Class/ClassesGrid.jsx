@@ -1,6 +1,7 @@
 import ClassCard from './ClassCard';
 
 const ClassesGrid = ({ classes, activeTab, handleDelete, handleEdit }) => {
+    console.log(classes)
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {

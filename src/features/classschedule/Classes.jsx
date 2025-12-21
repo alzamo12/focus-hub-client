@@ -10,9 +10,9 @@ const Classes = ({ pageView, activeTab }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
-    
+
     // Fetch user all Classes
-    const { data: classes = {} } = useQuery({
+    const { data: classesData } = useQuery({
         queryKey: ["classes", user?.email, activeTab, pageView],
         queryFn: async () => {
             const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}`);
@@ -23,6 +23,7 @@ const Classes = ({ pageView, activeTab }) => {
         refetchOnWindowFocus: false
     });
 
+    const { classes = [], view = '' } = classesData || {};
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
@@ -45,33 +46,43 @@ const Classes = ({ pageView, activeTab }) => {
     const handleEdit = useCallback((id) => {
         document.getElementById(`my_module_${id}`).showModal();
     }, []);
-
+    // console.log(classes)
+    let content;
+    if (classes?.length > 0) {
+        const safeView = view?.toLowerCase() ?? 'flat';
+        switch (safeView) {
+            case 'flat':
+                content = (
+                    <ClassesGrid
+                        classes={classes}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                        activeTab={activeTab}
+                    />
+                );
+                break;
+            case 'group':
+                content = (
+                    <GroupedClassUI classes={classes}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                    />
+                );
+                break;
+            default:
+                content = (
+                    <div>Invalid View</div>
+                );
+        }
+    } else {
+        content = (<div>No classes available here</div>)
+    }
 
     return (
         <div>
             <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
             <div>
-                {
-                    // 1st condition 
-                    classes?.result?.length > 0 ?
-                        // 2nd condition
-                        classes?.view === 'flat' ?
-                            <ClassesGrid
-                                classes={classes?.result}
-                                handleDelete={handleDelete}
-                                handleEdit={handleDelete}
-                                activeTab={activeTab}
-                            />
-                            :
-                            // if 2nd condition faild
-                            <GroupedClassUI classes={classes?.result}
-                                handleDelete={handleDelete}
-                                handleEdit={handleEdit}
-                            />
-                        :
-                        // if 1st condition fails
-                        <div>No classes available here</div>
-                }
+                {content}
             </div>
         </div>
     );
