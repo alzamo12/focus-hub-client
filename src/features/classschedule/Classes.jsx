@@ -10,18 +10,21 @@ const Classes = ({ pageView, activeTab }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // const timezone = "Nothing";
 
     // Fetch user all Classes
-    const { data: classesData } = useQuery({
+    const { data: classesData} = useQuery({
         queryKey: ["classes", user?.email, activeTab, pageView],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}`);
+            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}&timezone=${timezone}`);
             console.log(res?.data)
             return res.data;
         },
         suspense: true,
         refetchOnWindowFocus: false
     });
+    // console.log(error)
 
     const { classes = [], view = '' } = classesData || {};
 
@@ -46,7 +49,7 @@ const Classes = ({ pageView, activeTab }) => {
     const handleEdit = useCallback((id) => {
         document.getElementById(`my_module_${id}`).showModal();
     }, []);
-    // console.log(classes)
+
     let content;
     if (classes?.length > 0) {
         const safeView = view?.toLowerCase() ?? 'flat';

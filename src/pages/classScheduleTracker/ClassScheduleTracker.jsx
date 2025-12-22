@@ -2,11 +2,13 @@ import LoadingSpinner from "../../components/Spinner/LoadingSpinner";
 import { useState } from "react";
 import { Suspense } from "react";
 import Classes from "../../features/classschedule/Classes"
+import { ErrorBoundary } from 'react-error-boundary'; // Using a library for simplicity
+import ErrorHandler from "../../components/Error/ErrorHandler";
 
 export default function ClassScheduleTracker() {
     const [activeTab, setActiveTab] = useState("next");
     const [pageView, setPageView] = useState('flat');
-
+    const [err, errMSg] = useState("");
     const handlePageView = (e) => {
         const view = e.target.value;
         const lowerTxtView = view.toLowerCase();
@@ -47,9 +49,11 @@ export default function ClassScheduleTracker() {
             </div>
 
             {/* show classes with proper parent component and suspense */}
-            <Suspense fallback={<LoadingSpinner />}>
-                <Classes activeTab={activeTab} pageView={pageView} />
-            </Suspense>
+            <ErrorBoundary fallback={<ErrorHandler />}>
+                <Suspense fallback={<LoadingSpinner />}>
+                    <Classes errMSg={errMSg} activeTab={activeTab} pageView={pageView} />
+                </Suspense>
+            </ErrorBoundary>
         </div>
     );
 }
