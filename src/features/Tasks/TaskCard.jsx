@@ -11,7 +11,6 @@ const TaskCard = ({ task, handleDelete, handleEdit }) => {
             <div
                 key={task._id}
                 className="p-4 rounded-xl flex justify-between items-center shadow-2xl bg-primary"
-            // style={{ backgroundColor: cls.color || "var(--color-secondary)" }}
             >
                 <div>
                     <h3 className="font-bold text-lg text-[--color-primary]">{task.subject}</h3>
@@ -32,7 +31,7 @@ const TaskCard = ({ task, handleDelete, handleEdit }) => {
             {/* Edit Class Modal */}
             <dialog id={`my_module_${task._id}`} className="modal">
                 <div className="modal-box max-w-4xl mx-auto">
-                    <EditTask  task={task} />
+                    <EditTask task={task} />
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

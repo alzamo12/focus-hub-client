@@ -121,27 +121,11 @@ const AddTaskForm = ({ register, handleSubmit, handleAddTask, control }) => {
                         options={level} placeholder="Choose Subject" />
                 )}
             />
-            {/* <input
-                {...register("description")}
-                placeholder="Task Description"
-                className="textarea w-full col-span-2 bg-white border-[--color-accent]"
-            /> */}
             <input
                 {...register("description")}
                 placeholder="Task Description"
                 className="textarea w-full col-span-2 bg-white border-[--color-accent]"
             />
-            {/* <ReactQuill
-                theme='snow'
-                value={currentNote}
-                onChange={setCurrentNote}
-                formats={formats}
-                modules={modules}
-                // height="250px"
-                style={{ height: "250px" }}
-                className='bg-white  rounded-xl col-span-2 border-0'
-                placeholder='Write your note here ....'
-            /> */}
 
 
             <button
