@@ -1,10 +1,22 @@
 import ClassesGrid from './ClassesGrid';
 
-const GroupedClassUI = ({ classes, handleDelete, handleEdit, activeTab }) => {
-    const sortedData = [...classes].sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-    );
-    console.log(sortedData)
+const GroupedClassUI = ({ classes, handleDelete, handleEdit, activeTab, type }) => {
+    // const sortedData = [...classes].sort(
+    //     (a, b) => new Date(a.date) - new Date(b.date)
+    // );
+    // console.log(sortedData)
+    const sortedData = [...classes].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        if (type.toLowerCase() === "next") {
+            return dateA - dateB; // ascending
+        } else if (type.toLowerCase() === "prev") {
+            return dateB - dateA; // descending
+        } else {
+            return 0; // no change if type is unknown
+        }
+    });
     return (
         <div>
             {sortedData.map((day) => (

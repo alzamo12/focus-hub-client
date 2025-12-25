@@ -6,19 +6,22 @@ import { toast } from 'react-toastify';
 import ClassesGrid from '../../components/Class/ClassesGrid';
 import GroupedClassUI from '../../components/Class/GroupedClassUI';
 
-const Classes = ({ pageView, activeTab }) => {
+const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const limit = 5;
     // const timezone = "Nothing";
 
     // Fetch user all Classes
-    const { data: classesData} = useQuery({
-        queryKey: ["classes", user?.email, activeTab, pageView],
+    const { data: classesData } = useQuery({
+        queryKey: ["classes", user?.email, activeTab, pageView, page, limit],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}&timezone=${timezone}`);
-            console.log(res?.data)
+            const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}&timezone=${timezone}&page=${page}&limit=${limit}`);
+            if (res.data.totalPages) {
+                setTotalPage(res.data.totalPages);
+            };
             return res.data;
         },
         suspense: true,
@@ -26,7 +29,7 @@ const Classes = ({ pageView, activeTab }) => {
     });
     // console.log(error)
 
-    const { classes = [], view = '' } = classesData || {};
+    const { classes = [], view = '', type } = classesData || {};
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
@@ -66,7 +69,10 @@ const Classes = ({ pageView, activeTab }) => {
                 break;
             case 'group':
                 content = (
-                    <GroupedClassUI classes={classes}
+                    <GroupedClassUI
+                        activeTab={activeTab}
+                        classes={classes}
+                        type={type}
                         handleDelete={handleDelete}
                         handleEdit={handleEdit}
                     />
