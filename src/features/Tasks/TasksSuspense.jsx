@@ -5,16 +5,19 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import TasksGrid from '../../components/Tasks/TasksGrid';
 import GroupTaskUI from '../../components/Tasks/GroupTaskUI';
-const TasksSuspense = ({ activeTab, pageView }) => {
+const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
-
+    const limit = 5;
     // add a task
     const { data: tasksData } = useQuery({
-        queryKey: ['task', user?.email, activeTab, pageView],
+        queryKey: ['task', user?.email, activeTab, pageView, page, limit],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/tasks?email=${user?.email}&type=${activeTab}&view=${pageView}`);
+            const res = await axiosSecure.get(`/tasks?email=${user?.email}&type=${activeTab}&view=${pageView}&page=${page}&limit=${limit}`);
+            if (res.data.totalPages) {
+                setTotalPages(res.data.totalPages);
+            }
             return res.data
         },
         suspense: true
