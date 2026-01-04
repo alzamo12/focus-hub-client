@@ -6,8 +6,8 @@ const GroupedClassUI = ({ classes, handleDelete, handleEdit, activeTab, type }) 
     // );
     // console.log(sortedData)
     const sortedData = [...classes].sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
+        const dateA = new Date(a.startTime);
+        const dateB = new Date(b.startTime);
 
         if (type.toLowerCase() === "next") {
             return dateA - dateB; // ascending

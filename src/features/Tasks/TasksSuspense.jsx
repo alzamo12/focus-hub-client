@@ -23,7 +23,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
         suspense: true
     });
     console.log(tasksData)
-    const { tasks = [], view = 'flat' } = tasksData || {};
+    const { tasks = [], view = 'flat', type } = tasksData || {};
 
     // delete a task by id
     const { mutateAsync: deleteAsync } = useMutation({
@@ -76,6 +76,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
             case 'flat':
                 content = (
                     <TasksGrid
+                        type={type}
                         tasks={tasks}
                         handleDelete={handleDelete}
                         handleEdit={handleEdit}
@@ -89,6 +90,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
                         tasks={tasks}
                         handleDelete={handleDelete}
                         handleEdit={handleEdit}
+                        type={type}
                     />
                 );
                 break;

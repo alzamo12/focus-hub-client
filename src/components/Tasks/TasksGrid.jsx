@@ -1,10 +1,12 @@
 import TaskCard from '../../features/Tasks/TaskCard';
+import useSortedData from '../../hooks/useSortedData';
 
-const TasksGrid = ({ tasks, activeTab, handleDelete, handleEdit }) => {
+const TasksGrid = ({ type, tasks, activeTab, handleDelete, handleEdit }) => {
+    const sortedData = useSortedData({ tasks, type });
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {tasks?.length > 0 ?
-                tasks?.map((task) => (
+            {sortedData?.length > 0 ?
+                sortedData?.map((task) => (
                     <TaskCard key={task._id} activeTab={activeTab} task={task} handleDelete={handleDelete} handleEdit={handleEdit} />
                 ))
                 :
