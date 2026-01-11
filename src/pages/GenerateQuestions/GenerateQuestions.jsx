@@ -10,16 +10,20 @@ const GenerateQuestions = () => {
     const [loading, setLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
 
-    const { data: questions, refetch } = useQuery({
+    const { data: questions, error, refetch, isLoading } = useQuery({
         queryKey: ['question', questionInfo],
         queryFn: async () => {
             const res = await axiosSecure.post(`/gemini`, questionInfo);
+            console.log(res)
             setLoading(false)
             return res.data
         },
         enabled: !!questionInfo,
-        refetchOnWindowFocus: false
-    })
+        refetchOnWindowFocus: false,
+        retry: false
+    });
+
+    console.log(error)
 
 
     const handleSubmit = (subject, subTopic, level, language) => {
@@ -40,7 +44,7 @@ const GenerateQuestions = () => {
             <QuestionForm onSubmit={handleSubmit} />
             <div className='my-10'>
                 {
-                    loading ?
+                    isLoading ?
                         <LoadingSpinner />
                         :
                         <div>

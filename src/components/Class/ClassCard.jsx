@@ -6,6 +6,7 @@ import React from 'react';
 const ClassCard = ({ cls, handleDelete, handleEdit, activeTab }) => {
     const startTime = formatTime(cls?.startTime);
     const endTime = formatTime(cls?.endTime);
+    console.log('classcard cls info', cls)
     // console.log("memorization is not working")
     return (
         <div>
