@@ -99,7 +99,7 @@ function LanguageSelector({ onChange }) {
     );
 }
 
-const QuestionForm = ({ onSubmit }) => {
+const QuestionForm = ({ onSubmit, retryAfter, isPending }) => {
     const [subject, setSubject] = useState(null);
     const [level, setLevel] = useState(null);
     const [subTopic, setSubTopic] = useState(null);
@@ -142,9 +142,13 @@ const QuestionForm = ({ onSubmit }) => {
             <button
                 className="w-64 cursor-pointer bg-secondary font-bold py-2 px-4 rounded text-black transition"
                 onClick={() => onSubmit(subject, subTopic, level, language)}
-                disabled={!subject || !level || !subTopic}
+                disabled={!subject || !level || !subTopic || isPending || retryAfter > 0}
             >
-                Generate Questions
+                {retryAfter > 0 ?
+                    <span>retry after {retryAfter} seconds</span>
+                    :
+                    <span>Generate Questions</span>
+                }
             </button>
         </div>
     );
