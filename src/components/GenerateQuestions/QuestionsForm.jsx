@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Select from "react-select";
 // import { FixedSizeList } from 'react-window';
 // import { FixedSizeList as List } from 'react-window';
@@ -104,6 +104,10 @@ const QuestionForm = ({ onSubmit, retryAfter, isPending }) => {
     const [level, setLevel] = useState(null);
     const [subTopic, setSubTopic] = useState(null);
     const [language, setLanguages] = useState("");
+    // const [isDisabled, setIsDisabled] = useState(false);
+    const buttonRef = useRef(null);
+    const isDisabled = buttonRef?.current?.disabled;
+
     return (
         <div className="w-full mx-auto mt-5 p-6 bg-white shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
             <div className="mb-4 w-full">
@@ -140,7 +144,10 @@ const QuestionForm = ({ onSubmit, retryAfter, isPending }) => {
             <LanguageSelector onChange={setLanguages} />
 
             <button
-                className="w-64 cursor-pointer bg-secondary font-bold py-2 px-4 rounded text-black transition"
+                className={`w-64 bg-secondary font-bold py-2 px-4 rounded text-black transition 
+                       ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}
+                    `}
+                ref={buttonRef}
                 onClick={() => onSubmit(subject, subTopic, level, language)}
                 disabled={!subject || !level || !subTopic || isPending || retryAfter > 0}
             >

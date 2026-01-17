@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
 import QuestionForm from '../../components/GenerateQuestions/QuestionsForm';
@@ -7,22 +7,13 @@ import { toast } from "react-toastify"
 import { useEffect } from 'react';
 import { useRef } from 'react';
 const GenerateQuestions = () => {
-    // const [sub, setSub] = useState('');
-    const [questionInfo, setQuestionInfo] = useState(null);
-    const [loading, setLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
     const [retryAfter, setRetryAfter] = useState(0);
     const hasRestoredRef = useRef(false);
 
+    // step-1: update retryAfter state on every second
     useEffect(() => {
         if (retryAfter <= 0) return;
-        // const interval = setInterval((prev) => {
-        //     if (retryAfter <= 1) {
-        //         clearInterval(interval);
-        //         return 0
-        //     };
-        //     return prev - 1
-        // }, 1000)
         const interval = setInterval(() => {
             setRetryAfter((prev) => {
                 if (prev <= 1) {
@@ -34,7 +25,10 @@ const GenerateQuestions = () => {
         }, 1000)
         return () => clearInterval(interval);
     }, [retryAfter]);
+
+    // step-2: save retry after in localstorage
     useEffect(() => {
+        // return on first render
         if (!hasRestoredRef.current) return;
 
         if (retryAfter > 0) {
@@ -46,6 +40,8 @@ const GenerateQuestions = () => {
             localStorage.removeItem("ai_retry_until");
         }
     }, [retryAfter]);
+
+    // step-3: on first mount get the retry after value from LS
     useEffect(() => {
         const retryUntil = localStorage.getItem("ai_retry_until");
         if (retryUntil) {
@@ -65,14 +61,28 @@ const GenerateQuestions = () => {
         },
         onError: (err) => {
             console.error(err)
-            if (err?.response?.status === 503) {
-                return toast.error(err.response?.data?.message)
+            const status = err?.response?.status;
+            switch (status) {
+                case 503:
+                    toast.error(err.response?.data?.message);
+                    break;
+                case 429: {
+                    // const retryAfter = err.response.data.retryAfter;
+                    const { message, retryAfter } = err.response.data;
+                    setRetryAfter(retryAfter);
+                    toast.error(message);
+                    break
+                }
+                default:
+                    toast.error("Please try again later")
             }
-            if (err?.response?.status === 429) {
-                const retryAfter = err?.response?.data?.retryAfter;
-                setRetryAfter(retryAfter);
-            }
-            toast.error("Please try again later")
+            // if (err?.response?.status === 503) {
+            //     return toast.error(err.response?.data?.message)
+            // }
+            // if (err?.response?.status === 429) {
+            //     const retryAfter = err?.response?.data?.retryAfter;
+            //     setRetryAfter(retryAfter);
+            // }
         }
     });
 

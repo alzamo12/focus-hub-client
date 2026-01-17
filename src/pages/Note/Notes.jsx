@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import NoteCard from '../../features/notes/NoteCard';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from "../../hooks/useAxiosSecure"
 import { toast } from "react-toastify"
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2'
-
+import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
 
 import axios from 'axios';
 
@@ -180,15 +180,15 @@ const Notes = () => {
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
             {/* note add form */}
-            <NoteForm
-                currentNote={currentNote}
-                setCurrentNote={setCurrentNote}
-                title={title}
-                setTitle={setTitle}
-                sub={sub}
-                setSub={setSub}
-                handleNote={handleSaveNote}
-            />
+                <NoteForm
+                    currentNote={currentNote}
+                    setCurrentNote={setCurrentNote}
+                    title={title}
+                    setTitle={setTitle}
+                    sub={sub}
+                    setSub={setSub}
+                    handleNote={handleSaveNote}
+                />
 
             {/* previous note history */}
             <div className='mt-10'>

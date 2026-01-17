@@ -11,13 +11,12 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateUser } = useAuth();
     const axiosPublic = useAxiosPublic();
-
     function onSubmit(data) {
         // Design-only: do nothing
         // console.log(data);
         const { email, name, password, photo } = data;
         createUser(email, password)
-            .then(async() => {
+            .then(async () => {
                 updateUser(name, photo)
                 // console.log(result)
                 const res = await axiosPublic.post('/user', data);
