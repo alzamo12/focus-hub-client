@@ -50,10 +50,10 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
         { value: "geography", label: "Geography" }
     ];
     return (
-        <aside className={` text-gray-700 lg:flex lg:translate-x-0 flex-col w-64 
+        <aside className={` text-black lg:flex lg:translate-x-0 flex-col w-64 border-r border-black
             md:min-w-[240px] bg-primary shadow-lg z-50 h-screen fixed lg:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-            <div className="p-4 flex items-center gap-3 border-b border-primary/30">
+            <div className="h-16 flex items-center gap-3 ">
                 {/* PLACE YOUR LOGO + SITE NAME HERE */}
                 {/* Example: <img src="/logo.png" alt="StudentLife" className="w-8 h-8 rounded" /> */}
                 <div className="px-2 flex justify-between w-full">
@@ -113,7 +113,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
             </dialog>
 
 
-            <div className="p-4 border-t border-primary/30">
+            <div className="p-4 ">
                 {/* small footer / version or logout */}
                 <button onClick={() => logout()} className="btn btn-ghost btn-lg w-full justify-start text-gray-700 hover:bg-accent">
                     Logout

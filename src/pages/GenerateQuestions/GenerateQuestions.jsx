@@ -60,7 +60,7 @@ const GenerateQuestions = () => {
             toast.success("Data get successfully");
         },
         onError: (err) => {
-            console.error(err)
+            console.log(err)
             const status = err?.response?.status;
             switch (status) {
                 case 503:
@@ -70,19 +70,13 @@ const GenerateQuestions = () => {
                     // const retryAfter = err.response.data.retryAfter;
                     const { message, retryAfter } = err.response.data;
                     setRetryAfter(retryAfter);
-                    toast.error(message);
+                    console.log(message)
+                    toast.error(message)
                     break
                 }
                 default:
                     toast.error("Please try again later")
             }
-            // if (err?.response?.status === 503) {
-            //     return toast.error(err.response?.data?.message)
-            // }
-            // if (err?.response?.status === 429) {
-            //     const retryAfter = err?.response?.data?.retryAfter;
-            //     setRetryAfter(retryAfter);
-            // }
         }
     });
 
@@ -101,16 +95,18 @@ const GenerateQuestions = () => {
     // console.log(questionInfo)
 
     return (
-        <div>
-            <h2 className="card-title text-2xl flex items-center justify-center font-bold">Generate questions</h2>
+        <div className='overflow-hidden min-h-[100dvh] lg:min-h-full'>
+            <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <QuestionForm
                 isPending={isPending}
                 retryAfter={retryAfter}
                 onSubmit={handleSubmit} />
-            <div className='my-10'>
+            <div className='my-10 relative w-full'>
                 {
                     isPending ?
-                        <LoadingSpinner />
+                        <div className='absolute flex inset-0 justify-center items-center z-50  '>
+                            <div className='loading loading-xl loading-ring' />
+                        </div>
                         :
                         <div>
                             <h2 className="card-title font-bold mb-4">Here is the answer:</h2>

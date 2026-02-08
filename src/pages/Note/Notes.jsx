@@ -42,7 +42,7 @@ const Notes = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
-    const { mutateAsync } = useMutation({
+    const { mutateAsync: addNoteAsync } = useMutation({
         mutationFn: async (noteData) => {
             const res = await axiosSecure.post(`/note`, noteData);
             return res.data
@@ -152,6 +152,7 @@ const Notes = () => {
         };
         console.log(noteData)
         console.log(images)
+        addNoteAsync(noteData)
         // P(noteData)
     };
 
@@ -180,15 +181,15 @@ const Notes = () => {
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
             {/* note add form */}
-                <NoteForm
-                    currentNote={currentNote}
-                    setCurrentNote={setCurrentNote}
-                    title={title}
-                    setTitle={setTitle}
-                    sub={sub}
-                    setSub={setSub}
-                    handleNote={handleSaveNote}
-                />
+            <NoteForm
+                currentNote={currentNote}
+                setCurrentNote={setCurrentNote}
+                title={title}
+                setTitle={setTitle}
+                sub={sub}
+                setSub={setSub}
+                handleNote={handleSaveNote}
+            />
 
             {/* previous note history */}
             <div className='mt-10'>

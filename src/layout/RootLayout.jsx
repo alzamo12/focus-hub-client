@@ -69,7 +69,7 @@ const RootLayout = () => {
     );
 
     return (
-        <div className="flex min-h-screen bg-base-100 text-neutral-900">
+        <div className="flex min-h-screen text-neutral-900">
             <ToastContainer />
             {/* sidebar */}
             <DesktopSidebar setDrawerOpen={setDrawerOpen}
