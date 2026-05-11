@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../providers/themeProvider/ThemeContext";
 
 export default function Settings() {
+    // const { toggleTheme, theme } = useContext(ThemeContext)
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem("theme") || "light";
     });

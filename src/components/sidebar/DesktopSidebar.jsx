@@ -50,10 +50,11 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
         { value: "geography", label: "Geography" }
     ];
     return (
-        <aside className={` text-black lg:flex lg:translate-x-0 flex-col w-64 border-r border-black
-            md:min-w-[240px] bg-primary shadow-lg z-50 h-screen fixed lg:sticky top-0
+        <aside className={`lg:flex lg:translate-x-0 flex-col w-64 border-r border-black lg:p-4 lg:pl-1
+            md:min-w-[240px] dark:text-accent  shadow-lg z-50 h-screen fixed lg:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-            <div className="h-16 flex items-center gap-3 ">
+            {/* Logo */}
+            <div className="h-16 flex items-center gap-3 pl-1">
                 {/* PLACE YOUR LOGO + SITE NAME HERE */}
                 {/* Example: <img src="/logo.png" alt="StudentLife" className="w-8 h-8 rounded" /> */}
                 <div className="px-2 flex justify-between w-full">
@@ -71,9 +72,12 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                 </div>
             </div>
 
+            {/* sidebar links */}
             <nav className="flex-1 overflow-auto p-4">
+                {/* navlinks */}
                 <ul className="space-y-5 text-lg font-medium mb-10">{navLinks}</ul>
-                {/* {extraNavs.map((ul) => ul)} */}
+
+                {/* add new Button and more */}
                 <AnimatePresence>
                     {showNav &&
                         <motion.ul
@@ -83,18 +87,29 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                             exit={{ opacity: 0, y: -20, }}      // slides up and fades out
                             transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-accent">
                             <li>
-                                <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
+                                <button className="btn bg-accent-content text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
                             </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
                             <li>
-                                <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                                <button className="btn bg-accent-content text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
                             </li>
 
                         </motion.ul>}
                 </AnimatePresence >
 
-                <button onClick={() => setShowNav(!showNav)} className="btn btn-accent text-white w-32 mx-auto ml-3">Add New</button>
+                <button onClick={() => setShowNav(!showNav)} className="btn btn-accent text-black font-bold w-32 mx-auto ml-3">{
+                    showNav ? 'Close' : 'Add New'
+                }</button>
             </nav>
-         
+
+            {/* logout button */}
+            <div className="p-4 ">
+                {/* small footer / version or logout */}
+                <button onClick={() => logout()} className="btn btn-ghost btn-lg text-black dark:text-white w-full justify-start  hover:bg-accent hover:text-black">
+                    Logout
+                </button>
+            </div>
+
+            {/* dialog for add class */}
             <dialog id="my_modal_2" className="modal bg-primary">
                 <div className="modal-box max-w-4xl mx-auto bg-secondary">
                     <AddClass />
@@ -103,6 +118,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                     <button>close</button>
                 </form>
             </dialog>
+            {/* dialog for add task */}
             <dialog id="my_modal_1" className="modal bg-primary">
                 <div className="modal-box max-w-4xl mx-auto bg-secondary">
                     <AddTask />
@@ -112,13 +128,6 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                 </form>
             </dialog>
 
-
-            <div className="p-4 ">
-                {/* small footer / version or logout */}
-                <button onClick={() => logout()} className="btn btn-ghost btn-lg w-full justify-start text-gray-700 hover:bg-accent">
-                    Logout
-                </button>
-            </div>
         </aside>
     );
 };
