@@ -80,13 +80,15 @@ const GenerateQuestions = () => {
         }
     });
 
-    const handleSubmit = (subject, subTopic, level, language) => {
+    const handleSubmit = (subject, chapter, level,subTopic, type, language) => {
         // setLoading(true)
         const questionInfo = {
             subject: subject.value,
-            subTopic: subTopic.value,
+            chapter: chapter.value,
             level: level.value,
-            language: language.label
+            subTopic: subTopic.value,
+            type: type.value,
+            language: language.value
         };
         // setQuestionInfo(questionInfo);
 
@@ -100,7 +102,7 @@ const GenerateQuestions = () => {
             <QuestionForm
                 isPending={isPending}
                 retryAfter={retryAfter}
-                onSubmit={handleSubmit} />
+                handleSubmit={handleSubmit} />
             <div className='my-10 relative w-full'>
                 {
                     isPending ?

@@ -51,7 +51,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
     ];
     return (
         <aside className={`lg:flex lg:translate-x-0 flex-col w-64 border-r border-black lg:p-4 lg:pl-1
-            md:min-w-[240px] dark:text-accent  shadow-lg z-50 h-screen fixed lg:sticky top-0
+            md:min-w-[240px] not-dark:bg-sky-300 dark:text-accent  shadow-lg z-50 h-screen fixed lg:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
             {/* Logo */}
             <div className="h-16 flex items-center gap-3 pl-1">
