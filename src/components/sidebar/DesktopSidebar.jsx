@@ -110,7 +110,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
             </div>
 
             {/* dialog for add class */}
-            <dialog id="my_modal_2" className="modal bg-primary">
+            <dialog id="my_modal_2" className="modal">
                 <div className="modal-box max-w-4xl mx-auto bg-secondary">
                     <AddClass />
                 </div>
@@ -119,7 +119,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                 </form>
             </dialog>
             {/* dialog for add task */}
-            <dialog id="my_modal_1" className="modal bg-primary">
+            <dialog id="my_modal_1" className="modal">
                 <div className="modal-box max-w-4xl mx-auto bg-secondary">
                     <AddTask />
                 </div>
