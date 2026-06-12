@@ -5,12 +5,14 @@ import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useTittle from "../../hooks/useTittle";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateUser } = useAuth();
     const axiosPublic = useAxiosPublic();
+    useTittle("Sign Up")
     function onSubmit(data) {
         // Design-only: do nothing
         // console.log(data);

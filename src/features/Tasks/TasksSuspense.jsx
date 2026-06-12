@@ -28,7 +28,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
     // delete a task by id
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
-            const res = await axiosSecure.delete(`/task/${id}`);
+            const res = await axiosSecure.delete(`/tasks/${id}`);
             return res.data
         },
         onSuccess: (data) => {
@@ -52,12 +52,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
+            if (result.isConfirmed) {     
                 deleteAsync(id);
             }
         });

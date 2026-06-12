@@ -24,7 +24,7 @@ const AddTask = () => {
 
     const { mutateAsync: addTaskAsync } = useMutation({
         mutationFn: async (newTask) => {
-            const res = await axiosSecure.post("/task", newTask);
+            const res = await axiosSecure.post("/tasks", newTask);
             return res.data;
         },
         onSuccess: (result) => {

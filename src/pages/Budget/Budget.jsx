@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/LoadingSpinner"
 import AddBudgetForm from "../../features/budget/AddBudgetForm";
+import useTittle from "../../hooks/useTittle";
 
 const Budget = () => {
     // const [budget, setBudget] = useState(2000); // example fixed budget
@@ -16,6 +17,7 @@ const Budget = () => {
     const axiosSecure = useAxiosSecure();
     const date = new Date();
     const month = date.toISOString().slice(0, 7);
+    useTittle("Budget");
     // const axiosPublic = useAxiosPublic();
     // console.log(month)
     const { mutateAsync: addBudgetAsync } = useMutation({

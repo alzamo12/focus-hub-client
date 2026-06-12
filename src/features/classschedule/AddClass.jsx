@@ -64,7 +64,7 @@ const AddClass = () => {
     // Add Class Api
     const { mutateAsync } = useMutation({
         mutationFn: async (newClass) => {
-            const res = await axiosSecure.post("/class", newClass);
+            const res = await axiosSecure.post("/classes", newClass);
             return res.data;
         },
         onSuccess: (result) => {

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import NoteForm from '../../components/Forms/NoteForm';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import { toast } from 'react-toastify';
+import useTittle from '../../hooks/useTittle';
 
 const EditNote = () => {
     const { id } = useParams();
@@ -15,6 +16,8 @@ const EditNote = () => {
     const [sub, setSub] = useState(null);
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    useTittle("Edit Note")
+
     const { data: note, isLoading } = useQuery({
         queryKey: ['noteDetails', id],
         queryFn: async () => {

@@ -49,7 +49,7 @@ const EditClass = ({ cls, activeTab }) => {
 
     const { mutateAsync: classEditAsync } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.patch(`/class/${_id}`, data);
+            const res = await axiosSecure.patch(`/classes/${_id}`, data);
             return res?.data
         },
         onSuccess: async (data) => {

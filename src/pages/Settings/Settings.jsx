@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../providers/themeProvider/ThemeContext";
+import useTitle from "../../hooks/useTittle";
 
 export default function Settings() {
     // const { toggleTheme, theme } = useContext(ThemeContext)
+
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem("theme") || "light";
     });
+
+    useTitle("Settings")
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);

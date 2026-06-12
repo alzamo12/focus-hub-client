@@ -6,7 +6,7 @@ import { toast } from "react-toastify"
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2'
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
-
+import useTittle from '../../hooks/useTittle';
 import axios from 'axios';
 
 import DOMPurify from "dompurify";
@@ -42,6 +42,9 @@ const Notes = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
+    useTittle("Notes")
+
+
     const { mutateAsync: addNoteAsync } = useMutation({
         mutationFn: async (noteData) => {
             const res = await axiosSecure.post(`/note`, noteData);

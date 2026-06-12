@@ -3,11 +3,15 @@ import TasksSuspense from '../../features/Tasks/TasksSuspense';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorHandler from '../../components/Error/ErrorHandler';
+import useTittle from '../../hooks/useTittle';
+
 const Tasks = () => {
     const [activeTab, setActiveTab] = useState("next");
     const [pageView, setPageView] = useState("flat");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    useTittle("Tasks")
+
 
     const handlePageView = e => {
         const view = e.target.value;
@@ -24,6 +28,7 @@ const Tasks = () => {
     return (
         <div className="w-full mx-auto bg-[--color-base-100] min-h-screen grid">
             {/* name of each tab group should be unique */}
+
             <div>
                 <div className="flex gap-10">
                     {/* next and prev classes tab */}

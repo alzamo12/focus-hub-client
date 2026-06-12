@@ -63,7 +63,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
 
             <button
                 type="submit"
-                className= "btn btn-accent text-white cursor-pointer font-bold px-4 py-2 rounded "
+                className= "btn btn-secondary text-white cursor-pointer font-bold px-4 py-2 rounded "
             >
                 Add Budget
             </button>

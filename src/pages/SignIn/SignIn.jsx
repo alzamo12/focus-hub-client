@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
+import useTittle from "../../hooks/useTittle";
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -9,6 +10,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/";
+    useTittle("Sign In")
 
     const handleSubmit = (e) => {
         e.preventDefault();

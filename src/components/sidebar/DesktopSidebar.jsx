@@ -51,7 +51,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
     ];
     return (
         <aside className={`lg:flex lg:translate-x-0 flex-col w-64 border-r border-black lg:p-4 lg:pl-1
-            md:min-w-[240px] not-dark:bg-sky-300 dark:text-accent  shadow-lg z-50 h-screen fixed lg:sticky top-0
+            md:min-w-[240px] not-dark:bg-primary dark:text-accent  shadow-lg z-50 h-screen fixed lg:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
             {/* Logo */}
             <div className="h-16 flex items-center gap-3 pl-1">
@@ -85,18 +85,18 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                             initial={{ opacity: 0, y: -20, }}   // starts slightly up and transparent
                             animate={{ opacity: 1, y: 0 }}     // slides down and fades in
                             exit={{ opacity: 0, y: -20, }}      // slides up and fades out
-                            transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-accent">
+                            transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l-2 px-1 border-secondary">
                             <li>
-                                <button className="btn bg-accent-content text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
+                                <button className="btn btn-secondary text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
                             </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
                             <li>
-                                <button className="btn bg-accent-content text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                                <button className="btn btn-secondary text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
                             </li>
 
                         </motion.ul>}
                 </AnimatePresence >
 
-                <button onClick={() => setShowNav(!showNav)} className="btn btn-accent text-black font-bold w-32 mx-auto ml-3">{
+                <button onClick={() => setShowNav(!showNav)} className="btn btn-secondary hover:bg-[#0369A1] text-white  font-bold w-32 mx-auto ml-3">{
                     showNav ? 'Close' : 'Add New'
                 }</button>
             </nav>
@@ -104,7 +104,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
             {/* logout button */}
             <div className="p-4 ">
                 {/* small footer / version or logout */}
-                <button onClick={() => logout()} className="btn btn-ghost btn-lg text-black dark:text-white w-full justify-start  hover:bg-accent hover:text-black">
+                <button onClick={() => logout()} className="btn btn-ghost btn-lg text-black not-dark:hover:text-white hover:border-none hover:bg-secondary dark:text-white w-full justify-start">
                     Logout
                 </button>
             </div>

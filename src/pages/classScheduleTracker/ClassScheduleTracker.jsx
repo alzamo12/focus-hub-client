@@ -4,12 +4,14 @@ import { Suspense } from "react";
 import Classes from "../../features/classschedule/Classes"
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorHandler from "../../components/Error/ErrorHandler";
+import useTittle from "../../hooks/useTittle";
 
 const ClassScheduleTracker = () => {
     const [activeTab, setActiveTab] = useState("next");
     const [pageView, setPageView] = useState('flat');
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
+    useTittle("Class Schedule Tracker");
     const handlePageView = (e) => {
         const view = e.target.value;
         const lowerTxtView = view.toLowerCase();

@@ -1,12 +1,26 @@
-import React from 'react';
-import WhatToDoToday from '../../features/Dashboard/WhatToDoToday';
-
+import React, { Suspense } from 'react';
+import useTittle from '../../hooks/useTittle';
+import Dashboard from '../../features/Dashboard/Dashboard';
+import useAuth from '../../hooks/useAuth';
+import TodayTasks from '../../features/Dashboard/TodayTasks';
+import TodayClasses from '../../features/Dashboard/TodayClasses';
 const Home = () => {
+    const { user: { displayName } } = useAuth();
+    useTittle("Home")
 
     return (
-        <div>
-            <h2 className="card-title">This is Home Page</h2>
-            <WhatToDoToday />
+        <div className='min-h-screen'>
+            <div className="my-8">
+                <h1 className="text-3xl font-bold text-primary">Good Morning, {displayName} 👋</h1>
+                <p className="text-base-content/70">Monday, May 18, 2026</p>
+            </div>
+            <Suspense fallback={<div>Loading...</div>}>
+                <TodayTasks />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+                <TodayClasses />
+            </Suspense>
+            <Dashboard />
         </div>
     );
 };

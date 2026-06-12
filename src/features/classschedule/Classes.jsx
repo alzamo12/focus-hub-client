@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import ClassesGrid from '../../components/Class/ClassesGrid';
 import GroupedClassUI from '../../components/Class/GroupedClassUI';
-
+import Swal from 'sweetalert2';
 const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
@@ -33,7 +33,7 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
-            const res = await axiosSecure.delete(`/class/${id}`);
+            const res = await axiosSecure.delete(`/classes/${id}`);
             return res.data
         },
         onSuccess: (data) => {
@@ -46,7 +46,20 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     })
 
     const handleDelete = (id) => {
-        deleteAsync(id);
+        console.log("class delete hit");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteAsync(id);
+            }
+        });
     };
 
     const handleEdit = useCallback((id) => {

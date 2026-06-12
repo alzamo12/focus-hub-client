@@ -30,7 +30,7 @@ const EditTask = ({ task }) => {
     const queryClient = useQueryClient();
     const { mutateAsync:editAsync } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.patch(`/task/${task._id}`, data);
+            const res = await axiosSecure.patch(`/tasks/${task._id}`, data);
             return res.data
         },
         onSuccess: async (data) => {

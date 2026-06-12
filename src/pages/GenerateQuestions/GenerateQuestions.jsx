@@ -6,10 +6,12 @@ import QuestionForm from '../../components/GenerateQuestions/QuestionsForm';
 import { toast } from "react-toastify"
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import useTittle from '../../hooks/useTittle';
 const GenerateQuestions = () => {
     const axiosSecure = useAxiosSecure();
     const [retryAfter, setRetryAfter] = useState(0);
     const hasRestoredRef = useRef(false);
+    useTittle("Generate Questions")
 
     // step-1: update retryAfter state on every second
     useEffect(() => {
@@ -53,7 +55,7 @@ const GenerateQuestions = () => {
 
     const { data: questionsData, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.post(`/generate-questions`, data);
+            const res = await axiosSecure.post(`/ai/generate-questions`, data);
             return res.data
         },
         onSuccess: () => {
@@ -80,7 +82,7 @@ const GenerateQuestions = () => {
         }
     });
 
-    const handleSubmit = (subject, chapter, level,subTopic, type, language) => {
+    const handleSubmit = (subject, chapter, level, subTopic, type, language) => {
         // setLoading(true)
         const questionInfo = {
             subject: subject.value,
@@ -98,12 +100,13 @@ const GenerateQuestions = () => {
 
     return (
         <div className='overflow-hidden min-h-[100dvh] lg:min-h-full'>
+
             <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <QuestionForm
                 isPending={isPending}
                 retryAfter={retryAfter}
                 handleSubmit={handleSubmit} />
-            <div className='my-10 relative w-full'>
+            <div className='my-10 relative w-full p-4 border border-primary rounded-lg min-h-[200px] bg-white shadow-lg'>
                 {
                     isPending ?
                         <div className='absolute flex inset-0 justify-center items-center z-50  '>

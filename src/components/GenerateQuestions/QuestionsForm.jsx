@@ -406,7 +406,14 @@ const subtopics = {
         mineralResourcesFossils: [
             { value: "fossilFuels", label: "Fossil Fuels" },
             { value: "coalAndPetroleum", label: "Coal and Petroleum" },
-            { value: "naturalGas", label: "Natural Gas" }
+            { value: "naturalGas", label: "Natural Gas" },
+            { value: "alkane", label: "Alkanes" },
+            { value: "alkene", label: "Alkenes" },
+            { value: "alkyne", label: "Alkyne" },
+            { value: "alcohols", label: "Alcohols" },
+            { value: "aldehyde", label: "Aldehyde" },
+            { value: "fattyAcids", label: "Fatty Acids" },
+            { value: "polymers", label: "Polymers" }
         ],
 
         chemistryInOurLives: [
@@ -693,7 +700,7 @@ const QuestionForm = ({ handleSubmit, retryAfter, isPending }) => {
     const isDisabled = !subject || !level || !chapter || isPending || retryAfter > 0
     // console.log(language, subject)
     return (
-        <div className="w-full mx-auto mt-5 p-6 bg-white shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="w-full mx-auto mt-5 p-6 bg-white border border-primary shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
 
             {/* Subjects */}
             <div className="mb-4 w-full">
@@ -765,10 +772,11 @@ const QuestionForm = ({ handleSubmit, retryAfter, isPending }) => {
             </div>
 
             <button
-                className={`w-64 bg-secondary font-bold py-2 px-4 rounded text-black transition 
+                className={`w-64  bg-primary font-bold py-2 px-4 rounded text-black transition 
                        ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}
                     `}
                 onClick={() => handleSubmit(subject, chapter, level, subTopic, type, language)}
+                disabled={isDisabled}
             // disabled={isDisabled}
             >
                 {retryAfter > 0 ?
