@@ -10,12 +10,10 @@ import useTittle from '../../hooks/useTittle';
 import axios from 'axios';
 
 import DOMPurify from "dompurify";
-// import NoteForm from '../../components/Forms/NoteForm';
 import Select from "react-select";
 
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 import 'react-quill-new/dist/quill.snow.css';
-// import 'quill-better-table/dist/quill-better-table.css';
 
 function dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(",");
@@ -47,7 +45,7 @@ const Notes = () => {
 
     const { mutateAsync: addNoteAsync } = useMutation({
         mutationFn: async (noteData) => {
-            const res = await axiosSecure.post(`/note`, noteData);
+            const res = await axiosSecure.post(`/notes`, noteData);
             return res.data
         }, onSuccess: (data) => {
             toast.success("note added successfully")
@@ -60,7 +58,7 @@ const Notes = () => {
 
     const { mutateAsync: deleteNoteAsync } = useMutation({
         mutationFn: async (id) => {
-            const res = await axiosSecure.delete(`/note/${id}`);
+            const res = await axiosSecure.delete(`/notes/${id}`);
             return res.data
         },
         onSuccess: async (data) => {

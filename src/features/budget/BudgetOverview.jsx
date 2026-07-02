@@ -1,7 +1,7 @@
 const BudgetOverview = ({ budget, expenses }) => {
     // const {amount, month} = budg
-    const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
-    const balance = budget?.amount - totalSpent;
+    const totalSpent = expenses?.reduce((sum, e) => sum + e.amount, 0) || 0;
+    const balance = Number(budget?.amount) - Number(totalSpent);
 
     return (
         <div className="p-6 rounded-2xl shadow-lg bg-primary text-gray-700 flex justify-between items-center">

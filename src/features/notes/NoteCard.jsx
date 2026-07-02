@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import { Link } from "react-router";
 
-const NoteCard = ({ note, handleDeleteNote, handleEditNote }) => {
+const NoteCard = ({ note, handleDeleteNote }) => {
     // const cleanHTML = DOMPurify.sanitize(note?.content);
     const cut = note.content.slice(0, 200);
     const clean = DOMPurify.sanitize(cut);

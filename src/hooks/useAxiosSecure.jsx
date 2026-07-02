@@ -3,9 +3,9 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-    // baseURL: "http://localhost:5000/api",
+    baseURL: "http://localhost:5000/api",
     // baseURL: "https://focus-hub-server.onrender.com/",
-    baseURL: "https://focus-hub-server.vercel.app/api"
+    // baseURL: "https://focus-hub-server.vercel.app/api"
 })
 const useAxiosSecure = () => {
     const { user, logout, isLoading } = useAuth();
