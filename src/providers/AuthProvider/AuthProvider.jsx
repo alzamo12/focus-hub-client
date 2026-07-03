@@ -41,6 +41,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false)
             setUser(currentUser)
             console.log(currentUser)
+            console.log('token', currentUser?.accessToken)
             // console.log(currentUser)
         })
         return () => {

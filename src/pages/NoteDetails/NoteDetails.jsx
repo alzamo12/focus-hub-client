@@ -5,6 +5,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
+import ReactQuill from 'react-quill-new';
 
 const NoteDetails = () => {
     const { id } = useParams();
@@ -14,14 +15,14 @@ const NoteDetails = () => {
     const { data: note, isLoading } = useQuery({
         queryKey: ['noteDetails', id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/note/${id}`);
+            const res = await axiosSecure.get(`/notes/${id}`);
             return res.data
         }
     });
 
     const { mutateAsync: deleteNoteAsync } = useMutation({
         mutationFn: async (id) => {
-            const res = await axiosSecure.delete(`/note/${id}`);
+            const res = await axiosSecure.delete(`/notes/${id}`);
             return res.data
         },
         onSuccess: async (data) => {
@@ -56,11 +57,13 @@ const NoteDetails = () => {
     if (isLoading) return <LoadingSpinner />
 
     const cleanNoteContent = DOMPurify.sanitize(note?.content);
+    console.log('clean', cleanNoteContent, 'not-clean', note.content)
 
     return (
         <div
             className="bg-white border rounded-xl shadow p-4 space-y-2"
         >
+
             <div className="flex justify-between items-center">
                 <h3 className="font-semibold text-lg">{note?.subject}</h3>
                 <h3 className="font-semibold text-lg">{note?.title}</h3>
@@ -80,9 +83,14 @@ const NoteDetails = () => {
                     </button>
                 </div>
             </div>
-            <div
-                className="prose max-w-none ql-editor truncate"
-                dangerouslySetInnerHTML={{ __html: cleanNoteContent }}
+            {/* <div
+                className="prose max-w-none ql-editor truncate note-content"
+                dangerouslySetInnerHTML={{ __html: note.content }}
+            /> */}
+            <ReactQuill
+                value={cleanNoteContent}
+                readOnly
+                theme="bubble"
             />
             <p className="text-gray-400 text-sm">
                 Created: {new Date(note.createdAt).toLocaleString()}

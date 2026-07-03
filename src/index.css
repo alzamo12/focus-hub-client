@@ -52,3 +52,7 @@
   padding: 8px !important;
   border: none !important;
 }
+
+.note-content p {
+    margin-bottom: 1rem !important;
+}

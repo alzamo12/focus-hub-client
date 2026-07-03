@@ -21,7 +21,7 @@ const GoogleLogin = () => {
                     photoURL: user?.photoURL
                 };
                 try {
-                    const res = await axiosPublic.post("/user", userData);
+                    const res = await axiosPublic.post("/users", userData);
                     console.log(res?.data)
                 }
                 catch {

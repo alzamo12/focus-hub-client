@@ -21,7 +21,7 @@ const EditNote = () => {
     const { data: note, isLoading } = useQuery({
         queryKey: ['noteDetails', id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/note/${id}`);
+            const res = await axiosSecure.get(`/notes/${id}`);
             if (res.data) {
                 const cleanHTML = DOMPurify.sanitize(res.data.content);
                 setCurrentNote(cleanHTML)
@@ -36,7 +36,7 @@ const EditNote = () => {
     });
     const { mutateAsync: noteEditAsync } = useMutation({
         mutationFn: async (noteData) => {
-            const res = await axiosSecure.patch(`/note/${id}`, noteData);
+            const res = await axiosSecure.patch(`/notes/${id}`, noteData);
             return res.data
         },
         onSuccess: (data) => {

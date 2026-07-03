@@ -21,7 +21,7 @@ const SignUp = () => {
             .then(async () => {
                 updateUser(name, photo)
                 // console.log(result)
-                const res = await axiosPublic.post('/user', data);
+                const res = await axiosPublic.post('/users', data);
                 console.log(res?.data)
             })
             .catch(err => {

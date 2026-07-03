@@ -1,66 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Dashboard = () => {
     // State Management
-    const [todayClasses, setTodayClasses] = useState([]);
     const [todayTasks, setTodayTasks] = useState([]);
     const [budget, setBudget] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [markingDone, setMarkingDone] = useState(null);
-
+    const axiosSecure = useAxiosSecure();
     // Fake Backend API Base URL
     const API_BASE = 'http://localhost:5000/api';
 
-    // Fetch Data from Backend
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                // In real app, use Promise.all for parallel requests
-                const [classesRes, tasksRes, budgetRes] = await Promise.all([
-                    fetch(`${API_BASE}/classes/today`),
-                    fetch(`${API_BASE}/tasks/today`),
-                    fetch(`${API_BASE}/budget/current`)
-                ]);
+    const { data: { classes = [], tasks = [] } = {}, isLoading } = useQuery({
+        queryKey: ['dashboardData'],
+        queryFn: async () => {
+            const result = await axiosSecure.get('/dashboard');
+            return result.data;
+        }
+    });
 
-                const classes = await classesRes.json();
-                const tasks = await tasksRes.json();
-                const budgetData = await budgetRes.json();
-
-                setTodayClasses(classes);
-                setTodayTasks(tasks);
-                setBudget(budgetData);
-            } catch (error) {
-                console.error("Failed to fetch data:", error);
-                // Fallback to local fake data
-                setTodayClasses([/* your sample class */]);
-                setTodayTasks([/* your sample task */]);
-                setBudget({ month: "May 2026", totalBudget: 5000, totalExpenses: 2850 });
-            }
-            setLoading(false);
-        };
-
-        fetchData();
-    }, []);
 
     // Mark Task as Done (Smooth Interaction)
-    const markTaskDone = async (taskId) => {
-        setMarkingDone(taskId);
+    // const markTaskDone = async (taskId) => {
+    //     setMarkingDone(taskId);
 
-        try {
-            await fetch(`${API_BASE}/tasks/${taskId}/complete`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-            });
+    //     try {
+    //         await fetch(`${API_BASE}/tasks/${taskId}/complete`, {
+    //             method: 'PATCH',
+    //             headers: { 'Content-Type': 'application/json' },
+    //         });
 
-            // Optimistic Update
-            setTodayTasks(prev => prev.filter(task => task._id !== taskId));
-        } catch (err) {
-            alert("Failed to update task");
-        } finally {
-            setMarkingDone(null);
-        }
-    };
+    //         // Optimistic Update
+    //         setTodayTasks(prev => prev.filter(task => task._id !== taskId));
+    //     } catch (err) {
+    //         alert("Failed to update task");
+    //     } finally {
+    //         setMarkingDone(null);
+    //     }
+    // };
 
     const formatTime = (dateString) => {
         return new Date(dateString).toLocaleTimeString([], {
@@ -71,28 +48,31 @@ const Dashboard = () => {
     const spentPercentage = budget
         ? (budget.totalExpenses / budget.totalBudget) * 100
         : 0;
+    console.log(isLoading, classes, tasks)
+    if (isLoading) {
+        return <div className="text-center py-20">Loading dashboard...</div>
+    }
 
     return (
         <div className="min-h-screen">
             <div className="max-w-7xl mx-auto">
-           
+
                 <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
 
-                    {/* Today's Classes */}
                     <div className="xl:col-span-5">
                         <div className="card bg-base-100 shadow-xl">
                             <div className="card-body">
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="card-title text-2xl">🕒 Today's Classes</h2>
-                                    <div className="badge badge-primary badge-lg">{todayClasses.length} Class</div>
+                                    <div className="badge badge-primary badge-lg">{classes.length} Class</div>
                                 </div>
 
-                                {loading ? (
+                                {isLoading ? (
                                     <div className="py-10 text-center">Loading classes...</div>
-                                ) : todayClasses.length > 0 ? (
-                                    todayClasses.map(cls => (
+                                ) : classes.length > 0 ? (
+                                    classes.map(cls => (
                                         <div key={cls._id} className="bg-base-200 rounded-2xl p-6 mb-4 hover:shadow transition-all">
-                                            {/* Class Card Content (same as before + small improvements) */}
+                                            Class Card Content (same as before + small improvements)
                                             <div className="flex justify-between">
                                                 <div>
                                                     <h3 className="text-2xl font-bold">{cls.subject}</h3>
@@ -129,8 +109,8 @@ const Dashboard = () => {
                             <div className="card-body">
                                 <h2 className="card-title text-2xl mb-6">✅ Today's Tasks</h2>
 
-                                {todayTasks.length > 0 ? (
-                                    todayTasks.map(task => (
+                                {tasks.length > 0 ? (
+                                    tasks.map(task => (
                                         <div key={task._id} className="border border-base-300 rounded-2xl p-5 mb-4 hover:border-primary transition-all">
                                             <div className="flex justify-between items-start">
                                                 <div className="flex-1">
@@ -149,8 +129,8 @@ const Dashboard = () => {
                                             </div>
 
                                             <button
-                                                onClick={() => markTaskDone(task._id)}
-                                                disabled={markingDone === task._id}
+                                                onClick={() => alert(task._id)}
+                                                // disabled={markingDone === task._id}
                                                 className="btn btn-success btn-sm mt-5 w-full transition-all active:scale-95"
                                             >
                                                 {markingDone === task._id ? "Marking..." : "Mark as Done ✓"}
@@ -165,7 +145,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Monthly Budget */}
-                    <div className="xl:col-span-3">
+                    {/* <div className="xl:col-span-3">
                         <div className="card bg-base-100 shadow-xl h-full">
                             <div className="card-body">
                                 <h2 className="card-title">💰 {budget?.month} Budget</h2>
@@ -201,11 +181,12 @@ const Dashboard = () => {
                                 )}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default Dashboard;
