@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import NoteCard from '../../features/notes/NoteCard';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from "../../hooks/useAxiosSecure"
@@ -8,12 +8,14 @@ import Swal from 'sweetalert2'
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
 import useTittle from '../../hooks/useTittle';
 import axios from 'axios';
-
 import DOMPurify from "dompurify";
-import Select from "react-select";
+
+import 'react-quill-new/dist/quill.snow.css';
+import NoteTab from '../../features/notes/NoteTab';
+import NoteCards from '../../features/notes/NoteCards';
+import GenerateNote from '../../features/notes/GenerateNote';
 
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
-import 'react-quill-new/dist/quill.snow.css';
 
 function dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(",");
@@ -34,7 +36,8 @@ const subjects = [
 const Notes = () => {
     const [currentNote, setCurrentNote] = useState("");
     const [title, setTitle] = useState("");
-    const [isEditing, setIsEditing] = useState(null);
+    // const [isEditing, setIsEditing] = useState(null);
+    const [activeTab, setActiveTab] = useState("create_note");
     const [sub, setSub] = useState(null);
     const [selectedSub, setSelectedSub] = useState(null);
     const axiosSecure = useAxiosSecure();
@@ -178,42 +181,48 @@ const Notes = () => {
 
     };
 
+    const handleActiveTab = (activeTab) => {
+        setActiveTab(activeTab);
+    };
+
+
     return (
         <div className='max-w-screen-2xl ' >
-            <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
-            {/* note add form */}
-            <NoteForm
-                currentNote={currentNote}
-                setCurrentNote={setCurrentNote}
-                title={title}
-                setTitle={setTitle}
-                sub={sub}
-                setSub={setSub}
-                handleNote={handleSaveNote}
-            />
 
-            {/* previous note history */}
-            <div className='mt-10'>
-                <Select
-                    options={subjects}
-                    value={selectedSub}
-                    onChange={setSelectedSub}
-                    placeholder="Please select your subject"
-                    className='w-full md:w-1/3 input-lg rounded-md'
-                />
-                <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 justify-between my-8 md:gap-20">
-                    {notes?.length === 0 ? (
-                        <p className="text-center text-gray-500">No notes yet.</p>
-                    ) : (
-                        notes?.map((note) => (
-                            <NoteCard
-                                key={note._id}
-                                note={note}
-                                handleEditNote={handleEditNote}
-                                handleDeleteNote={handleDeleteNote}
-                            />
-                        ))
-                    )}
+            <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
+
+            <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen grid">
+                <div>
+                    <NoteTab activeTab={activeTab} handleActiveTab={handleActiveTab} />
+
+                    {
+                        activeTab === "create_note" ?
+                            (
+                                <div>
+                                    < NoteForm
+                                        currentNote={currentNote}
+                                        setCurrentNote={setCurrentNote}
+                                        title={title}
+                                        setTitle={setTitle}
+                                        sub={sub}
+                                        setSub={setSub}
+                                        handleNote={handleSaveNote}
+                                    />
+
+                                    <NoteCards
+                                        subjects={subjects}
+                                        selectedSub={selectedSub}
+                                        setSelectedSub={setSelectedSub}
+                                        notes={notes}
+                                        handleEditNote={handleEditNote}
+                                        handleDeleteNote={handleDeleteNote}
+                                    />
+                                </div>
+                            ) :
+                            (<GenerateNote />
+                            )
+                    }
+
                 </div>
             </div>
         </div >

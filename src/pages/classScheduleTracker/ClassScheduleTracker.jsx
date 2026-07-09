@@ -23,6 +23,8 @@ const ClassScheduleTracker = () => {
         setActiveTab(activeTab);
     };
 
+
+    
     return (
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen grid">
             <div>

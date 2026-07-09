@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
-import QuestionForm from '../../components/GenerateQuestions/QuestionsForm';
+import GenerateForm from '../../components/GenerateQuestions/GenerateForm';
 import { toast } from "react-toastify"
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -82,7 +82,7 @@ const GenerateQuestions = () => {
         }
     });
 
-    const handleSubmit = (subject, chapter, level, subTopic, type, language) => {
+    const handleSubmit = ({subject, chapter, level, subTopic, type, language}) => {
         // setLoading(true)
         const questionInfo = {
             subject: subject.value,
@@ -93,7 +93,7 @@ const GenerateQuestions = () => {
             language: language.value
         };
         // setQuestionInfo(questionInfo);
-
+// console.log(questionInfo)
         mutateAsync(questionInfo)
     };
     // console.log(questionInfo)
@@ -102,7 +102,8 @@ const GenerateQuestions = () => {
         <div className='overflow-hidden min-h-[100dvh] lg:min-h-full'>
 
             <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
-            <QuestionForm
+            <GenerateForm
+                formType="questions"
                 isPending={isPending}
                 retryAfter={retryAfter}
                 handleSubmit={handleSubmit} />

@@ -60,6 +60,7 @@ const EditNote = () => {
         noteEditAsync(noteData)
     };
 
+     
     return (
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4">📒 Edit Note</h2>

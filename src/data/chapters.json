@@ -1,0 +1,290 @@
+{
+    "physics": [
+        {
+            "value": "force",
+            "label": "Force"
+        },
+        {
+            "value": "physicalQualitiesAndTheirMeasurement",
+            "label": "Physical Qualities and Their Measurement"
+        },
+        {
+            "value": "motion",
+            "label": "Motion"
+        },
+        {
+            "value": "motion",
+            "label": "Motion"
+        },
+        {
+            "value": "workPowerAndEnergy",
+            "label": "Work, Power and Energy"
+        },
+        {
+            "value": "wavesAndSound",
+            "label": "Waves and Sound"
+        },
+        {
+            "value": "reflectionOfLight",
+            "label": "Reflection of Light"
+        },
+        {
+            "value": "staticElectricity",
+            "label": "Static Electricity"
+        }
+    ],
+    "math": [
+        {
+            "value": "realNumbers",
+            "label": "Real Numbers"
+        },
+        {
+            "value": "setsAndFunctions",
+            "label": "Sets and Functions"
+        },
+        {
+            "value": "algebraicExpressions",
+            "label": "Algebraic Expressions"
+        },
+        {
+            "value": "exponentsAndLogarithms",
+            "label": "Exponents and Logarithms"
+        },
+        {
+            "value": "equationsInOneVariable",
+            "label": "Equations in One Variable"
+        },
+        {
+            "value": "linesAnglesAndTriangles",
+            "label": "Lines, Angles and Triangles"
+        },
+        {
+            "value": "practicalGeometry",
+            "label": "Practical Geometry"
+        },
+        {
+            "value": "circle",
+            "label": "Circle"
+        },
+        {
+            "value": "trigonometricRatio",
+            "label": "Trigonometric Ratio"
+        },
+        {
+            "value": "distanceAndElevation",
+            "label": "Distance and Elevation"
+        },
+        {
+            "value": "algebraicRatioAndProportion",
+            "label": "Algebraic Ratio and Proportion"
+        },
+        {
+            "value": "simpleSimultaneousEquations",
+            "label": "Simple Simultaneous Equations in Two Variables"
+        },
+        {
+            "value": "finiteSeries",
+            "label": "Finite Series"
+        },
+        {
+            "value": "ratioSimilarityAndSymmetry",
+            "label": "Ratio, Similarity and Symmetry"
+        },
+        {
+            "value": "areaRelatedTheoremsAndConstructions",
+            "label": "Area Related Theorems and Constructions"
+        },
+        {
+            "value": "mensuration",
+            "label": "Mensuration"
+        },
+        {
+            "value": "statistics",
+            "label": "Statistics"
+        }
+    ],
+    "chemistry": [
+        {
+            "value": "conceptsOfChemistry",
+            "label": "Concepts of Chemistry"
+        },
+        {
+            "value": "statesOfMatter",
+            "label": "States of Matter"
+        },
+        {
+            "value": "structureOfMatter",
+            "label": "Structure of Matter"
+        },
+        {
+            "value": "periodicTable",
+            "label": "Periodic Table"
+        },
+        {
+            "value": "chemicalBond",
+            "label": "Chemical Bond"
+        },
+        {
+            "value": "conceptOfMole",
+            "label": "Concept of Mole and Chemical Counting"
+        },
+        {
+            "value": "chemicalReactions",
+            "label": "Chemical Reactions"
+        },
+        {
+            "value": "chemistryAndEnergy",
+            "label": "Chemistry and Energy"
+        },
+        {
+            "value": "acidBaseBalance",
+            "label": "Acid - Base Balance"
+        },
+        {
+            "value": "mineralResourcesMetals",
+            "label": "Mineral Resources: Metal - Nonmetal"
+        },
+        {
+            "value": "mineralResourcesFossils",
+            "label": "Mineral Resources: Fossils"
+        },
+        {
+            "value": "chemistryInOurLives",
+            "label": "Chemistry in Our Lives"
+        }
+    ],
+    "biology": [
+        {
+            "value": "lessonsOnLife",
+            "label": "Lessons on Life"
+        },
+        {
+            "value": "cellsAndTissues",
+            "label": "Cells and Tissues of Organisms"
+        },
+        {
+            "value": "cellDivision",
+            "label": "Cell Division"
+        },
+        {
+            "value": "bioenergetics",
+            "label": "Bioenergetics"
+        },
+        {
+            "value": "foodNutritionAndDigestion",
+            "label": "Food, Nutrition and Digestion"
+        },
+        {
+            "value": "transportInOrganisms",
+            "label": "Transport in Organisms"
+        },
+        {
+            "value": "exchangeOfGases",
+            "label": "Exchange of Gases"
+        },
+        {
+            "value": "excretorySystem",
+            "label": "Excretory System"
+        },
+        {
+            "value": "firmnessAndLocomotion",
+            "label": "Firmness and Locomotion"
+        },
+        {
+            "value": "coordination",
+            "label": "Co-ordination"
+        },
+        {
+            "value": "reproductionInOrganisms",
+            "label": "Reproduction in Organism"
+        },
+        {
+            "value": "heredityAndEvolution",
+            "label": "Heredity in Organisms and Biological Evolution"
+        },
+        {
+            "value": "environmentOfLife",
+            "label": "Environment of Life"
+        },
+        {
+            "value": "biotechnology",
+            "label": "Biotechnology"
+        }
+    ],
+    "higherMath": [
+        {
+            "value": "setAndFunction",
+            "label": "Set and Function"
+        },
+        {
+            "value": "algebraicExpression",
+            "label": "Algebraic Expression"
+        },
+        {
+            "value": "geometry",
+            "label": "Geometry"
+        },
+        {
+            "value": "geometricConstructions",
+            "label": "Geometric Constructions"
+        },
+        {
+            "value": "equation",
+            "label": "Equation"
+        },
+        {
+            "value": "inequality",
+            "label": "Inequality"
+        },
+        {
+            "value": "infiniteSeries",
+            "label": "Infinite Series"
+        },
+        {
+            "value": "trigonometry",
+            "label": "Trigonometry"
+        },
+        {
+            "value": "exponentialAndLogarithmicFunction",
+            "label": "Exponential and Logarithmic Function"
+        },
+        {
+            "value": "binomialExpansion",
+            "label": "Binomial Expansion"
+        },
+        {
+            "value": "coordinateGeometry",
+            "label": "Coordinate Geometry"
+        },
+        {
+            "value": "planarVector",
+            "label": "Planar Vector"
+        },
+        {
+            "value": "solidGeometry",
+            "label": "Solid Geometry"
+        },
+        {
+            "value": "probability",
+            "label": "Probability"
+        }
+    ],
+    "history": [
+        {
+            "value": "british",
+            "label": "British"
+        },
+        {
+            "value": "mughal",
+            "label": "Mughal"
+        },
+        {
+            "value": "babylon",
+            "label": "Babylon"
+        },
+        {
+            "value": "bangladesh-liberation-war",
+            "label": "Bangladesh liberation war"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "value": "physics",
+        "label": "Physics"
+    },
+    {
+        "value": "math",
+        "label": "Math"
+    },
+    {
+        "value": "chemistry",
+        "label": "Chemistry"
+    },
+    {
+        "value": "biology",
+        "label": "Biology"
+    },
+    {
+        "value": "higherMath",
+        "label": "Higher Math"
+    },
+    {
+        "value": "history",
+        "label": "History"
+    }
+]

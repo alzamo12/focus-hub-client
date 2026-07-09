@@ -25,7 +25,8 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
             return res.data;
         },
         suspense: true,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
+        enabled: !!user?.email && !!activeTab && !!pageView && !!page && !!limit,
     });
     // console.log(error)
 

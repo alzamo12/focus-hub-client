@@ -1,0 +1,32 @@
+import NoteCard from './NoteCard';
+import Select from "react-select";
+
+const NoteCards = ({ subjects, selectedSub, setSelectedSub, notes, handleEditNote, handleDeleteNote }) => {
+    return (
+        <div className='mt-10'>
+            <Select
+                options={subjects}
+                value={selectedSub}
+                onChange={setSelectedSub}
+                placeholder="Please select your subject"
+                className='w-full md:w-1/3 input-lg rounded-md'
+            />
+            <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 justify-between my-8 md:gap-20">
+                {notes?.length === 0 ? (
+                    <p className="text-center text-gray-500">No notes yet.</p>
+                ) : (
+                    notes?.map((note) => (
+                        <NoteCard
+                            key={note._id}
+                            note={note}
+                            handleEditNote={handleEditNote}
+                            handleDeleteNote={handleDeleteNote}
+                        />
+                    ))
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default NoteCards;

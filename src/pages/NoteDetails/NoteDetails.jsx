@@ -60,42 +60,42 @@ const NoteDetails = () => {
     console.log('clean', cleanNoteContent, 'not-clean', note.content)
 
     return (
-        <div
-            className="bg-white border rounded-xl shadow p-4 space-y-2"
-        >
+            <div
+                className="bg-white border rounded-xl shadow p-4 space-y-2"
+            >
 
-            <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg">{note?.subject}</h3>
-                <h3 className="font-semibold text-lg">{note?.title}</h3>
-                <div className="space-x-2">
-                    <Link
-                        // onClick={() => handleEditNote(note._id)}
-                        to={`/editNote/${note?._id}`}
-                        className="px-3 py-1 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 cursor-pointer"
-                    >
-                        Edit
-                    </Link>
-                    <button
-                        onClick={() => handleDeleteNote(note._id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer"
-                    >
-                        Delete
-                    </button>
+                <div className="flex justify-between items-center">
+                    <h3 className="font-semibold text-lg">{note?.subject}</h3>
+                    <h3 className="font-semibold text-lg">{note?.title}</h3>
+                    <div className="space-x-2">
+                        <Link
+                            // onClick={() => handleEditNote(note._id)}
+                            to={`/editNote/${note?._id}`}
+                            className="px-3 py-1 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 cursor-pointer"
+                        >
+                            Edit
+                        </Link>
+                        <button
+                            onClick={() => handleDeleteNote(note._id)}
+                            className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 </div>
-            </div>
-            {/* <div
+                {/* <div
                 className="prose max-w-none ql-editor truncate note-content"
                 dangerouslySetInnerHTML={{ __html: note.content }}
             /> */}
-            <ReactQuill
-                value={cleanNoteContent}
-                readOnly
-                theme="bubble"
-            />
-            <p className="text-gray-400 text-sm">
-                Created: {new Date(note.createdAt).toLocaleString()}
-            </p>
-        </div>
+                <ReactQuill
+                    value={cleanNoteContent}
+                    readOnly
+                    theme="bubble"
+                />
+                <p className="text-gray-400 text-sm">
+                    Created: {new Date(note.createdAt).toLocaleString()}
+                </p>
+            </div>
     );
 };
 
