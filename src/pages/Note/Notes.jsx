@@ -14,6 +14,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import NoteTab from '../../features/notes/NoteTab';
 import NoteCards from '../../features/notes/NoteCards';
 import GenerateNote from '../../features/notes/GenerateNote';
+import { marked } from "marked";
 
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 
@@ -185,6 +186,12 @@ const Notes = () => {
         setActiveTab(activeTab);
     };
 
+    const handleGeneratedSaveNote = (note) => {
+        const note_html = marked.parse(note)
+        setCurrentNote(note_html);
+        setActiveTab("create_note")
+    }
+
 
     return (
         <div className='max-w-screen-2xl ' >
@@ -219,7 +226,7 @@ const Notes = () => {
                                     />
                                 </div>
                             ) :
-                            (<GenerateNote />
+                            (<GenerateNote handleGeneratedSaveNote={handleGeneratedSaveNote} />
                             )
                     }
 

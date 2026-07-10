@@ -9,7 +9,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css";
 
-const GenerateNote = () => {
+const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
     const { data: generatedNote, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
@@ -57,7 +57,10 @@ const GenerateNote = () => {
                         </div>
                         :
                         <div>
-                            <h2 className="card-title font-bold mb-4">Here is the answer:</h2>
+                            <div className='flex justify-between'>
+                                <h2 className="card-title font-bold mb-4">Here is the answer:</h2>
+                                <button onClick={() => handleGeneratedSaveNote(generatedNote?.text)} className='btn'>Save</button>
+                            </div>
                             {/* <p className='whitespace-pre-line'>{generatedNote?.text}</p> */}
                             {/* <div className="markdown-body"> */}
                             {/* <ReactMarkdown
