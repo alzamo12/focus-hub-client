@@ -4,16 +4,29 @@ import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
-import "katex/dist/katex.min.css";
+// import remarkMath from "remark-math";
+// import rehypeKatex from "rehype-katex";
+// import remarkGfm from "remark-gfm";
+// import "katex/dist/katex.min.css";
+import ReactQuill from 'react-quill-new';
+import NoteViewer from '../../components/NoteViewer/NoteViewer';
+import "react-quill-new/dist/quill.bubble.css";
+import { useState } from 'react';
 
 const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
+    const [note, setNote] = useState(null);
+
+
     const { data: generatedNote, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.post("/ai/generate-notes", data);
+            const clean = res?.data?.text
+                .replace(/^```json\s*/i, "")
+                .replace(/\s*```$/, "");
+
+            const delta = JSON.parse(clean);
+            setNote(delta)
             return res.data
         }
     });
@@ -32,11 +45,30 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
         mutateAsync(generateNotesData)
     };
 
+
     // console.log(data)
 
     // if (isPending) {
     //     return <LoadingSpinner />
     // };
+
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "color",
+        "background",
+        "list",
+        "bullet",
+        "link",
+        "image",
+        "table",
+        "blockquote",
+        "code-block",
+        "script",   // for sub/sup
+        "strike",
+    ];
 
     return (
         <div
@@ -70,12 +102,19 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                     {generatedNote?.text}
                                 </ReactMarkdown> */}
                             <article className="prose prose-lg max-w-none">
-                                <ReactMarkdown
+                                {/* <ReactMarkdown
                                     remarkPlugins={[remarkMath, remarkGfm]}
                                     rehypePlugins={[rehypeKatex]}
                                 >
                                     {generatedNote?.text}
-                                </ReactMarkdown>
+                                </ReactMarkdown> */}
+                                <ReactQuill
+                                    value={note}
+                                    readOnly
+                                    theme="bubble"
+                                    formats={formats}
+                                />
+                                {/* <NoteViewer html={generatedNote?.text}/> */}
                             </article>
                             {/* </div> */}
                         </div>

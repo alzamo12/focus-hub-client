@@ -15,6 +15,7 @@ import NoteTab from '../../features/notes/NoteTab';
 import NoteCards from '../../features/notes/NoteCards';
 import GenerateNote from '../../features/notes/GenerateNote';
 import { marked } from "marked";
+import { useRef } from 'react';
 
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 
@@ -37,6 +38,7 @@ const subjects = [
 const Notes = () => {
     const [currentNote, setCurrentNote] = useState("");
     const [title, setTitle] = useState("");
+    const noteRef = useRef(null);
     // const [isEditing, setIsEditing] = useState(null);
     const [activeTab, setActiveTab] = useState("create_note");
     const [sub, setSub] = useState(null);
@@ -187,8 +189,19 @@ const Notes = () => {
     };
 
     const handleGeneratedSaveNote = (note) => {
-        const note_html = marked.parse(note)
-        setCurrentNote(note_html);
+        // const note_html = marked.parse(note)
+        // const editor = noteRef.current.getEditor();
+        // const delta = editor.clipboard.convert({
+        //     html: note,
+        // });
+        // editor.setContents(delta);
+        const clean = note
+            .replace(/^```json\s*/i, "")
+            .replace(/\s*```$/, "");
+
+        const delta = JSON.parse(clean);
+
+        setCurrentNote(delta);
         setActiveTab("create_note")
     }
 
@@ -207,6 +220,7 @@ const Notes = () => {
                             (
                                 <div>
                                     < NoteForm
+                                        noteRef={noteRef}
                                         currentNote={currentNote}
                                         setCurrentNote={setCurrentNote}
                                         title={title}

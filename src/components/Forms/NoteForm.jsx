@@ -13,7 +13,7 @@ const subjects = [
     // { value: "History", label: "History" },
 ];
 
-const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote }) => {
+const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, }) => {
 
     // const modules = {
     //     toolbar: {
@@ -61,7 +61,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                 // Modern, grouped table manipulation array layout strings
                 ["table", "table-insert-row-above", "table-insert-row-below", "table-insert-column-left", "table-insert-column-right"],
                 ["table-delete-row", "table-delete-column", "table-delete-table"],
-
+                // ['formula'],
                 // ["increaseImageSize", "decreaseImageSize"],
                 ["clean"],
             ],
@@ -111,6 +111,10 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
         "link",
         "image",
         "table",
+        "blockquote",
+        "code-block",
+        "script",   // for sub/sup
+        "strike",
     ];
 
     return (
@@ -137,6 +141,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
 
             {/*   text editor form */}
             <ReactQuill
+                // ref={noteRef}
                 theme='snow'
                 value={currentNote}
                 onChange={setCurrentNote}
