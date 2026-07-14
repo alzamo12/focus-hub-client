@@ -14,9 +14,9 @@ import 'react-quill-new/dist/quill.snow.css';
 import NoteTab from '../../features/notes/NoteTab';
 import NoteCards from '../../features/notes/NoteCards';
 import GenerateNote from '../../features/notes/GenerateNote';
-import { marked } from "marked";
 import { useRef } from 'react';
-
+import Pagination from '../../components/Pagination/Pagination';
+// import NoteForm from "../../components/Forms/NoteForm"
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 
 function dataURLtoFile(dataurl, filename) {
@@ -43,9 +43,12 @@ const Notes = () => {
     const [activeTab, setActiveTab] = useState("create_note");
     const [sub, setSub] = useState(null);
     const [selectedSub, setSelectedSub] = useState(null);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
+    const limit = 5;
     useTittle("Notes")
 
 
@@ -78,10 +81,15 @@ const Notes = () => {
         }
     });
 
-    const { data: notes } = useQuery({
-        queryKey: ['note', user.email, selectedSub],
+    const { data: notes, isLoading, isPending } = useQuery({
+        queryKey: ['note', user.email, selectedSub, page, limit],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/notes?email=${user?.email}&subject=${selectedSub?.value}`);
+            const res = await axiosSecure.get(`/notes?email=${user?.email}&subject=${selectedSub?.value}&page=${page}&limit=${limit}`);
+
+            if (res.data.totalPages) {
+                setTotalPages(res.data.totalPages)
+            }
+
             return res.data
         }
     });
@@ -203,11 +211,18 @@ const Notes = () => {
 
         setCurrentNote(delta);
         setActiveTab("create_note")
-    }
+    };
+    // const { notesData, totalPages } = notes || {};
+
+    console.log('this is notes data', notes)
+
+    // if (isLoading || isPending) {
+    //     return <LoadingSpinner />
+    // }
 
 
     return (
-        <div className='max-w-screen-2xl ' >
+        <div className='max-w-screen-2xl overflow-y-hidden' >
 
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
 
@@ -219,33 +234,45 @@ const Notes = () => {
                         activeTab === "create_note" ?
                             (
                                 <div>
-                                    < NoteForm
-                                        noteRef={noteRef}
-                                        currentNote={currentNote}
-                                        setCurrentNote={setCurrentNote}
-                                        title={title}
-                                        setTitle={setTitle}
-                                        sub={sub}
-                                        setSub={setSub}
-                                        handleNote={handleSaveNote}
-                                    />
+                                    <Suspense fallback={<LoadingSpinner />}>
+                                        < NoteForm
+                                            noteRef={noteRef}
+                                            currentNote={currentNote}
+                                            setCurrentNote={setCurrentNote}
+                                            title={title}
+                                            setTitle={setTitle}
+                                            sub={sub}
+                                            setSub={setSub}
+                                            handleNote={handleSaveNote}
+                                            btnText="Add Note"
+                                        />
+                                    </Suspense>
 
                                     <NoteCards
                                         subjects={subjects}
                                         selectedSub={selectedSub}
                                         setSelectedSub={setSelectedSub}
-                                        notes={notes}
+                                        notes={notes?.notesData}
                                         handleEditNote={handleEditNote}
                                         handleDeleteNote={handleDeleteNote}
+                                        isLoading={isLoading}
+                                        isPending={isPending}
+                                    />
+                                    <Pagination
+                                        setPage={setPage}
+                                        page={page}
+                                        totalPage={totalPages}
                                     />
                                 </div>
-                            ) :
+                            ) : activeTab === 'generate_note' &&
                             (<GenerateNote handleGeneratedSaveNote={handleGeneratedSaveNote} />
                             )
                     }
 
                 </div>
             </div>
+
+
         </div >
     );
 };

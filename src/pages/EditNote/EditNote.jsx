@@ -73,6 +73,7 @@ const EditNote = () => {
                 sub={sub}
                 setSub={setSub}
                 handleNote={handleEditNote}
+                btnText="Edit Note"
             />
         </div >
     );

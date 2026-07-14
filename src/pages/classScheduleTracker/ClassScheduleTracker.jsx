@@ -5,6 +5,7 @@ import Classes from "../../features/classschedule/Classes"
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorHandler from "../../components/Error/ErrorHandler";
 import useTittle from "../../hooks/useTittle";
+import Pagination from "../../components/Pagination/Pagination";
 
 const ClassScheduleTracker = () => {
     const [activeTab, setActiveTab] = useState("next");
@@ -24,7 +25,7 @@ const ClassScheduleTracker = () => {
     };
 
 
-    
+
     return (
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen grid">
             <div>
@@ -71,7 +72,7 @@ const ClassScheduleTracker = () => {
                     </Suspense>
                 </ErrorBoundary>
             </div>
-            <div className="join items-center justify-center mt-8 md:md-0">
+            {/* <div className="join items-center justify-center mt-8 md:md-0">
                 <button
                     onClick={() => { setPage(page - 1) }}
                     disabled={page === 1}
@@ -81,7 +82,12 @@ const ClassScheduleTracker = () => {
                     onClick={() => { setPage(page + 1) }}
                     disabled={page === totalPage}
                     className="join-item btn">»</button>
-            </div>
+            </div> */}
+            <Pagination
+                setPage={setPage}
+                page={page}
+                totalPage={totalPage}
+            />
         </div>
     );
 };

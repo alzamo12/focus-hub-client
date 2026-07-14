@@ -4,6 +4,7 @@ import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorHandler from '../../components/Error/ErrorHandler';
 import useTittle from '../../hooks/useTittle';
+import Pagination from '../../components/Pagination/Pagination';
 
 const Tasks = () => {
     const [activeTab, setActiveTab] = useState("next");
@@ -72,7 +73,7 @@ const Tasks = () => {
                     </Suspense>
                 </ErrorBoundary>
             </div>
-            <div className="join items-center justify-center mt-8 md:md-0">
+            {/* <div className="join items-center justify-center mt-8 md:md-0">
                 <button
                     onClick={() => { setPage(page - 1) }}
                     disabled={page === 1}
@@ -82,7 +83,12 @@ const Tasks = () => {
                     onClick={() => { setPage(page + 1) }}
                     disabled={page === totalPages}
                     className="join-item btn">»</button>
-            </div>
+            </div> */}
+            <Pagination
+                setPage={setPage}
+                page={page}
+                totalPage={totalPages}
+            />
         </div>
     );
 };
