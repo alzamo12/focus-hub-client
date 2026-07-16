@@ -5,7 +5,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
+import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
+import '../../css/calendar.css'
 const Dashboard = () => {
     // State Management
     const axiosSecure = useAxiosSecure();
@@ -68,7 +69,7 @@ const Dashboard = () => {
     console.log(isLoading, classes, tasks);
 
     if (isLoading) {
-        return <div className="text-center py-20">Loading dashboard...</div>
+        return <LoadingSpinner />
     }
 
     return (
@@ -81,8 +82,8 @@ const Dashboard = () => {
                 ]}
                 initialView="dayGridMonth"
                 events={events}
-                // dateClick={handleDateClick}
-                // eventContent={renderEventContent}
+                // contentHeight="auto"
+                contentHeight="auto"
             />
         </div>
     );

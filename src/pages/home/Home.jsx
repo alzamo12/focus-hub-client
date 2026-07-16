@@ -11,15 +11,9 @@ const Home = () => {
     return (
         <div className='min-h-screen'>
             <div className="my-8">
-                <h1 className="text-3xl font-bold text-primary">Good Morning, {displayName} 👋</h1>
+                <h1 className="text-3xl font-bold text-accent">Good Morning, {displayName} 👋</h1>
                 <p className="text-base-content/70">Monday, May 18, 2026</p>
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
-                <TodayTasks />
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                <TodayClasses />
-            </Suspense>
             <Dashboard />
         </div>
     );

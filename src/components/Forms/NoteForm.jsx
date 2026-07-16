@@ -13,7 +13,7 @@ const subjects = [
     // { value: "History", label: "History" },
 ];
 
-const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText}) => {
+const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText }) => {
 
     // const modules = {
     //     toolbar: {
@@ -156,7 +156,7 @@ const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, 
             {/* submit button */}
             <button
                 onClick={handleNote}
-                className="w-full mt-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                className="w-full mt-4 py-2 bg-white border border-primary  text-secondary rounded-lg hover:bg-secondary hover:text-white"
             >
                 {btnText}
             </button>

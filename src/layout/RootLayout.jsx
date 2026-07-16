@@ -80,7 +80,7 @@ const RootLayout = () => {
             {/* proper outlet + navbar*/}
             <div className="flex-1 flex flex-col ">
                 {/* navbar */}
-                <header className="sticky top-0 z-40 w-full border-b border-primary">
+                <header className="sticky top-0 z-40 w-full border-b border-accent">
                     <DesktopNavbar
                         setDrawerOpen={setDrawerOpen}
                         timeString={timeString}

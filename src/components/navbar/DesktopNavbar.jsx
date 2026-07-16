@@ -20,13 +20,13 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
                         onClick={() => setDrawerOpen(true)}
                         className="p-2 flex lg:hidden rounded-md focus:outline-none focus:ring-2 focus:ring-primary/60"
                     >
-                        <Menu className="w-6 h-6 text-neutral-900" />
+                        <Menu className="w-6 h-6 dark:text-accent not-dark:text-neutral-900" />
                     </button>
                 </div>
                 {/* Right: time & profile */}
                 {
                     user ?
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-6 text-accent">
                             {/* Time & date */}
                             <div className="text-right">
                                 <div className="text-sm font-medium">{timeString}</div>
