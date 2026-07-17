@@ -26,6 +26,23 @@
 
 }
 
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  /* set as default */
+
+  --color-primary: "#33c7d8";
+  /* --color-primary: "#B7E5CD"; */
+  /* --color-primary: "#9400D3"; */
+  --color-secondary: "#0284C7";
+  /* --color-accent: "#305669"; */
+  /* --color-accent: "#33c7d8", ; */
+  --color-accent: "#B7E5CD", ;
+  /* --color-secondary: "#8ABEB9", ; */
+  /* --color-base-100: "#F6F0F0"; */
+
+}
+
 /* ensures mini-toolbar is visible */
 .ql-increaseImageSize::before {
   content: "I+";

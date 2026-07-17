@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <div className='min-h-screen'>
             <div className="my-8">
-                <h1 className="text-3xl font-bold text-accent">Good Morning, {displayName} 👋</h1>
+                <h1 className="text-3xl font-bold text-secondary dark:text-primary">Good Morning, {displayName} 👋</h1>
                 <p className="text-base-content/70">Monday, May 18, 2026</p>
             </div>
             <Dashboard />

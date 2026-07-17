@@ -19,7 +19,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                         initial={{ opacity: 0, y: -20, }}   // starts slightly up and transparent
                         animate={{ opacity: 1, y: 0 }}     // slides down and fades in
                         exit={{ opacity: 0, y: -20, }}      // slides up and fades out
-                        transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-accent">
+                        transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l px-1 border-primary">
                         <li>
                             {/* <button className="btn btn-secondary text-black" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button> */}
                         </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -52,7 +52,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
     return (
         <aside className={`lg:flex lg:translate-x-0 flex-col w-64 
             border-r border-black lg:p-4 lg:pl-1
-            md:min-w-[240px] not-dark:bg-primary dark:bg-black dark:text-accent  
+            md:min-w-[240px] not-dark:bg-primary dark:bg-black dark:text-primary  
             shadow-lg z-50 h-screen fixed lg:sticky top-0
         ${drawerOpen ? 'translate-x-0 ' : '-translate-x-full'} 
         transition-transform duration-300 ease-in-out`}>
@@ -88,18 +88,18 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                             initial={{ opacity: 0, y: -20, }}   // starts slightly up and transparent
                             animate={{ opacity: 1, y: 0 }}     // slides down and fades in
                             exit={{ opacity: 0, y: -20, }}      // slides up and fades out
-                            transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l-2 px-1 border-secondary">
+                            transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l-2 px-1 border-accent">
                             <li>
-                                <button className="btn btn-secondary text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
+                                <button className="btn not-dark:btn-secondary dark:btn-ghost dark:border-primary text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
                             </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
                             <li>
-                                <button className="btn btn-secondary text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                                <button className="btn not-dark:btn-secondary dark:btn-ghost dark:border-primary text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
                             </li>
 
                         </motion.ul>}
                 </AnimatePresence >
 
-                <button onClick={() => setShowNav(!showNav)} className="btn btn-secondary hover:bg-[#0369A1] text-white  font-bold w-32 mx-auto ml-3">{
+                <button onClick={() => setShowNav(!showNav)} className="btn not-dark:btn-secondary dark:bg-black dark:border-accent hover:shadow-2xl text-white  font-bold w-32 mx-auto ml-3">{
                     showNav ? 'Close' : 'Add New'
                 }</button>
             </nav>
@@ -114,7 +114,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
 
             {/* dialog for add class */}
             <dialog id="my_modal_2" className="modal">
-                <div className="modal-box max-w-4xl mx-auto bg-secondary">
+                <div className="modal-box max-w-4xl mx-auto p-0">
                     <AddClass />
                 </div>
                 <form method="dialog" className="modal-backdrop">

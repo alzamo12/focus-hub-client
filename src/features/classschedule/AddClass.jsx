@@ -21,7 +21,7 @@ const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
 //     // color: z.string().regex(/^#([0-9A-Fa-f]{6})$/),
 //     // userEmail: z.string().email(),
 // });
-export function TimeInput({ value, onChange, name }) {
+export function TimeInput({ value, onChange, name, inputCommonStyles }) {
     const [showClock, setShowClock] = useState(false);
 
     return (
@@ -34,7 +34,7 @@ export function TimeInput({ value, onChange, name }) {
                 placeholder={`${name}`}
                 readOnly
                 onClick={() => setShowClock(true)}
-                className="input input-bordered w-full bg-white border-[--color-accent] cursor-pointer"
+                className={`${inputCommonStyles}`}
             />
 
             {/* Clock Popup */}
@@ -128,8 +128,8 @@ const AddClass = () => {
         // console.log(data)
     };
     return (
-        <div className="p-6 w-full mx-auto h-auto">
-            <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
+        <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">
+            <h2 className="text-2xl font-bold mb-4">Class Schedule</h2>
 
             <AddClassForm
                 handleSubmit={handleSubmit}
