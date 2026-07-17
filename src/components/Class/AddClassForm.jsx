@@ -71,7 +71,7 @@ const AddClassForm = ({ handleSubmit, onSubmit, register, control, subjects }) =
     const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="grid  md:grid-cols-2 gap-4 mb-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="sm:flex sm:flex-col md:grid md:grid-cols-2 gap-4 mb-6 space-y-5 md:space-y-0">
             {/* Module name */}
             <input
                 {...register("module")}

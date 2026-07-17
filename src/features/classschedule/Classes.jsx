@@ -98,12 +98,12 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
                 );
         }
     } else {
-        content = (<div>No classes available here</div>)
+        content = (<div className=''>No classes available here</div>)
     }
 
     return (
-        <div>
-            <h2 className="text-2xl font-bold text-[--color-primary] mb-4">Class Schedule</h2>
+        <div className='text-base-content'>
+            <h2 className="text-2xl font-bold  mb-4">Class Schedule</h2>
             <div>
                 {content}
             </div>

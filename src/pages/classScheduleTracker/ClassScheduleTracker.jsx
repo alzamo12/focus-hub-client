@@ -30,7 +30,7 @@ const ClassScheduleTracker = () => {
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen grid">
             <div>
                 {/* name of each tab group should be unique */}
-                <div className="flex gap-10">
+                <div className="flex gap-10 text-black dark:text-white">
                     {/* next and prev classes tab */}
                     <div className="tabs tabs-border mb-10">
                         <input
