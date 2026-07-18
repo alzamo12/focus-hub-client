@@ -30,9 +30,9 @@ const ClassScheduleTracker = () => {
         <div className=" w-full mx-auto bg-[--color-base-100] min-h-screen grid">
             <div>
                 {/* name of each tab group should be unique */}
-                <div className="flex gap-10 text-black dark:text-white">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-10 mb-10 text-black dark:text-white">
                     {/* next and prev classes tab */}
-                    <div className="tabs tabs-border mb-10">
+                    <div className="tabs tabs-border">
                         <input
                             type="radio"
                             name="my_tabs_2"
@@ -54,7 +54,7 @@ const ClassScheduleTracker = () => {
 
                     </div>
                     {/* make a view toggle button */}
-                    <select onChange={handlePageView} defaultValue="Flat" className="select">
+                    <select onChange={handlePageView} defaultValue="Flat" className="select mx-3 w-3/4 md:w-72">
                         <option>Flat</option>
                         <option>Group</option>
                     </select>

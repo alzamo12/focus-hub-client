@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import AddClass from "../../features/classschedule/AddClass";
 import { AnimatePresence, motion } from "motion/react"
 import AddTask from "../../features/Tasks/AddTask";
+import SidebarButton from "../buttons/SidebarModelOpenButton/SidebarButton";
 
 const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
     const [extraNavs, setExtraNavs] = useState([]);
@@ -90,10 +91,16 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
                             exit={{ opacity: 0, y: -20, }}      // slides up and fades out
                             transition={{ duration: 0.4, ease: "easeInOut" }} className="space-y-2  text-lg font-medium mt-4 my-4 pt-2 border-l-2 px-1 border-accent">
                             <li>
-                                <button className="btn not-dark:btn-secondary dark:btn-ghost dark:border-primary text-white" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Task</button>
+                                <SidebarButton
+                                    modalName={`my_modal_2`} // my_modal_2 for classes
+                                    text={`Add Class`}
+                                />
                             </li>                        {/* Open the modal using document.getElementById('ID').showModal() method */}
                             <li>
-                                <button className="btn not-dark:btn-secondary dark:btn-ghost dark:border-primary text-white" onClick={() => document.getElementById('my_modal_2').showModal()}>Add Class</button>
+                                <SidebarButton
+                                    modalName={`my_modal_1`} // my_modal_1 for tasks
+                                    text={`Add Task`}
+                                />
                             </li>
 
                         </motion.ul>}
