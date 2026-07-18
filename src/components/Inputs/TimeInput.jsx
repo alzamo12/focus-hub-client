@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Timekeeper from "react-timekeeper";
+import { useState } from "react";
+import TimeKeeper from "react-timekeeper";
 
-const TimeInput = ({ value, onChange, name }) => {
+const TimeInput = ({ value, onChange, name, inputCommonStyles }) => {
     const [showClock, setShowClock] = useState(false);
 
     return (
@@ -14,7 +14,7 @@ const TimeInput = ({ value, onChange, name }) => {
                 placeholder={`${name}`}
                 readOnly
                 onClick={() => setShowClock(true)}
-                className="input input-bordered w-full bg-white border-[--color-accent] cursor-pointer"
+                className={`${inputCommonStyles}`}
             />
 
             {/* Clock Popup */}
@@ -22,7 +22,7 @@ const TimeInput = ({ value, onChange, name }) => {
                 <div
                     // style={{ transform: "scale(0.9)", transformOrigin: "top left" }} 
                     className="absolute z-50 top-4">
-                    <Timekeeper
+                    <TimeKeeper
                         time={value}
 
                         onChange={(newTime) => onChange(newTime.formatted12)}

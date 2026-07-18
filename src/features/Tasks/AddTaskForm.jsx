@@ -2,33 +2,14 @@ import DatePicker from 'react-datepicker';
 import { Controller } from 'react-hook-form';
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-// import TimeInput from "../../features/classschedule/AddClass/TimeInput"
 import TimeInput from '../../components/Inputs/TimeInput';
 import ReactQuill from "react-quill-new"
-import { useState } from 'react';
+import CommonInput from '../../components/Inputs/add_Class_And_Task_Form_Inputs/CommonInput';
+import DateInput from '../../components/Inputs/add_Class_And_Task_Form_Inputs/DateInput';
+import Clock from '../../components/Inputs/add_Class_And_Task_Form_Inputs/Clock';
+import SelectInput from '../../components/Inputs/add_Class_And_Task_Form_Inputs/SelectInput';
+import AddButton from '../../components/buttons/addClassAndTaskSubmitButton/AddButton';
 
-
-const modules = {
-    toolbar: {
-        container: [
-            [{ header: [1, 2, 3, false] }],
-            ["bold", "italic", "underline", "strike"],
-            [{ color: [] }, { background: [] }], // <-- Add this line for color
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["clean"],
-        ],
-    },
-};
-const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "color",
-    "background",
-    "list",
-    "bullet",
-];
 const subjects = [
     { value: "math", label: "Math" },
     { value: "english", label: "English" },
@@ -48,92 +29,56 @@ const level = [
     { value: "complex", label: "Complex" },
 ];
 const AddTaskForm = ({ register, handleSubmit, handleAddTask, control }) => {
-    // const [currentNote, setCurrentNote] = useState("");
-    // console.log(currentNote);
+    const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
+
     return (
-        <form onSubmit={handleSubmit(handleAddTask)} className="grid md:grid-cols-2 gap-4 mb-6">
-            <input
-                {...register("module")}
+        <form onSubmit={handleSubmit(handleAddTask)} className="flex flex-col md:space-y-0 md:grid md:grid-cols-2 gap-4 mb-6">
+            <CommonInput
+                register={register}
+                inputCommonStyles={inputCommonStyles}
                 placeholder="Module Name"
-                className="input input-bordered w-full bg-white border-[--color-accent]"
+                inputName="module"
             />
-            <Controller
-                name="subject"
-                required={true}
+
+            <SelectInput
+                inputName={`subject`}
                 control={control}
-                render={({ field }) => (
-                    <Select {...field}
-                        onChange={(selectedOption) => field.onChange(selectedOption?.value)} // only store value
-                        value={subjects.find((s) => s.value === field.value) || null}
-                        options={subjects} placeholder="Choose Subject" />
-                )}
+                options={subjects}
+                placeholder={`Choose Subject`}
             />
 
-            <Controller
-                name="date"
+            <DateInput
                 control={control}
-                rules={{ required: "Please select a date" }}
-                render={({ field, fieldState }) => (
-                    <div>
-                        <DatePicker
-                            placeholderText="Select date"
-                            selected={field.value}
-                            onChange={(date) => field.onChange(date)}
-                            className=" input input-bordered cursor-pointer  bg-white border-[--color-accent]"
-                        />
-                        {fieldState.error && (
-                            <p className="text-red-500 mt-1">{fieldState.error.message}</p>
-                        )}
-                    </div>
-                )}
+                inputCommonStyles={inputCommonStyles}
             />
 
-            <Controller
-                name="startTime"
+            <Clock
+                inputName="startTime"
                 control={control}
-                // this render the uncontrolled component
-                render={({ field }) => (
-                    // <Timekeeper
-                    //     time={field.value}
-                    //     onChange={(val) => field.onChange(val.formatted12)} // e.g. "03:45 pm"
-                    // />
-                    // use time input function to show the current time with react library
-                    <TimeInput {...field} />
-                )}
+                inputCommonStyles={inputCommonStyles}
             />
 
-            <Controller
-                name="endTime"
+            <Clock
+                inputName="endTime"
                 control={control}
-                render={({ field }) => (
-                    <TimeInput {...field} />
-                )}
+                inputCommonStyles={inputCommonStyles}
             />
 
-            <Controller
-                name="level"
-                required={true}
+            <SelectInput
+                inputName={`level`}
                 control={control}
-                render={({ field }) => (
-                    <Select {...field}
-                        onChange={(selectedOption) => field.onChange(selectedOption?.value)} // only store value
-                        value={level.find((l) => l.value === field.value) || null}
-                        options={level} placeholder="Choose Subject" />
-                )}
-            />
-            <input
-                {...register("description")}
-                placeholder="Task Description"
-                className="textarea w-full col-span-2 bg-white border-[--color-accent]"
+                options={level}
+                placeholder={`Choose Level`}
             />
 
+            <CommonInput
+                register={register}
+                inputCommonStyles={`${inputCommonStyles} textarea col-span-2`}
+                placeholder="Module Name"
+                inputName="module"
+            />
 
-            <button
-                type="submit"
-                className="btn col-span-2 text-black bg-[--color-primary] hover:bg-[--color-accent]"
-            >
-                Add Class
-            </button>
+            <AddButton text={`Add Task`} />
         </form>
     );
 };

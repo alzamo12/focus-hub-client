@@ -123,7 +123,7 @@ const DesktopSidebar = ({ navLinks, logout, setDrawerOpen, drawerOpen }) => {
             </dialog>
             {/* dialog for add task */}
             <dialog id="my_modal_1" className="modal">
-                <div className="modal-box max-w-4xl mx-auto bg-secondary">
+                <div className="modal-box max-w-4xl mx-auto p-0">
                     <AddTask />
                 </div>
                 <form method="dialog" className="modal-backdrop">

@@ -51,9 +51,9 @@ const AddTask = () => {
         console.log(updatedData)
     };
     return (
-        <div>
+        <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">
             {/* <AddClassForm /> */}
-            <h2 className="card-title">Describe Your Goal!</h2>
+            <h2 className="card-title mb-4">Describe Your Goal!</h2>
             <AddTaskForm
                 handleAddTask={handleAddTask}
                 handleSubmit={handleSubmit}

@@ -2,58 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import Timekeeper from "react-timekeeper";
-import { useState } from 'react';
-// import "react-datepicker/dist/react-datepicker.css";
 import { toast } from 'react-toastify';
-import useAuth from '../../hooks/useAuth';
 import AddClassForm from '../../components/Class/AddClassForm';
 import combineDateTime from '../../utils/combineDateTime';
 
 const Days = ["monday", "tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const HHMM = /^([01]\d|2[0-3]):([0-5]\d)$/;
-
-// const classSchema = z.object({
-//     subject: z.string().min(1).max(100),
-//     day: z.enum(Days),
-//     startTime: z.string().regex(HHMM),
-//     endTime: z.string().regex(HHMM),
-//     instructor: z.string().min(1).max(100),
-//     // color: z.string().regex(/^#([0-9A-Fa-f]{6})$/),
-//     // userEmail: z.string().email(),
-// });
-export function TimeInput({ value, onChange, name, inputCommonStyles }) {
-    const [showClock, setShowClock] = useState(false);
-
-    return (
-        <div className="">
-            {/* <ToastContainer /> */}
-            {/* Input */}
-            <input
-                type="text"
-                value={value}
-                placeholder={`${name}`}
-                readOnly
-                onClick={() => setShowClock(true)}
-                className={`${inputCommonStyles}`}
-            />
-
-            {/* Clock Popup */}
-            {showClock && (
-                <div
-                    // style={{ transform: "scale(0.9)", transformOrigin: "top left" }} 
-                    className="absolute z-50 top-4">
-                    <Timekeeper
-                        time={value}
-
-                        onChange={(newTime) => onChange(newTime.formatted12)}
-                        onDoneClick={() => setShowClock(false)} // hide clock when done
-                        switchToMinuteOnHourSelect
-                    />
-                </div>
-            )}
-        </div>
-    );
-};
 
 // main add class component of the files
 const AddClass = () => {
