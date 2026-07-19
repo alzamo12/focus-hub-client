@@ -44,11 +44,18 @@
 }
 
 .ql-toolbar .ql-table-delete-row::before {
-  content: "✕R";
+  content: "xR";
+  /* padding-right: 50px; */
+}
+
+.ql-toolbar .ql-table-delete-row::after {
+  /* content: "✕xR"; */
+  /* padding: 10; */
+  /* padding-right: 50px; */
 }
 
 .ql-toolbar .ql-table-delete-column::before {
-  content: "✕C";
+  content: "xC";
 }
 
 .ql-toolbar .ql-table-delete-table::before {
@@ -57,9 +64,11 @@
 }
 
 .ql-toolbar .ql-table-edit::before {
-  content: "🗑";
+  /* content: "🗑";  */
+  content: "📄";
   /* color: blac; */
 }
+
 
 
 [data-theme="dark"] [class*="ql-table-"] {
@@ -74,6 +83,13 @@
   /* color: white; */
   background-color: #33c7d8;
   /* margin: 8px 15px; */
+  /* padding-right: 10px; */
+  /* margin: 5px; */
+}
+
+.ql-formats {
+  background-color: #7DD3FC;
+  /* color: white; */
   padding-right: 10px;
   margin: 5px;
 }
@@ -86,8 +102,30 @@
   /* color: black; */
 }
 
+.ql-toolbar {
+  border: none !important;
+  border-bottom: 2px solid #7DD3FC !important;
+}
+
+/* .ql-formats > *{
+  padding-left: 5px;
+} */
+
 .ql-container {
   background-color: white !important;
+  overflow-x: hidden !important;
+}
+
+;
+
+.ql-editor {
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  overflow-x: hidden !important;
+
 }
 
 /* @media (max-width: 767px) {

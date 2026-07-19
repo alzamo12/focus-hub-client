@@ -122,9 +122,9 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
         [{ header: [1, 2, false] }],
         [{ color: [] }],
         [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "image"],
         ["table", "table-edit"],
-        ["clean"],
+        ["link", "image"],
+        // ["clean"],
     ];
     const desktopToolbar = [
         [{ header: [1, 2, 3, false] }],
@@ -201,7 +201,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
     const getTable = () => quillRef.current?.getEditor().getModule("table");
 
     return (
-        <div className="bg-base-100 shadow-lg rounded-2xl p-6 space-y-4 w-full">
+        <div className="bg-base-100 shadow-lg rounded-2xl lg:p-6 space-y-4 w-full">
             {/* subject input */}
             <div className='flex flex-col md:flex-row gap-4 w-full'>
                 <div className='w-full md:w-1/2'>
@@ -228,8 +228,8 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
 
             {/* {isMobile && <MobileToolbar />} */}
             {/*   text editor form */}
-            <div className="quill-toolbar-wrapper">
-                <ReactQuill
+          {/* <div className="w-full min-w-0 overflow-x-hidden"> */}
+                  <ReactQuill
                     // ref={noteRef}
                     ref={quillRef}
                     theme='snow'
@@ -239,10 +239,11 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                     modules={modules}
                     formats={formats}
                     style={{ height: "400px", paddingBottom: "40px" }}
-                    className=' not-dark:bg-white  rounded-2xl dark:border dark:border-primary dark:text-black'
+                    className=' not-dark:bg-white  rounded-2xl border 
+                    border-primary dark:text-black'
                     placeholder='Write your note here ....'
                 />
-            </div>
+          {/* </div> */}
 
             {/* submit button */}
             <button
@@ -253,35 +254,64 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
             </button>
 
             {/* modal */}
+
             {showTableMenu && (
-                <div className="dropdown-content md:hidden menu bg-base-100 rounded-box shadow w-56 z-[100]">
-                    <button onClick={() => getTable()?.insertRowAbove()}>
-                        Row Above
-                    </button>
+                <div>
+                    <div class="fixed inset-0 bg-black/50 z-40"></div>
 
-                    <button onClick={() => getTable()?.insertRowBelow()}>
-                        Row Below
-                    </button>
+                    <div className="dropdown-content md:hidden menu 
+                dark:bg-black bg-white rounded-box rounded-tr-none shadow 
+                px-8 z-100 absolute top-[45%] left-[25%] pt-4
+                ">
 
-                    <button onClick={() => getTable()?.insertColumnLeft()}>
-                        Column Left
-                    </button>
+                        <button
+                            onClick={() => setShowTableMenu(false)}
+                            className="btn btn-sm btn-circle btn-ghost 
+                    absolute top-0 right-0"
+                        >✕</button>
 
-                    <button onClick={() => getTable()?.insertColumnRight()}>
-                        Column Right
-                    </button>
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.insertRowAbove()}>
+                            Row Above
+                        </button>
 
-                    <button onClick={() => getTable()?.deleteRow()}>
-                        Delete Row
-                    </button>
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.insertRowBelow()}>
+                            Row Below
+                        </button>
 
-                    <button onClick={() => getTable()?.deleteColumn()}>
-                        Delete Column
-                    </button>
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.insertColumnLeft()}>
+                            Column Left
+                        </button>
 
-                    <button onClick={() => getTable()?.deleteTable()}>
-                        Delete Table
-                    </button>
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.insertColumnRight()}>
+                            Column Right
+                        </button>
+
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.deleteRow()}>
+                            Delete Row
+                        </button>
+
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.deleteColumn()}>
+                            Delete Column
+                        </button>
+
+                        <button 
+                        className="border-b-2 border-primary mb-2"
+                        onClick={() => getTable()?.deleteTable()}>
+                            Delete Table
+                        </button>
+                    </div>
                 </div>
             )}
         </div>
