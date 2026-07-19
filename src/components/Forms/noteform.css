@@ -31,6 +31,7 @@
 
 .ql-toolbar .ql-table-insert-row-below::before {
   content: "↓R";
+  /* color:; */
 }
 
 .ql-toolbar .ql-table-insert-column-left::before {
@@ -39,6 +40,7 @@
 
 .ql-toolbar .ql-table-insert-column-right::before {
   content: "→C";
+  /* background-color: blac; */
 }
 
 .ql-toolbar .ql-table-delete-row::before {
@@ -51,4 +53,38 @@
 
 .ql-toolbar .ql-table-delete-table::before {
   content: "🗑";
+  /* color: blac; */
+}
+
+[data-theme="dark"] [class*="ql-table-"] {
+  /* border-top: 2px solid #3b82f6 !important; Brighter blue for dark backgrounds */
+  /* background-color: #1e293b !important; Dark slate background */
+  color: #171717a9  ;
+  font-weight: 700;
+}
+
+
+[data-theme='dark'] .ql-formats {
+  /* color: white; */
+  background-color: #33c7d8;
+  /* margin: 8px 15px; */
+  padding-right: 10px;
+  margin: 5px;
+}
+
+[data-theme='dark'] .ql-toolbar {
+  /* color: black; */
+  /* background-color: black; */
+  border: none;
+  border-bottom: 2px solid #33c7d8;
+  /* color: black; */
+}
+
+
+@media screen and (max-width: 1023px) {
+
+  /* CSS rules placed here only apply to screens 768px wide or smaller */
+  .sidebar {
+    display: none;
+  }
 }

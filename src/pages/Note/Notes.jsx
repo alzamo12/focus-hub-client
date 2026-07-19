@@ -222,7 +222,7 @@ const Notes = () => {
 
 
     return (
-        <div className='max-w-screen-2xl overflow-y-hidden' >
+        <div className='max-w-screen-2xl overflow-y-hidden dark:text-white' >
 
             <h2 className="text-2xl font-bold text-center my-4">📒 Study Notes</h2>
 

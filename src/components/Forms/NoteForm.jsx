@@ -2,6 +2,8 @@ import Select from "react-select";
 import "./noteform.css"
 import React from "react";
 import ReactQuill from "react-quill-new";
+import SelectInput from "../Inputs/add_Class_And_Task_Form_Inputs/SelectInput";
+import useInputStyles from "../../hooks/useInputStyles";
 // React.lazy(() => import('react-quill-new'));
 // const ReactQuill =  <Suspense>{React.lazy(() => import('react-quill-new'))}</Suspense>
 
@@ -13,8 +15,9 @@ const subjects = [
     // { value: "History", label: "History" },
 ];
 
-const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText }) => {
+const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText }) => {
 
+    const customStyles = useInputStyles();
     // const modules = {
     //     toolbar: {
     //         container: [
@@ -118,7 +121,7 @@ const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, 
     ];
 
     return (
-        <div className="bg-white shadow-lg rounded-2xl p-6 space-y-4 w-full">
+        <div className="bg-base-100 shadow-lg rounded-2xl p-6 space-y-4 w-full">
             {/* subject input */}
             <div className='flex flex-col md:flex-row gap-4 w-full'>
                 <div className='w-full md:w-1/2'>
@@ -128,11 +131,15 @@ const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, 
                         onChange={setSub}
                         placeholder="Please select your subject"
                         className='w-full input-lg rounded-md'
+                        styles={customStyles}
                     />
+
+
                 </div>
                 <input
                     type="text"
-                    className="w-full md:w-1/2 border border-gray-300 rounded-md input-lg px-2 text-lg"
+                    className="w-full md:w-1/2 border dark:border-primary border-gray-300 
+                    rounded-md input-lg px-2 text-lg dark:bg-black"
                     placeholder="Enter subject..."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -149,14 +156,14 @@ const NoteForm = ({ noteRef, currentNote, setCurrentNote, title, setTitle, sub, 
                 modules={modules}
                 formats={formats}
                 style={{ height: "400px", paddingBottom: "40px" }}
-                className='bg-white  rounded-2xl'
+                className=' not-dark:bg-white  rounded-2xl dark:border dark:border-primary dark:text-white'
                 placeholder='Write your note here ....'
             />
 
             {/* submit button */}
             <button
                 onClick={handleNote}
-                className="w-full mt-4 py-2 bg-white border border-primary  text-secondary rounded-lg hover:bg-secondary hover:text-white"
+                className="w-full mt-4 py-2 bg-white dark:bg-black dark:text-accent border border-primary  text-secondary rounded-lg hover:bg-secondary hover:text-white"
             >
                 {btnText}
             </button>
