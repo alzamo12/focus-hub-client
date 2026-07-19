@@ -69,29 +69,27 @@ const NoteDetails = () => {
             className="bg-white border rounded-xl shadow p-4 space-y-2"
         >
 
-            <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg">{note?.subject}</h3>
-                <h3 className="font-semibold text-lg">{note?.title}</h3>
-                <div className="space-x-2">
+            <div className="flex flex-col md:flex-row-reverse justify-between items-center">
+                <div className="space-x-2 flex w-full md:w-auto justify-between my-3">
                     <Link
-                        // onClick={() => handleEditNote(note._id)}
                         to={`/editNote/${note?._id}`}
-                        className="px-3 py-1 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 cursor-pointer"
+                        className="px-6 py-1 bg-secondary dark:bg-base-100 text-white rounded-lg cursor-pointer"
                     >
                         Edit
                     </Link>
                     <button
                         onClick={() => handleDeleteNote(note._id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer"
+                        className="px-6 py-1 bg-base-100 border border-primary text-red-600 rounded-lg cursor-pointer"
                     >
                         Delete
                     </button>
                 </div>
+                <div className='flex flex-col md:flex-row-reverse w-auto px-5 md:px-0 py-2 md:py-0 md:w-1/2 md:justify-between  text-center border border-secondary md:border-0 rounded-2xl'>
+                    <h3 className="font-semibold text-xl md:text-2xl"><i>Title:</i> {note?.title}</h3>
+                    <h3 className="font-semibold text-lg"><i>Subject:</i> {note?.subject}</h3>
+                </div>
+
             </div>
-            {/* <div
-                className="prose max-w-none ql-editor truncate note-content"
-                dangerouslySetInnerHTML={{ __html: note.content }}
-            /> */}
             <ReactQuill
                 value={cleanNoteContent}
                 readOnly

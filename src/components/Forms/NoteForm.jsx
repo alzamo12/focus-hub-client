@@ -219,7 +219,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                 <input
                     type="text"
                     className="w-full md:w-1/2 border dark:border-primary border-gray-300 
-                    rounded-md input-lg px-2 text-lg dark:bg-black"
+                    rounded-md input-lg px-2 text-lg dark:bg-black text-white py-1" 
                     placeholder="Enter note title..."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}

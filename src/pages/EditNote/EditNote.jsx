@@ -63,7 +63,7 @@ const EditNote = () => {
      
     return (
         <div className='max-w-screen-2xl ' >
-            <h2 className="text-2xl font-bold text-center my-4">📒 Edit Note</h2>
+            <h2 className="text-2xl font-bold text-center my-4 text-base-200 ">📒 Edit Note</h2>
             {/* note add form */}
             <NoteForm
                 currentNote={currentNote}

@@ -21,7 +21,7 @@ export default function Settings() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-base-200 transition-colors">
+        <div className="min-h-screen flex items-center justify-center transition-colors">
             <div className="card w-80 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title">Settings</h2>
