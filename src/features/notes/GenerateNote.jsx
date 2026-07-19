@@ -11,7 +11,9 @@ import ReactMarkdown from "react-markdown";
 import ReactQuill from 'react-quill-new';
 import NoteViewer from '../../components/NoteViewer/NoteViewer';
 import "react-quill-new/dist/quill.bubble.css";
+// import 'react-quill-new/dist/quill.snow.css';
 import { useState } from 'react';
+import DOMPurify from "dompurify";
 
 const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
@@ -45,12 +47,9 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
         mutateAsync(generateNotesData)
     };
 
-
-    // console.log(data)
-
-    // if (isPending) {
-    //     return <LoadingSpinner />
-    // };
+    // const cleanNoteContent = DOMPurify.sanitize(note?.content ?? "", {
+    //     ADD_ATTR: ["style"],
+    // });
 
     const formats = [
         "header",
@@ -85,13 +84,16 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                 {
                     isPending ?
                         <div className='absolute flex inset-0 justify-center items-center z-50  '>
-                            <div className='loading loading-xl loading-ring' />
+                            <div className='loading loading-xl loading-ring text-black' />
                         </div>
                         :
                         <div>
                             <div className='flex justify-between'>
-                                <h2 className="card-title font-bold mb-4">Here is the answer:</h2>
-                                <button onClick={() => handleGeneratedSaveNote(generatedNote?.text)} className='btn'>Save</button>
+                                <h2 className="card-title font-bold mb-4 text-black">Here is the answer:</h2>
+                                <button
+                                    onClick={() => handleGeneratedSaveNote(generatedNote?.text)}
+                                    className='btn bg-primary text-black font-bold border-none'
+                                >Save</button>
                             </div>
                             {/* <p className='whitespace-pre-line'>{generatedNote?.text}</p> */}
                             {/* <div className="markdown-body"> */}
@@ -102,12 +104,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                     {generatedNote?.text}
                                 </ReactMarkdown> */}
                             <article className="prose prose-lg max-w-none">
-                                {/* <ReactMarkdown
-                                    remarkPlugins={[remarkMath, remarkGfm]}
-                                    rehypePlugins={[rehypeKatex]}
-                                >
-                                    {generatedNote?.text}
-                                </ReactMarkdown> */}
+
                                 <ReactQuill
                                     value={note}
                                     readOnly

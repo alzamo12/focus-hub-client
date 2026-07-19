@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import ReactQuill from 'react-quill-new';
 import "react-quill-new/dist/quill.bubble.css";
+// import 'react-quill-new/dist/quill.snow.css';
 import NoteViewer from '../../components/NoteViewer/NoteViewer';
 
 const NoteDetails = () => {

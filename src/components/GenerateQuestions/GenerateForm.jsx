@@ -6,6 +6,7 @@ import subTopics from "../../data/subTopics.json";
 import chapters from "../../data/chapters.json";
 import questionTypes from "../../data/questionTypes.json";
 import subjects from "../../data/subjects.json";
+import useInputStyles from "../../hooks/useInputStyles";
 
 function LanguageSelector({ onChange }) {
     const [value, setValue] = useState(null);
@@ -77,7 +78,8 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
     const [language, setLanguage] = useState(null);
     const [type, setType] = useState(null);
     const [subTopic, setSubTopic] = useState(null);
-    const [questionLevels, setQuestionLevels] = useState(null)
+    const [questionLevels, setQuestionLevels] = useState(null);
+    const customStyles = useInputStyles();
     const isDisabled = !subject || !level || !chapter || isPending || retryAfter > 0;
 
     useEffect(() => {
@@ -100,12 +102,13 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
     }, [formType])
 
     return (
-        <div className="w-full mx-auto mt-5 p-6 bg-white border border-primary shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="w-full mx-auto mt-5 p-6 bg-base-100 border border-primary shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
 
             {/* Subjects */}
             <div className="mb-4 w-full">
                 <label className="block mb-2 font-medium">Subject</label>
                 <Select
+                    styles={customStyles}
                     options={subjects}
                     value={subject}
                     onChange={setSubject}
@@ -117,6 +120,7 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
             <div className="mb-4 w-full">
                 <label className="block mb-2 font-medium">Level</label>
                 <Select
+                    styles={customStyles}
                     options={questionLevels}
                     value={level}
                     onChange={setLevel}
@@ -128,6 +132,7 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
             <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Chapter</label>
                 <Select
+                    styles={customStyles}
                     options={subject ? chapters[subject.value] : []}
                     value={chapter}
                     onChange={setChapter}
@@ -140,6 +145,7 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
             <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Sub Topic</label>
                 <Select
+                    styles={customStyles}
                     options={chapter ? subTopics[subject.value][chapter.value] : []}
                     value={subTopic}
                     onChange={setSubTopic}
@@ -152,6 +158,7 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
             <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Question Type</label>
                 <Select
+                    styles={customStyles}
                     options={questionTypes}
                     value={type}
                     onChange={setType}
@@ -164,6 +171,7 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
             <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Language</label>
                 <Select
+                    styles={customStyles}
                     options={languages}
                     value={language}
                     onChange={setLanguage}
