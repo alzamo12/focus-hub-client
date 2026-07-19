@@ -201,7 +201,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
     const getTable = () => quillRef.current?.getEditor().getModule("table");
 
     return (
-        <div className="bg-base-100 shadow-lg rounded-2xl lg:p-6 space-y-4 w-full">
+        <div className="bg-base-100 shadow-lg rounded-2xl lg:py-6 space-y-4 w-full">
             {/* subject input */}
             <div className='flex flex-col md:flex-row gap-4 w-full'>
                 <div className='w-full md:w-1/2'>
@@ -220,7 +220,7 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                     type="text"
                     className="w-full md:w-1/2 border dark:border-primary border-gray-300 
                     rounded-md input-lg px-2 text-lg dark:bg-black"
-                    placeholder="Enter subject..."
+                    placeholder="Enter note title..."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
