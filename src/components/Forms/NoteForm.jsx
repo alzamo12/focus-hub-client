@@ -1,6 +1,6 @@
 import Select from "react-select";
 import "./noteform.css"
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill-new";
 import SelectInput from "../Inputs/add_Class_And_Task_Form_Inputs/SelectInput";
 import useInputStyles from "../../hooks/useInputStyles";
@@ -15,9 +15,59 @@ const subjects = [
     // { value: "History", label: "History" },
 ];
 
+function MobileToolbar() {
+    return (
+        <div id="mobile-toolbar">
+            {/* Always visible */}
+            <button className="ql-bold" />
+            <button className="ql-italic" />
+            <button className="ql-underline" />
+
+            {/* Insert */}
+            <details>
+                <summary>Insert</summary>
+
+                <button className="ql-image" />
+                <button className="ql-link" />
+                <button className="ql-formula" />
+                {/* Table button if using quill-table */}
+            </details>
+
+            {/* Colors */}
+            <details>
+                <summary>Color</summary>
+
+                <select className="ql-color" defaultValue="">
+                    <option value=""></option>
+                    <option value="red"></option>
+                    <option value="blue"></option>
+                    <option value="green"></option>
+                    <option value="#ff9800"></option>
+                </select>
+
+                <select className="ql-background" defaultValue="">
+                    <option value=""></option>
+                    <option value="yellow"></option>
+                    <option value="lightgreen"></option>
+                    <option value="#90caf9"></option>
+                </select>
+            </details>
+
+            {/* Alignment */}
+            <details>
+                <summary>Align</summary>
+
+                <select className="ql-align"></select>
+            </details>
+        </div>
+    );
+}
 const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText }) => {
 
     const customStyles = useInputStyles();
+    // const isMobile = window.innerWidth < 768;
+    const quillRef = useRef(null);
+
     // const modules = {
     //     toolbar: {
     //         container: [
@@ -51,23 +101,48 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
     //     // },
 
     // };
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [showTableMenu, setShowTableMenu] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
 
+        window.addEventListener("resize", handleResize);
+
+        // Set initial value
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+    const mobileToolbar = [
+        ["bold", "italic", "underline"],
+        [{ header: [1, 2, false] }],
+        [{ color: [] }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "image"],
+        ["table", "table-edit"],
+        ["clean"],
+    ];
+    const desktopToolbar = [
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ color: [] }, { background: [] }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "image"],
+
+        // Modern, grouped table manipulation array layout strings
+        ["table", "table-insert-row-above", "table-insert-row-below", "table-insert-column-left", "table-insert-column-right"],
+        ["table-delete-row", "table-delete-column", "table-delete-table"],
+        // ['formula'],
+        // ["increaseImageSize", "decreaseImageSize"],
+        ["clean"],
+    ];
     const modules = {
         toolbar: {
-            container: [
-                [{ header: [1, 2, 3, false] }],
-                ["bold", "italic", "underline", "strike"],
-                [{ color: [] }, { background: [] }],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["link", "image"],
-
-                // Modern, grouped table manipulation array layout strings
-                ["table", "table-insert-row-above", "table-insert-row-below", "table-insert-column-left", "table-insert-column-right"],
-                ["table-delete-row", "table-delete-column", "table-delete-table"],
-                // ['formula'],
-                // ["increaseImageSize", "decreaseImageSize"],
-                ["clean"],
-            ],
+            container: isMobile ? mobileToolbar : desktopToolbar,
             handlers: {
                 // Main initialization handler
                 table() {
@@ -94,13 +169,16 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                 },
                 "table-delete-table"() {
                     this.quill.getModule("table").deleteTable();
-                }
+                },
+                "table-edit": function () {
+                    setShowTableMenu(!showTableMenu); // Open a modal, drawer, or dropdown
+                },
+
             },
         },
         table: true,
         // imageResize: { ... }
     };
-
 
     const formats = [
         "header",
@@ -119,6 +197,8 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
         "script",   // for sub/sup
         "strike",
     ];
+
+    const getTable = () => quillRef.current?.getEditor().getModule("table");
 
     return (
         <div className="bg-base-100 shadow-lg rounded-2xl p-6 space-y-4 w-full">
@@ -146,27 +226,64 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
                 />
             </div>
 
+            {/* {isMobile && <MobileToolbar />} */}
             {/*   text editor form */}
-            <ReactQuill
-                // ref={noteRef}
-                theme='snow'
-                value={currentNote}
-                onChange={setCurrentNote}
-                height="300px"
-                modules={modules}
-                formats={formats}
-                style={{ height: "400px", paddingBottom: "40px" }}
-                className=' not-dark:bg-white  rounded-2xl dark:border dark:border-primary dark:text-white'
-                placeholder='Write your note here ....'
-            />
+            <div className="quill-toolbar-wrapper">
+                <ReactQuill
+                    // ref={noteRef}
+                    ref={quillRef}
+                    theme='snow'
+                    value={currentNote}
+                    onChange={setCurrentNote}
+                    height="300px"
+                    modules={modules}
+                    formats={formats}
+                    style={{ height: "400px", paddingBottom: "40px" }}
+                    className=' not-dark:bg-white  rounded-2xl dark:border dark:border-primary dark:text-black'
+                    placeholder='Write your note here ....'
+                />
+            </div>
 
             {/* submit button */}
             <button
                 onClick={handleNote}
-                className="w-full mt-4 py-2 bg-white dark:bg-black dark:text-accent border border-primary  text-secondary rounded-lg hover:bg-secondary hover:text-white"
+                className="w-full mt-10 2xl:mt-4 py-2 bg-white dark:bg-black dark:text-accent border border-primary  text-secondary rounded-lg hover:bg-secondary hover:text-white"
             >
                 {btnText}
             </button>
+
+            {/* modal */}
+            {showTableMenu && (
+                <div className="dropdown-content md:hidden menu bg-base-100 rounded-box shadow w-56 z-[100]">
+                    <button onClick={() => getTable()?.insertRowAbove()}>
+                        Row Above
+                    </button>
+
+                    <button onClick={() => getTable()?.insertRowBelow()}>
+                        Row Below
+                    </button>
+
+                    <button onClick={() => getTable()?.insertColumnLeft()}>
+                        Column Left
+                    </button>
+
+                    <button onClick={() => getTable()?.insertColumnRight()}>
+                        Column Right
+                    </button>
+
+                    <button onClick={() => getTable()?.deleteRow()}>
+                        Delete Row
+                    </button>
+
+                    <button onClick={() => getTable()?.deleteColumn()}>
+                        Delete Column
+                    </button>
+
+                    <button onClick={() => getTable()?.deleteTable()}>
+                        Delete Table
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

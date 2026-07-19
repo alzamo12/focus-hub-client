@@ -56,10 +56,16 @@
   /* color: blac; */
 }
 
+.ql-toolbar .ql-table-edit::before {
+  content: "🗑";
+  /* color: blac; */
+}
+
+
 [data-theme="dark"] [class*="ql-table-"] {
   /* border-top: 2px solid #3b82f6 !important; Brighter blue for dark backgrounds */
   /* background-color: #1e293b !important; Dark slate background */
-  color: #171717a9  ;
+  color: #171717a9;
   font-weight: 700;
 }
 
@@ -80,11 +86,39 @@
   /* color: black; */
 }
 
+.ql-container {
+  background-color: white !important;
+}
 
-@media screen and (max-width: 1023px) {
+/* @media (max-width: 767px) {
+  .quill-toolbar-wrapper .ql-toolbar {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
 
-  /* CSS rules placed here only apply to screens 768px wide or smaller */
-  .sidebar {
+  .quill-toolbar-wrapper .ql-toolbar .ql-formats {
+    display: inline-block;
+  }
+} */
+
+/* 
+@media (max-width: 767px) {
+  .ql-toolbar.ql-snow {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ql-toolbar.ql-snow::-webkit-scrollbar {
     display: none;
   }
-}
+
+  .ql-toolbar.ql-snow .ql-formats {
+    display: inline-block;
+    white-space: nowrap;
+  }
+} */
