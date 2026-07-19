@@ -54,12 +54,15 @@ const EditTask = ({ task }) => {
     }
 
     return (
-        <div>
+      <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">
+            {/* <AddClassForm /> */}
+            <h2 className="card-title mb-4">Edit Task</h2>
             <AddTaskForm
                 handleAddTask={handleEditTask}
                 handleSubmit={handleSubmit}
                 control={control}
                 register={register}
+                buttonText="Edit Task"
             />
         </div>
     );

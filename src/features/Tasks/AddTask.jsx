@@ -59,6 +59,7 @@ const AddTask = () => {
                 handleSubmit={handleSubmit}
                 register={register}
                 control={control}
+                buttonText={`Add Task`}
                 // subjects={subjects}
                 // level={level}
             />

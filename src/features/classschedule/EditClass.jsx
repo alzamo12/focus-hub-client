@@ -88,7 +88,9 @@ const EditClass = ({ cls, activeTab }) => {
                 onSubmit={onSubmit}
                 register={register}
                 control={control}
-                subjects={subjects} />
+                subjects={subjects}
+                buttonText={`Edit Class`}
+                />
         </div>
     );
 };

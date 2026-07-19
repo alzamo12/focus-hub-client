@@ -7,7 +7,7 @@ import Clock from '../Inputs/add_Class_And_Task_Form_Inputs/Clock';
 import SelectInput from '../Inputs/add_Class_And_Task_Form_Inputs/SelectInput';
 import AddButton from '../buttons/addClassAndTaskSubmitButton/AddButton';
 
-const AddClassForm = ({ handleSubmit, onSubmit, register, control, subjects }) => {
+const AddClassForm = ({ handleSubmit, onSubmit, register, control, subjects, buttonText }) => {
 
     const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
 
@@ -66,7 +66,7 @@ const AddClassForm = ({ handleSubmit, onSubmit, register, control, subjects }) =
                 inputName="building"
             />
 
-            <AddButton text={`Add Class`} />
+            <AddButton text={buttonText} />
         </form>
     );
 };

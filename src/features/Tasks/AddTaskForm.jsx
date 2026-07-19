@@ -28,7 +28,7 @@ const level = [
     { value: "hard", label: "Hard" },
     { value: "complex", label: "Complex" },
 ];
-const AddTaskForm = ({ register, handleSubmit, handleAddTask, control }) => {
+const AddTaskForm = ({ register, handleSubmit, handleAddTask, control, buttonText }) => {
     const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
 
     return (
@@ -74,11 +74,11 @@ const AddTaskForm = ({ register, handleSubmit, handleAddTask, control }) => {
             <CommonInput
                 register={register}
                 inputCommonStyles={`${inputCommonStyles} textarea col-span-2`}
-                placeholder="Module Name"
-                inputName="module"
+                placeholder="Describe your task"
+                inputName="description"
             />
 
-            <AddButton text={`Add Task`} />
+            <AddButton text={buttonText} />
         </form>
     );
 };

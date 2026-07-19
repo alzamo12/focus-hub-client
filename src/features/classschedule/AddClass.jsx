@@ -90,7 +90,9 @@ const AddClass = () => {
                 onSubmit={onSubmit}
                 register={register}
                 control={control}
-                subjects={subjects} />
+                subjects={subjects}
+                buttonText="Add Class"
+                />
         </div>
     );
 };
