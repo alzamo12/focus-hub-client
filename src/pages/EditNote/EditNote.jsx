@@ -7,6 +7,8 @@ import NoteForm from '../../components/Forms/NoteForm';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import { toast } from 'react-toastify';
 import useTittle from '../../hooks/useTittle';
+import { dataURLToFile } from '../../utils/dataURLToFile';
+import axios from 'axios';
 
 const EditNote = () => {
     const { id } = useParams();
@@ -49,10 +51,48 @@ const EditNote = () => {
     if (isLoading) return <LoadingSpinner />
     console.log(note)
 
-    const handleEditNote = (id) => {
-        const cleanHTML = DOMPurify.sanitize(currentNote)
+    const handleEditNote = async (id) => {
+        // const cleanHTML = DOMPurify.sanitize(currentNote);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(currentNote, "text/html");
+        // console.log(doc.body.textContent)
+        if (!sub) return toast.error("Please select a subject")
+        if (!title) return toast.error("Please give a title")
+        if (!doc.body.textContent) return toast.error("Please write something on your note")
+
+        const images = Array.from(doc.querySelectorAll("img"));
+        console.log("Total images:", images.length);
+
+        const uploadImages = images.map(async (img) => {
+            const src = img.src;
+            if (src.startsWith('http')) return;
+
+            const file = dataURLToFile(src, "note-image.png");
+
+
+            // 4. Upload to Cloudinary
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "focus-hub");
+
+            const response = await axios.post(
+                import.meta.env.VITE_cloudinary_url,
+                formData
+            );
+
+            // 5. Replace src with Cloudinary URL
+            img.src = response.data.secure_url;
+            console.log(img.src)
+        });
+
+        await Promise.all(uploadImages)
+
+        let updatedHtml = doc.body.innerHTML;
+
+        // 7. Sanitize before storing
+        updatedHtml = DOMPurify.sanitize(updatedHtml);
         const noteData = {
-            content: cleanHTML,
+            content: updatedHtml,
             title,
             subject: sub.value
         };
@@ -60,7 +100,7 @@ const EditNote = () => {
         noteEditAsync(noteData)
     };
 
-     
+
     return (
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4 text-base-200 ">📒 Edit Note</h2>

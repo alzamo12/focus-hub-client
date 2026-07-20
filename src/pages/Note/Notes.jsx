@@ -16,18 +16,20 @@ import NoteCards from '../../features/notes/NoteCards';
 import GenerateNote from '../../features/notes/GenerateNote';
 import { useRef } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
+import useGenerateImageLink from '../../hooks/useGenerateImageLink';
+import { dataURLToFile } from '../../utils/dataURLToFile';
 // import NoteForm from "../../components/Forms/NoteForm"
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 
-function dataURLtoFile(dataurl, filename) {
-    const arr = dataurl.split(",");
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) u8arr[n] = bstr.charCodeAt(n);
-    return new File([u8arr], filename, { type: mime });
-};
+// function dataURLtoFile(dataurl, filename) {
+//     const arr = dataurl.split(",");
+//     const mime = arr[0].match(/:(.*?);/)[1];
+//     const bstr = atob(arr[1]);
+//     let n = bstr.length;
+//     const u8arr = new Uint8Array(n);
+//     while (n--) u8arr[n] = bstr.charCodeAt(n);
+//     return new File([u8arr], filename, { type: mime });
+// };
 const subjects = [
     { value: "Physics", label: "Physics" },
     { value: "Math", label: "Math" },
@@ -48,6 +50,7 @@ const Notes = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
+    // const handleGenerateImageLink = useGenerateImageLink();
     const limit = 5;
     useTittle("Notes")
 
@@ -112,7 +115,7 @@ const Notes = () => {
             const src = img.src;
             if (src.startsWith('http')) return;
 
-            const file = dataURLtoFile(src, "note-image.png");
+            const file = dataURLToFile(src, "note-image.png");
 
 
             // 4. Upload to Cloudinary
@@ -131,28 +134,8 @@ const Notes = () => {
         });
 
         await Promise.all(uploadImages)
+        // handleGenerateImageLink(doc)
 
-        // for (let img of images) {
-        //     const src = img.src;
-        //     if (src.startsWith('http')) continue;
-
-        //     const file = dataURLtoFile(src, "note-image.png");
-
-
-        //     // 4. Upload to Cloudinary
-        //     const formData = new FormData();
-        //     formData.append("file", file);
-        //     formData.append("upload_preset", "focus-hub");
-
-        //     const response = await axios.post(
-        //         import.meta.env.VITE_cloudinary_url,
-        //         formData
-        //     );
-
-        //     // 5. Replace src with Cloudinary URL
-        //     img.src = response.data.secure_url;
-        //     console.log(img.src)
-        // }
         let updatedHtml = doc.body.innerHTML;
 
         // 7. Sanitize before storing
@@ -166,7 +149,7 @@ const Notes = () => {
             content: updatedHtml
         };
         console.log(noteData)
-        console.log(images)
+        // console.log(images)
         addNoteAsync(noteData)
         // P(noteData)
     };
