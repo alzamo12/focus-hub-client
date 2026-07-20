@@ -43,6 +43,14 @@
   /* --color-secondary: "#8ABEB9", ; */
   /* --color-base-100: "#F6F0F0"; */
 
+};
+
+[data-theme='dark'] .input-style{
+  border: 2px solid #33c7d8 !important;
+  background-color: black;
+}
+[data-theme='light'] .input-style{
+  border: 2px solid #7DD3FC !important;
 }
 
 /* ensures mini-toolbar is visible */

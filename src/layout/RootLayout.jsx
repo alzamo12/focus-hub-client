@@ -60,11 +60,11 @@ const RootLayout = () => {
                     Generate Questions
                 </Link>
             </li>
-            <li>
+            {/* <li>
                 <Link to="/settings" className="rounded-md px-4 py-1 hover:bg-secondary/30">
                     Settings
                 </Link>
-            </li>
+            </li> */}
         </>
     );
 

@@ -14,6 +14,7 @@ import "react-quill-new/dist/quill.bubble.css";
 // import 'react-quill-new/dist/quill.snow.css';
 import { useState } from 'react';
 import DOMPurify from "dompurify";
+// import "../../css/noteform.css"
 
 const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
@@ -80,7 +81,8 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                 // isPending={isPending}
                 retryAfter={0}
                 handleSubmit={handleSubmit} />
-            <div className='my-10 relative w-full p-4 border border-primary rounded-lg min-h-50 bg-white shadow-lg'>
+            <div className='my-10 relative w-full p-4 border border-primary 
+            rounded-lg min-h-50 bg-white  shadow-lg'>
                 {
                     isPending ?
                         <div className='absolute flex inset-0 justify-center items-center z-50  '>
@@ -89,7 +91,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                         :
                         <div>
                             <div className='flex justify-between'>
-                                <h2 className="card-title font-bold mb-4 text-black">Here is the answer:</h2>
+                                <h2 className="card-title font-bold mb-4 text-black ">Here is the answer:</h2>
                                 <button
                                     onClick={() => handleGeneratedSaveNote(generatedNote?.text)}
                                     className='btn bg-primary text-black font-bold border-none'
@@ -103,13 +105,14 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                 >
                                     {generatedNote?.text}
                                 </ReactMarkdown> */}
-                            <article className="prose prose-lg max-w-none">
+                            <article className="prose prose-lg max-w-none ">
 
                                 <ReactQuill
                                     value={note}
                                     readOnly
                                     theme="bubble"
                                     formats={formats}
+                                    className=''
                                 />
                                 {/* <NoteViewer html={generatedNote?.text}/> */}
                             </article>

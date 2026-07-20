@@ -26,14 +26,14 @@ const SignIn = () => {
     };
 
     return (
-        <div className="card bg-base-100 shadow-lg rounded-2xl p-6">
-            <h1 className="text-2xl font-semibold text-neutral-900 mb-1">Sign in</h1>
-            <p className="text-sm text-neutral-700 mb-6">Welcome back — sign in to continue to StudentLife</p>
+        <div className="card bg-base-100 dark:border dark:border-primary dark:text-white shadow-lg rounded-2xl p-6">
+            <h1 className="text-2xl font-semibold mb-1">Sign in</h1>
+            <p className="text-sm text-neutral-700 dark:text-accent mb-6">Welcome back — sign in to continue to StudentLife</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Email */}
                 <div>
-                    <label htmlFor="email" className="text-sm font-medium text-neutral-800 block mb-2">
+                    <label htmlFor="email" className="text-sm font-medium text-neutral-800 dark:text-accent block mb-2">
                         Email
                     </label>
                     <input
@@ -42,14 +42,14 @@ const SignIn = () => {
                         type="email"
                         required
                         placeholder="you@example.com"
-                        className="input input-bordered w-full rounded-lg bg-white"
+                        className="input input-bordered w-full rounded-lg bg-white input-style"
                         aria-label="Email"
                     />
                 </div>
 
                 {/* Password */}
                 <div>
-                    <label htmlFor="password" className="text-sm font-medium text-neutral-800 block mb-2">
+                    <label htmlFor="password" className="text-sm font-medium text-neutral-800 dark:text-accent block mb-2">
                         Password
                     </label>
                     <div className="relative">
@@ -59,7 +59,7 @@ const SignIn = () => {
                             type={showPassword ? "text" : "password"}
                             required
                             placeholder="Enter your password"
-                            className="input input-bordered w-full rounded-lg pr-12 bg-white"
+                            className="input input-bordered w-full rounded-lg pr-12 bg-white input-style"
                             aria-label="Password"
                         />
                         <button
@@ -93,7 +93,7 @@ const SignIn = () => {
                 {/* Or divider */}
                 <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-base-200" />
-                    <div className="text-xs text-neutral-500">or</div>
+                    <div className="text-xs text-neutral-500 dark:text-primary">or</div>
                     <div className="flex-1 h-px bg-base-200" />
                 </div>
 
@@ -102,7 +102,7 @@ const SignIn = () => {
             </form>
 
             {/* bottom navigator -> Register */}
-            <div className="mt-6 text-center text-sm text-neutral-700">
+            <div className="mt-6 text-center text-sm text-neutral-700 dark:text-accent">
                 Don’t have an account?{" "}
                 <Link to="/auth/signup" className="font-medium text-primary hover:underline">
                     Register

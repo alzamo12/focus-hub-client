@@ -1,9 +1,11 @@
 import useAuth from '../../hooks/useAuth';
 import { Menu } from 'lucide-react';
 import { Link } from 'react-router';
+import useTheme from '../../hooks/useTheme';
 
 const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
     const { user, logout } = useAuth();
+    const { toggleTheme, theme } = useTheme();
     // console.log(user)
     const handleLogout = () => {
         logout();
@@ -32,7 +34,18 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
                             <div className="text-sm font-medium">{timeString}</div>
                             <div className="text-xs opacity-80">{dateString}</div>
                         </div>
+                        <div className="flex items-center justify-between">
+                            {/* <span className="font-medium">
+                                {theme === "light" ? "Light Mode" : "Dark Mode"}
+                            </span> */}
 
+                            <input
+                                type="checkbox"
+                                className="toggle toggle-primary"
+                                checked={theme === "dark"}
+                                onChange={toggleTheme}
+                            />
+                        </div>
                         {/* Profile */}
                         <div className="flex items-center gap-3">
                             {/* Avatar placeholder */}

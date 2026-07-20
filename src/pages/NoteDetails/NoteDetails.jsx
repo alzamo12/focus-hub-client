@@ -95,6 +95,7 @@ const NoteDetails = () => {
                 value={cleanNoteContent}
                 readOnly
                 theme="bubble"
+                // className='dark:b'
             />
             {/* <NoteViewer html={cleanNoteContent}/> */}
             <p className="text-gray-400 text-sm">

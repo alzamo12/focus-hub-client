@@ -102,7 +102,10 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
     }, [formType])
 
     return (
-        <div className="w-full mx-auto mt-5 p-6 bg-base-100 border border-primary shadow-lg rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="w-full mx-auto mt-5 p-6 bg-base-100
+         border border-primary shadow-lg rounded-xl 
+         grid grid-cols-1 lg:grid-cols-2 
+         gap-5 dark:text-white">
 
             {/* Subjects */}
             <div className="mb-4 w-full">
@@ -166,7 +169,6 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
                 />
             </div>
 
-            {/* <LanguageSelector onChange={setLanguages} /> */}
             {/* language */}
             <div className="mb-4 full">
                 <label className="block mb-2 font-medium">Language</label>

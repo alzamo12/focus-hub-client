@@ -101,13 +101,13 @@ const GenerateQuestions = () => {
     return (
         <div className='overflow-hidden min-h-[100dvh] lg:min-h-full'>
 
-            <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
+            <h2 className="card-title dark:text-white relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <GenerateForm
                 formType="questions"
                 isPending={isPending}
                 retryAfter={retryAfter}
                 handleSubmit={handleSubmit} />
-            <div className='my-10 relative w-full p-4 border border-primary rounded-lg min-h-[200px] bg-white shadow-lg'>
+            <div className='my-10 relative w-full p-4 border border-primary rounded-lg min-h-[200px] bg-white dark:bg-black dark:text-white shadow-lg'>
                 {
                     isPending ?
                         <div className='absolute flex inset-0 justify-center items-center z-50  '>
@@ -115,8 +115,8 @@ const GenerateQuestions = () => {
                         </div>
                         :
                         <div>
-                            <h2 className="card-title font-bold mb-4">Here is the answer:</h2>
-                            <p className='whitespace-pre-line'>{questionsData}</p>
+                            <h2 className="card-title font-bold mb-4 ">Here is the answer:</h2>
+                            <p className='whitespace-pre-line '>{questionsData}</p>
                         </div>
                 }
             </div>

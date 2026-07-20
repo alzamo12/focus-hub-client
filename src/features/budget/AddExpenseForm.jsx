@@ -1,6 +1,7 @@
 import { useState } from "react";
+import DatePicker from 'react-datepicker';
 
-const AddExpenseForm = ({  onSubmit }) => {
+const AddExpenseForm = ({ onSubmit }) => {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("Books");
@@ -31,11 +32,13 @@ const AddExpenseForm = ({  onSubmit }) => {
         setCategory("Books");
         setDate("");
     };
+    const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
+
 
     return (
         <form
             onSubmit={handleSubmit}
-            className="p-6 rounded-2xl shadow-lg bg-white mt-6"
+            className="p-6 rounded-2xl shadow-lg bg-white dark:bg-black dark:text-white mt-6"
         >
             <h2 className="text-lg font-bold mb-4">Add New Expense</h2>
 
@@ -45,7 +48,7 @@ const AddExpenseForm = ({  onSubmit }) => {
                     placeholder="Expense Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="input input-bordered w-full"
+                    className="input input-style w-full"
                 />
 
                 <input
@@ -53,13 +56,13 @@ const AddExpenseForm = ({  onSubmit }) => {
                     placeholder="Amount (BDT)"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="input input-bordered w-full"
+                    className="input input-style w-full"
                 />
 
                 <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="select select-bordered w-full"
+                    className="select input-style w-full"
                 >
                     <option>Books</option>
                     <option>Courses</option>
@@ -67,11 +70,18 @@ const AddExpenseForm = ({  onSubmit }) => {
                     <option>Others</option>
                 </select>
 
-                <input
+                {/* <input
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="input input-bordered w-full"
+                    className="input input-style w-full"
+                /> */}
+                <DatePicker
+                    placeholderText="Select date"
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    wrapperClassName="w-full" // Styles the outer container
+                    className={`${inputCommonStyles}`}
                 />
             </div>
 

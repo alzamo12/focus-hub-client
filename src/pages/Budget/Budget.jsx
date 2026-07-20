@@ -95,34 +95,38 @@ const Budget = () => {
             userEmail: user?.email
         };
         addBudgetAsync(newData)
-    }
+    };
+
 
     if (expensesLoding || budgetLoading) {
         return <Spinner />
-    }
+    };
 
     return (
-        <div className="mx-auto space-y-6 flex flex-col md:flex-row justify-between">
+        <div className="my-8">
+                <h2 className="font-bold dark:text-white text-center text-3xl">Plan Your Budget</h2>
+            <div className="mx-auto my-12 space-y-6 flex flex-col md:flex-row justify-between">
 
-            <div className="w-full md:w-4/12">
-                <AddBudgetForm month={month} handleAddBudget={handleAddBudget} />
+                <div className="w-full md:w-4/12">
+                    <AddBudgetForm month={month} handleAddBudget={handleAddBudget} />
+                </div>
+
+                {/* Budget Overview */}
+                <div className="w-full md:w-7/12">
+                    {!budget ?
+                        <div className="card-title">PLease add a budget first</div> :
+
+                        <div className="w-full">
+                            <BudgetOverview budget={budget} expenses={myExpenses} />
+
+                            <AddExpenseForm onSubmit={addExpense} />
+
+                            <ExpenseList expenses={myExpenses} />
+                        </div>
+                    }
+                </div>
+
             </div>
-
-            {/* Budget Overview */}
-            <div className="w-full md:w-7/12">
-                {!budget ?
-                    <div className="card-title">PLease add a budget first</div> :
-
-                    <div className="w-full">
-                        <BudgetOverview budget={budget} expenses={myExpenses} />
-
-                        <AddExpenseForm onSubmit={addExpense} />
-
-                        <ExpenseList expenses={myExpenses} />
-                    </div>
-                }
-            </div>
-
         </div>
     );
 };

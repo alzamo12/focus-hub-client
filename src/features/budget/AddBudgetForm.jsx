@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+// import "../../../.."
 const AddBudgetForm = ({ handleAddBudget, month }) => {
 
     const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="p-4 bg-white shadow-md rounded-lg space-y-3 w-full text-gray-700"
+            className="p-4 bg-white dark:bg-black dark:text-white dark:border-primary dark:border shadow-md rounded-lg space-y-3 w-full text-gray-700"
         >
             <h2 className="text-lg font-semibold">Add Budget</h2>
 
@@ -39,7 +39,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
                 defaultValue={month}
                 onChange={handleChange}
                 required
-                className="w-full border p-2 rounded"
+                className="w-full p-2 rounded input-style"
             />
 
             <input
@@ -49,7 +49,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
                 onChange={handleChange}
                 placeholder="Amount"
                 required
-                className="w-full border p-2 rounded"
+                className="w-full p-2 rounded input-style "
             />
 
             <input
@@ -58,12 +58,12 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
                 value={formData.category}
                 onChange={handleChange}
                 placeholder="Category (optional)"
-                className="w-full border p-2 rounded"
+                className="w-full p-2 rounded input-style "
             />
 
             <button
                 type="submit"
-                className= "btn btn-secondary text-white cursor-pointer font-bold px-4 py-2 rounded "
+                className= "btn btn-secondary dark:bg-black dark:border-accent text-white cursor-pointer font-bold px-4 py-2 rounded "
             >
                 Add Budget
             </button>

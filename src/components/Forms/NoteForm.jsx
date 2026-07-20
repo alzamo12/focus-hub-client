@@ -1,5 +1,5 @@
 import Select from "react-select";
-import "./noteform.css"
+import "../../css/noteform.css"
 import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill-new";
 import SelectInput from "../Inputs/add_Class_And_Task_Form_Inputs/SelectInput";

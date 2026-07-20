@@ -16,7 +16,6 @@ import NoteCards from '../../features/notes/NoteCards';
 import GenerateNote from '../../features/notes/GenerateNote';
 import { useRef } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
-import useGenerateImageLink from '../../hooks/useGenerateImageLink';
 import { dataURLToFile } from '../../utils/dataURLToFile';
 // import NoteForm from "../../components/Forms/NoteForm"
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
