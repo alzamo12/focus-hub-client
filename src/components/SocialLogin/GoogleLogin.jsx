@@ -6,7 +6,7 @@ const GoogleLogin = () => {
     const { googleLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from || "/";
+    const from = location.state?.from || "/dashboard";
     // const { mutate } = useCreateUser(from);
     const axiosPublic = useAxiosPublic();
 

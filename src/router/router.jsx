@@ -13,10 +13,15 @@ import NoteDetails from "../pages/NoteDetails/NoteDetails";
 import EditNote from "../pages/EditNote/EditNote";
 import Tasks from "../pages/Tasks/Tasks";
 import Settings from "../pages/Settings/Settings";
+import LandingPage from "../pages/LandingPage/LandingPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
+        Component: LandingPage
+    },
+    {
+        path: "/dashboard",
         element: <PrivateRoute><RootLayout /></PrivateRoute>,
         children: [
             {
@@ -70,7 +75,7 @@ const router = createBrowserRouter([
                 Component: SignUp
             }
         ]
-    }
+    },
 ]);
 
 export default router

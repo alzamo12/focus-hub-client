@@ -9,7 +9,7 @@ const SignIn = () => {
     const { signIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from || "/";
+    const from = location.state?.from || "/dashboard";
     useTittle("Sign In")
 
     const handleSubmit = (e) => {
@@ -85,7 +85,8 @@ const SignIn = () => {
 
                 {/* Sign in button */}
                 <div>
-                    <button type="submit" className="btn btn-primary w-full rounded-lg">
+                    <button type="submit"
+                        className="btn btn-secondary dark:btn-primary w-full rounded-lg">
                         Sign in
                     </button>
                 </div>
@@ -104,7 +105,8 @@ const SignIn = () => {
             {/* bottom navigator -> Register */}
             <div className="mt-6 text-center text-sm text-neutral-700 dark:text-accent">
                 Don’t have an account?{" "}
-                <Link to="/auth/signup" className="font-medium text-primary hover:underline">
+                <Link to="/auth/signup" className="font-medium
+                 text-secondary dark:text-primary hover:underline">
                     Register
                 </Link>
             </div>

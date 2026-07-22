@@ -286,5 +286,99 @@
             "value": "bangladesh-liberation-war",
             "label": "Bangladesh liberation war"
         }
+    ],
+    "bangla": [
+        {
+            "value": "stories",
+            "label": "Stories"
+        },
+        {
+            "value": "poems",
+            "label": "Poems"
+        }
+    ],
+    "islam": [
+        {
+            "value": "akaid",
+            "label": "আকাইদ"
+        },
+        {
+            "value": "islamicShariahSources",
+            "label": "ইসলামি শরিয়তের উৎস"
+        },
+        {
+            "value": "ibadat",
+            "label": "ইবাদত"
+        },
+        {
+            "value": "akhlaq",
+            "label": "আখলাক"
+        },
+        {
+            "value": "adarshaJibonchorit",
+            "label": "আদর্শ জীবনচরিত"
+        }
+    ],
+    "bgs": [
+        {
+            "value": "purboBanglarAndolon",
+            "label": "পূর্ববাংলার আন্দোলন ও ভাষাতান্দোলনের উত্থান (১৯৪৭-১৯৫২)"
+        },
+        {
+            "value": "bangladeshSwadhinota",
+            "label": "বাংলাদেশের স্বাধীনতা"
+        },
+        {
+            "value": "muktijuddho",
+            "label": "মুক্তিযুদ্ধ"
+        },
+        {
+            "value": "bhugolOPrakritikSompod",
+            "label": "বাংলাদেশের ভৌগোলিক অবস্থান ও প্রাকৃতিক সম্পদ"
+        },
+        {
+            "value": "rashtroNagorikotaAin",
+            "label": "রাষ্ট্র, নাগরিকতা ও আইন"
+        },
+        {
+            "value": "sorkarerAngoOProshason",
+            "label": "বাংলাদেশ সরকারের বিভিন্ন অঙ্গ ও প্রশাসন ব্যবস্থা"
+        },
+        {
+            "value": "orthonitiOBanijjo",
+            "label": "বাংলাদেশের অর্থনীতি ও বাণিজ্য"
+        },
+        {
+            "value": "antorjatikSomporko",
+            "label": "আন্তর্জাতিক সম্পর্ক ও বাংলাদেশ"
+        },
+        {
+            "value": "jatioSompadOitijjo",
+            "label": "জাতীয় সম্পদ ও ঐতিহ্যিক বাংলাদেশ"
+        },
+        {
+            "value": "orthonaitikUnnoyon",
+            "label": "অর্থনৈতিক উন্নয়ন ও বাংলাদেশের অর্থনৈতিক প্রকৃতি"
+        },
+        {
+            "value": "sorkarerOrthoBank",
+            "label": "বাংলাদেশ সরকারের অর্থ ও ব্যাংক ব্যবস্থা"
+        },
+        {
+            "value": "poribeshKaryokrom",
+            "label": "বাংলাদেশের পরিবেশ কার্যক্রম ও সমন্বয়করণ"
+        },
+        {
+            "value": "samajikPoriborton",
+            "label": "বাংলাদেশের সামাজিক পরিবর্তন"
+        },
+        {
+            "value": "samajikSomossa",
+            "label": "বাংলাদেশের সামাজিক সমস্যা ও প্রতিকার"
+        },
+        {
+            "value": "boishwikoBongladesh",
+            "label": "বৈশ্বিকায়ন ও বাংলাদেশ"
+        }
     ]
 }

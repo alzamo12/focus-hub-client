@@ -106,7 +106,8 @@ const SignUp = () => {
 
                 {/* Sign Up button */}
                 <div>
-                    <button type="submit" className="btn btn-primary w-full rounded-lg text-white">
+                    <button type="submit" 
+                    className="btn btn-secondary dark:btn-primary w-full rounded-lg text-white">
                         Sign Up
                     </button>
                 </div>
@@ -125,7 +126,8 @@ const SignUp = () => {
             {/* Bottom navigator -> Sign In */}
             <div className="mt-6 text-center text-sm text-neutral-700 dark:text-accent">
                 Already have an account?{" "}
-                <Link to="/auth/signin" className="font-medium text-primary hover:underline">
+                <Link to="/auth/signin" className="font-medium 
+                text-secondary dark:text-primary hover:underline">
                     Sign In
                 </Link>
             </div>

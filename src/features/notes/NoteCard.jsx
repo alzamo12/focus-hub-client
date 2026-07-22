@@ -14,7 +14,7 @@ const NoteCard = ({ note, handleDeleteNote }) => {
                     <h2 className="card-title  text-base">Subject: {note?.subject}</h2>
                 {/* </div> */}
                 <div className="card-actions justify-end">
-                    <Link to={`/note/${note?._id}`} className="btn dark:bg-base-100 dark:text-white dark:border dark:border-accent btn-secondary dark:shadow-accent dark:hover:shadow-lg text-white">View</Link>
+                    <Link to={`/dashboard/note/${note?._id}`} className="btn dark:bg-base-100 dark:text-white dark:border dark:border-accent btn-secondary dark:shadow-accent dark:hover:shadow-lg text-white">View</Link>
                     <button onClick={() => handleDeleteNote(note?._id)} className="btn btn-ghost border border-secondary dark:border-primary dark:shadow-primary dark:hover:shadow-lg">Delete</button>
                 </div>
             </div>

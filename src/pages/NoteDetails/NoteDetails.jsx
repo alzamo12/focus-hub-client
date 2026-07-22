@@ -32,7 +32,7 @@ const NoteDetails = () => {
             if (data.success) {
                 toast.success("Note deleted Successfully");
                 queryClient.invalidateQueries({ queryKey: ['note'] })
-                navigate("/notes")
+                navigate("/dashboard/notes")
             }
             console.log(data);
         },
@@ -74,7 +74,7 @@ const NoteDetails = () => {
             <div className="flex flex-col md:flex-row-reverse justify-between items-center">
                 <div className="space-x-2 flex w-full md:w-auto justify-between my-3">
                     <Link
-                        to={`/editNote/${note?._id}`}
+                        to={`/dashboard/editNote/${note?._id}`}
                         className="px-6 py-1 bg-secondary dark:bg-base-100 text-white rounded-lg cursor-pointer"
                     >
                         Edit

@@ -88,9 +88,9 @@ const GenerateQuestions = () => {
         // setLoading(true)
         const questionInfo = {
             subject: subject.value,
-            chapter: chapter.value,
+            chapter: chapter.label,
             level: level.value,
-            subTopic: subTopic.value,
+            subTopic: subTopic.label,
             type: type.value,
             language: language.value
         };

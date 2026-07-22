@@ -6,14 +6,14 @@ import SelectInput from "../Inputs/add_Class_And_Task_Form_Inputs/SelectInput";
 import useInputStyles from "../../hooks/useInputStyles";
 // React.lazy(() => import('react-quill-new'));
 // const ReactQuill =  <Suspense>{React.lazy(() => import('react-quill-new'))}</Suspense>
-
-const subjects = [
-    { value: "Physics", label: "Physics" },
-    { value: "Math", label: "Math" },
-    { value: "Chemistry", label: "Chemistry" },
-    { value: "History", label: "History" },
-    // { value: "History", label: "History" },
-];
+import subjects from "../../data/subjects.json"
+// const subjects = [
+//     { value: "Physics", label: "Physics" },
+//     { value: "Math", label: "Math" },
+//     { value: "Chemistry", label: "Chemistry" },
+//     { value: "History", label: "History" },
+//     // { value: "History", label: "History" },
+// ];
 
 function MobileToolbar() {
     return (

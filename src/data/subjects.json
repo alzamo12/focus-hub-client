@@ -22,5 +22,17 @@
     {
         "value": "history",
         "label": "History"
+    },
+    {
+        "value": "bangla",
+        "label": "Bangla"
+    },
+    {
+        "value": "islam",
+        "label": "Islam"
+    },
+    {
+        "value": "bgs",
+        "label": "Bangladesh and Global Studies"
     }
 ]

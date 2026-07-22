@@ -21,6 +21,7 @@ const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 const subjects = [
     { value: "Physics", label: "Physics" },
     { value: "Math", label: "Math" },
+    // { value: "Higher Math", label: "Math" },
     { value: "Chemistry", label: "Chemistry" },
     { value: "History", label: "History" },
     { value: "All", label: "All" },

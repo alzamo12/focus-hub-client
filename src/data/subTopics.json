@@ -1380,5 +1380,915 @@
                 "label": "Event and Outcome"
             }
         ]
+    },
+    "bangla": {
+        "stories": [
+            {
+                "value": "upokarok",
+                "label": "উপকারক"
+            },
+            {
+                "value": "fulerBibah",
+                "label": "ফুলের বিবাহ"
+            },
+            {
+                "value": "suta",
+                "label": "সূতা"
+            },
+            {
+                "value": "library",
+                "label": "লাইব্রেরি"
+            },
+            {
+                "value": "boiPora",
+                "label": "বই পড়া"
+            },
+            {
+                "value": "obhagirsorgo",
+                "label": "অভাগীর স্বর্গ"
+            },
+            {
+                "value": "nirihoBangali",
+                "label": "নিরীহ বাঙালি"
+            },
+            {
+                "value": "pallisahitto",
+                "label": "পল্লিসাহিত্য"
+            },
+            {
+                "value": "udamOporishrom",
+                "label": "উদাম ও পরিশ্রম"
+            },
+            {
+                "value": "jibonShikkherGyan",
+                "label": "জীবন শিক্ষের জ্ঞান"
+            },
+            {
+                "value": "amAantirBhepu",
+                "label": "আম-আঁটির ভেপু"
+            },
+            {
+                "value": "manushMuhammad",
+                "label": "মানুষ মুহাম্মদ (সা.)"
+            },
+            {
+                "value": "utpiditoShoktirUdbodhon",
+                "label": "উৎপীড়িত শক্তির উদ্বোধন"
+            },
+            {
+                "value": "nimGach",
+                "label": "নিমগাছ"
+            },
+            {
+                "value": "shikkhaOMonushyotwo",
+                "label": "শিক্ষা ও মনুষ্যত্ব"
+            },
+            {
+                "value": "probasBondhu",
+                "label": "প্রবাস বন্ধু"
+            },
+            {
+                "value": "momotadi",
+                "label": "মমতাদি"
+            },
+            {
+                "value": "bonomanush",
+                "label": "বনমানুষ"
+            },
+            {
+                "value": "ekattorerDinGuli",
+                "label": "একাত্তরের দিনগুলি"
+            },
+            {
+                "value": "swadhinotaAmarSwadhinota",
+                "label": "স্বাধীনতা আমার স্বাধীনতা"
+            },
+            {
+                "value": "ekusherGolpo",
+                "label": "একুশের গল্প"
+            },
+            {
+                "value": "amaderSonskriti",
+                "label": "আমাদের সংস্কৃতি"
+            },
+            {
+                "value": "sahityerRupORiti",
+                "label": "সাহিত্যের রূপ ও রীতি"
+            },
+            {
+                "value": "banglaShobdo",
+                "label": "বাংলা শব্দ"
+            },
+            {
+                "value": "amaderNotunGourabGatha",
+                "label": "আমাদের নতুন গৌরবগাথা"
+            }
+        ],
+        "poems": [
+            {
+                "value": "bondona",
+                "label": "বন্দনা"
+            },
+            {
+                "value": "hamd",
+                "label": "হামদ"
+            },
+            {
+                "value": "bosbogi",
+                "label": "বসবগী"
+            },
+            {
+                "value": "kopotakkhoNod",
+                "label": "কপোতাক্ষ নদ"
+            },
+            {
+                "value": "jibonSongit",
+                "label": "জীবন-সঙ্গীত"
+            },
+            {
+                "value": "pran",
+                "label": "প্রাণ"
+            },
+            {
+                "value": "jatAbishkar",
+                "label": "জাত-আবিষ্কার"
+            },
+            {
+                "value": "okkhorDhr",
+                "label": "অক্ষরধৃ"
+            },
+            {
+                "value": "abarGan",
+                "label": "আবার গান"
+            },
+            {
+                "value": "hayrabaji",
+                "label": "হায়রাবাজি"
+            },
+            {
+                "value": "jibonBinimoy",
+                "label": "জীবন বিনিময়"
+            },
+            {
+                "value": "manush",
+                "label": "মানুষ"
+            },
+            {
+                "value": "umarFaruk",
+                "label": "উমর ফারুক"
+            },
+            {
+                "value": "soinikEiMath",
+                "label": "সৈনিক এই মাঠ"
+            },
+            {
+                "value": "jabAmiTomarDeshe",
+                "label": "যাব আমি তোমার দেশে"
+            },
+            {
+                "value": "ektiKobita",
+                "label": "একটি কবিতা"
+            },
+            {
+                "value": "amarDesh",
+                "label": "আমার দেশ"
+            },
+            {
+                "value": "amiKonoAgontukNoi",
+                "label": "আমি কোনো আগন্তুক নই"
+            },
+            {
+                "value": "drishti",
+                "label": "দৃষ্টি"
+            },
+            {
+                "value": "meDinerKobita",
+                "label": "মে-দিনের কবিতা"
+            },
+            {
+                "value": "ama",
+                "label": "আমা"
+            },
+            {
+                "value": "poster",
+                "label": "পোস্টার"
+            },
+            {
+                "value": "ranar",
+                "label": "রানার"
+            },
+            {
+                "value": "tomakePawarJonnoHeSwadhinota",
+                "label": "তোমাকে পাওয়ার জন্য, হে স্বাধীনতা"
+            },
+            {
+                "value": "obakSworgodesh",
+                "label": "অবাক স্বর্গদেশ"
+            },
+            {
+                "value": "boreshwor",
+                "label": "বোরেশ্বর"
+            },
+            {
+                "value": "chuniyaAmarArektiya",
+                "label": "চুনিয়া আমার আরেকটিয়া"
+            },
+            {
+                "value": "mihil",
+                "label": "মিহিল"
+            }
+        ]
+    },
+    "islam": {
+        "akaid": [
+            {
+                "value": "islam",
+                "label": "ইসলাম"
+            },
+            {
+                "value": "iman",
+                "label": "ঈমান"
+            },
+            {
+                "value": "manobikMullyobodhBikasheImanerGurutto",
+                "label": "মানবিক মূল্যবোধ বিকাশে ঈমানের গুরুত্ব"
+            },
+            {
+                "value": "tawhid",
+                "label": "তাওহিদ"
+            },
+            {
+                "value": "allahTaalarPorichoy",
+                "label": "আল্লাহ তায়ালার পরিচয়"
+            },
+            {
+                "value": "shirk",
+                "label": "শিরক"
+            },
+            {
+                "value": "nifaq",
+                "label": "নিফাক"
+            },
+            {
+                "value": "risalat",
+                "label": "রিসালাত"
+            },
+            {
+                "value": "naitikJibonBikasheRisalatONobuwat",
+                "label": "নৈতিক জীবন বিকাশে রিসালাত ও নবুয়ত"
+            },
+            {
+                "value": "naitikJibonGothoneAsmaniKitaberVumika",
+                "label": "নৈতিক জীবন গঠনে আসমানি কিতাবের ভূমিকা"
+            },
+            {
+                "value": "akhirat",
+                "label": "আখিরাত"
+            },
+            {
+                "value": "akhiraterKoyektiStor",
+                "label": "আখিরাতের কয়েকটি স্তর"
+            },
+            {
+                "value": "akhirateBiswasherVumika",
+                "label": "নৈতিক জীবন গঠনে আখিরাতে বিশ্বাসের ভূমিকা"
+            }
+        ],
+        "islamicShariahSources": [
+            {
+                "value": "quranProthomUtso",
+                "label": "শরিয়তের প্রথম উৎস : আল-কুরআন"
+            },
+            {
+                "value": "quranSongrokkhonOSongkolon",
+                "label": "আল-কুরআন সংরক্ষণ ও সংকলন"
+            },
+            {
+                "value": "makkiOMadaniSura",
+                "label": "মাক্কি ও মাদানি সূরা"
+            },
+            {
+                "value": "tilawatGuruttoOMahattwo",
+                "label": "তিলাওয়াত : গুরুত্ব ও মাহাত্ম্য"
+            },
+            {
+                "value": "suraAshShams",
+                "label": "সূরা আশ-শামস"
+            },
+            {
+                "value": "suraAdDuha",
+                "label": "সূরা আদ-দুহা"
+            },
+            {
+                "value": "suraAlInshirah",
+                "label": "সূরা আল-ইনশিরাহ"
+            },
+            {
+                "value": "suraAtTin",
+                "label": "সূরা আত-তীন"
+            },
+            {
+                "value": "suraAlMaun",
+                "label": "সূরা আল-মাউন"
+            },
+            {
+                "value": "sunnahDitiyoUtso",
+                "label": "শরিয়তের দ্বিতীয় উৎস : সুন্নাহ"
+            },
+            {
+                "value": "hadithNiyyot",
+                "label": "হাদিস ১ (নিয়ত সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithIslamerVitti",
+                "label": "হাদিস ২ (ইসলামের ভিত্তি সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithDanShilota",
+                "label": "হাদিস ৩ (দানশীলতা সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithBrikkhoropon",
+                "label": "হাদিস ৪ (বৃক্ষরোপণ সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithShobottomoManush",
+                "label": "হাদিস ৫ (সবোত্তম মানুষ সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithManobPrem",
+                "label": "হাদিস ৬ (মানবপ্রেম ও সৃষ্টির সেবা সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithPoropokar",
+                "label": "হাদিস ৭ (পরোপকার সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithShotota",
+                "label": "হাদিস ৮ (ব্যবসায়ে সততা সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithDhoirjoOKkhoma",
+                "label": "হাদিস ৯ (ধৈর্য ও ক্ষমা সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "hadithJikir",
+                "label": "হাদিস ১০ (যিকির সম্পর্কিত হাদিস)"
+            },
+            {
+                "value": "ijma",
+                "label": "শরিয়তের তৃতীয় উৎস : আল-ইজমা"
+            },
+            {
+                "value": "qiyas",
+                "label": "শরিয়তের চতুর্থ উৎস : আল-কিয়াস"
+            },
+            {
+                "value": "ahkamPorivasha",
+                "label": "শরিয়তের আহকাম সংক্রান্ত পরিভাষা"
+            }
+        ],
+        "ibadat": [
+            {
+                "value": "ibadat",
+                "label": "ইবাদত"
+            },
+            {
+                "value": "salat",
+                "label": "সালাত"
+            },
+            {
+                "value": "sawm",
+                "label": "সাওম"
+            },
+            {
+                "value": "zakat",
+                "label": "যাকাত"
+            },
+            {
+                "value": "hajj",
+                "label": "হজ্জ"
+            },
+            {
+                "value": "malikShromikShomporko",
+                "label": "মালিক-শ্রমিক সম্পর্ক"
+            },
+            {
+                "value": "ilm",
+                "label": "ইলম (জ্ঞান)"
+            },
+            {
+                "value": "shikkharthirBoishishto",
+                "label": "শিক্ষার্থীর বৈশিষ্ট্য"
+            },
+            {
+                "value": "shikkhokerGunaboli",
+                "label": "শিক্ষকের গুণাবলি"
+            },
+            {
+                "value": "chatroShikkhokShomporko",
+                "label": "ছাত্র-শিক্ষক সম্পর্ক"
+            },
+            {
+                "value": "shilpoONaitikota",
+                "label": "শিল্প ও নৈতিকতা"
+            },
+            {
+                "value": "jihad",
+                "label": "জিহাদ"
+            },
+            {
+                "value": "jihadOSontrashbad",
+                "label": "জিহাদ ও সন্ত্রাসবাদ"
+            }
+        ],
+        "akhlaq": [
+            {
+                "value": "akhlakeHamidah",
+                "label": "আখলাকে হামিদাহ"
+            },
+            {
+                "value": "taqwa",
+                "label": "তাকওয়া"
+            },
+            {
+                "value": "wadaPalon",
+                "label": "ওয়াদা পালন"
+            },
+            {
+                "value": "shotyobadita",
+                "label": "সত্যবাদিতা"
+            },
+            {
+                "value": "shalinota",
+                "label": "শালীনতা"
+            },
+            {
+                "value": "manobSheba",
+                "label": "মানবসেবা"
+            },
+            {
+                "value": "danshilota",
+                "label": "দানশীলতা"
+            },
+            {
+                "value": "atmomorjadabodhOShamajikShompriti",
+                "label": "আত্মমর্যাদাবোধ ও সামাজিক সম্প্রীতি"
+            },
+            {
+                "value": "narirProtiShodachoron",
+                "label": "নারীর প্রতি সদাচরণ"
+            },
+            {
+                "value": "deshprem",
+                "label": "দেশপ্রেম"
+            },
+            {
+                "value": "kortobboporayonota",
+                "label": "কর্তব্যপরায়ণতা"
+            },
+            {
+                "value": "mitobboyita",
+                "label": "মিতব্যয়িতা"
+            },
+            {
+                "value": "otithiporayonota",
+                "label": "অতিথিপরায়ণতা"
+            },
+            {
+                "value": "shotKajerAdesh",
+                "label": "সৎকাজের আদেশ ও অসৎ কাজে নিষেধ"
+            },
+            {
+                "value": "akhlakeJamimah",
+                "label": "আখলাকে যামিমাহ"
+            },
+            {
+                "value": "protarona",
+                "label": "প্রতারণা"
+            },
+            {
+                "value": "gibat",
+                "label": "গিবত"
+            },
+            {
+                "value": "hingsha",
+                "label": "হিংসা"
+            },
+            {
+                "value": "fitnaFasad",
+                "label": "ফিতনা-ফাসাদ"
+            }
+        ],
+        "adarshaJibonchorit": [
+            {
+                "value": "samokalinShamajikOSangskritikObostha",
+                "label": "মহানবি হযরত মুহাম্মদ (সা.)-এর সমকালীন সামাজিক ও সাংস্কৃতিক অবস্থা"
+            },
+            {
+                "value": "jonmoShoishobOKoishor",
+                "label": "হযরত মুহাম্মদ (সা.)-এর জন্ম, শৈশব ও কৈশোর"
+            },
+            {
+                "value": "joubonNobuwatOIslamProchar",
+                "label": "হযরত মুহাম্মদ (সা.)-এর যৌবনকাল, নবুয়তপ্রাপ্তি ও ইসলাম প্রচার"
+            },
+            {
+                "value": "madaniJibon",
+                "label": "হযরত মুহাম্মদ (সা.)-এর মাদানি জীবন"
+            },
+            {
+                "value": "makkaBijoyOBidayHajj",
+                "label": "হযরত মুহাম্মদ (সা.)-এর মক্কা বিজয় ও বিদায় হজ"
+            },
+            {
+                "value": "abuBakarRa",
+                "label": "খুলাফায়ে রাশেদিনের জীবনাদর্শ : হযরত আবু বকর (রা.)"
+            },
+            {
+                "value": "umarRa",
+                "label": "হযরত উমর (রা.)"
+            },
+            {
+                "value": "usmanRa",
+                "label": "হযরত উসমান (রা.)"
+            },
+            {
+                "value": "aliRa",
+                "label": "হযরত আলি (রা.)"
+            },
+            {
+                "value": "imamBukhari",
+                "label": "মুসলিম মনীষী : ইমাম বুখারি (র.)"
+            },
+            {
+                "value": "imamAbuHanifa",
+                "label": "ইমাম আবু হানিফা (র.)"
+            },
+            {
+                "value": "imamGhazali",
+                "label": "ইমাম গাযালি (র.)"
+            },
+            {
+                "value": "ibneJarirAtTabari",
+                "label": "ইবনে জারির আত-তাবারি (র.)"
+            },
+            {
+                "value": "chikitsaShastro",
+                "label": "জ্ঞান-বিজ্ঞান ও প্রযুক্তি চর্চায় মুসলমানদের অবদান : চিকিৎসা শাস্ত্র"
+            },
+            {
+                "value": "rosayonShastro",
+                "label": "রসায়ন শাস্ত্র"
+            },
+            {
+                "value": "vugolShastro",
+                "label": "ভূগোল শাস্ত্র"
+            },
+            {
+                "value": "gonitShastro",
+                "label": "গণিত শাস্ত্র"
+            }
+        ]
+    },
+    "bgs": {
+        "purboBanglarAndolon": [
+            {
+                "value": "purboBanglarAndolon",
+                "label": "পূর্ববাংলার আন্দোলন ও ভাষাতান্দোলনের উত্থান (১৯৪৭-১৯৫২)"
+            },
+            {
+                "value": "bhashaPotobhumi",
+                "label": "ভাষা আন্দোলনের পটভূমি"
+            },
+            {
+                "value": "urduChapiye",
+                "label": "উর্দু চাপিয়ে দেওয়ার চেষ্টা"
+            },
+            {
+                "value": "bhashaGhotona",
+                "label": "ভাষা আন্দোলনের ঘটনা"
+            },
+            {
+                "value": "bhashaShohid",
+                "label": "ভাষা শহিদ"
+            },
+            {
+                "value": "21February",
+                "label": "২১শে ফেব্রুয়ারি"
+            }
+        ],
+        "bangladeshSwadhinota": [
+            {
+                "value": "bangladeshSwadhinota",
+                "label": "বাংলাদেশের স্বাধীনতা"
+            },
+            {
+                "value": "swadhinotarPotobhumi",
+                "label": "স্বাধীনতার পটভূমি"
+            },
+            {
+                "value": "6Dofa",
+                "label": "৬ দফা আন্দোলন"
+            },
+            {
+                "value": "osohojog",
+                "label": "অসহযোগ আন্দোলন"
+            },
+            {
+                "value": "swadhinotaGhoshona",
+                "label": "স্বাধীনতা ঘোষণা"
+            }
+        ],
+        "muktijuddho": [
+            {
+                "value": "muktijuddho",
+                "label": "মুক্তিযুদ্ধ"
+            },
+            {
+                "value": "searchlight",
+                "label": "অপারেশন সার্চলাইট"
+            },
+            {
+                "value": "muktibahini",
+                "label": "মুক্তিবাহিনী"
+            },
+            {
+                "value": "sectorJuddho",
+                "label": "সেক্টর যুদ্ধ"
+            },
+            {
+                "value": "bijoyDibos",
+                "label": "বিজয় দিবস"
+            }
+        ],
+        "bhugolOPrakritikSompod": [
+            {
+                "value": "bhugolOPrakritikSompod",
+                "label": "বাংলাদেশের ভৌগোলিক অবস্থান ও প্রাকৃতিক সম্পদ"
+            },
+            {
+                "value": "obosthan",
+                "label": "অবস্থান"
+            },
+            {
+                "value": "nodNodi",
+                "label": "নদ-নদী"
+            },
+            {
+                "value": "jolbayu",
+                "label": "জলবায়ু"
+            },
+            {
+                "value": "sompod",
+                "label": "প্রাকৃতিক সম্পদ"
+            }
+        ],
+        "rashtroNagorikotaAin": [
+            {
+                "value": "rashtroNagorikotaAin",
+                "label": "রাষ্ট্র, নাগরিকতা ও আইন"
+            },
+            {
+                "value": "rashtrerDharona",
+                "label": "রাষ্ট্রের ধারণা"
+            },
+            {
+                "value": "nagorikota",
+                "label": "নাগরিকতা"
+            },
+            {
+                "value": "shongbidhan",
+                "label": "সংবিধান"
+            },
+            {
+                "value": "moulikOdhikar",
+                "label": "মৌলিক অধিকার"
+            }
+        ],
+        "sorkarerAngo": [
+            {
+                "value": "sorkarerAngo",
+                "label": "বাংলাদেশ সরকারের বিভিন্ন অঙ্গ ও প্রশাসন ব্যবস্থা"
+            },
+            {
+                "value": "nirbahi",
+                "label": "নির্বাহী বিভাগ"
+            },
+            {
+                "value": "ainSova",
+                "label": "আইনসভা"
+            },
+            {
+                "value": "bichar",
+                "label": "বিচার বিভাগ"
+            },
+            {
+                "value": "sthanio",
+                "label": "স্থানীয় সরকার"
+            }
+        ],
+        "orthonitiBanijjo": [
+            {
+                "value": "orthonitiBanijjo",
+                "label": "বাংলাদেশের অর্থনীতি ও বাণিজ্য"
+            },
+            {
+                "value": "krishi",
+                "label": "কৃষি"
+            },
+            {
+                "value": "shilpo",
+                "label": "শিল্প"
+            },
+            {
+                "value": "rmg",
+                "label": "তৈরি পোশাক"
+            },
+            {
+                "value": "bideshBanijjo",
+                "label": "বৈদেশিক বাণিজ্য"
+            }
+        ],
+        "antorjatikSomporko": [
+            {
+                "value": "antorjatikSomporko",
+                "label": "আন্তর্জাতিক সম্পর্ক ও বাংলাদেশ"
+            },
+            {
+                "value": "pororashtroNiti",
+                "label": "পররাষ্ট্র নীতি"
+            },
+            {
+                "value": "jatishongho",
+                "label": "জাতিসংঘ"
+            },
+            {
+                "value": "saarc",
+                "label": "সার্ক"
+            },
+            {
+                "value": "dwipakkhik",
+                "label": "দ্বিপাক্ষিক সম্পর্ক"
+            }
+        ],
+        "jatioSompad": [
+            {
+                "value": "jatioSompad",
+                "label": "জাতীয় সম্পদ ও ঐতিহ্যিক বাংলাদেশ"
+            },
+            {
+                "value": "sangskriti",
+                "label": "সাংস্কৃতিক ঐতিহ্য"
+            },
+            {
+                "value": "aitihasikSthan",
+                "label": "ঐতিহাসিক স্থান"
+            },
+            {
+                "value": "utsob",
+                "label": "উৎসব"
+            },
+            {
+                "value": "lokSongskriti",
+                "label": "লোকসংস্কৃতি"
+            }
+        ],
+        "orthonaitikUnnoyon": [
+            {
+                "value": "orthonaitikUnnoyon",
+                "label": "অর্থনৈতিক উন্নয়ন ও বাংলাদেশের অর্থনৈতিক প্রকৃতি"
+            },
+            {
+                "value": "porikalpona",
+                "label": "পরিকল্পনা"
+            },
+            {
+                "value": "darridroBimocchon",
+                "label": "দারিদ্র্য বিমোচন"
+            },
+            {
+                "value": "teksoiUnnoyon",
+                "label": "টেকসই উন্নয়ন"
+            }
+        ],
+        "sorkarerOrthoBank": [
+            {
+                "value": "sorkarerOrthoBank",
+                "label": "বাংলাদেশ সরকারের অর্থ ও ব্যাংক ব্যবস্থা"
+            },
+            {
+                "value": "budget",
+                "label": "বাজেট"
+            },
+            {
+                "value": "banking",
+                "label": "ব্যাংকিং ব্যবস্থা"
+            }
+        ],
+        "poribeshKaryokrom": [
+            {
+                "value": "poribeshKaryokrom",
+                "label": "বাংলাদেশের পরিবেশ কার্যক্রম ও সমন্বয়করণ"
+            },
+            {
+                "value": "durjogBabsosthapona",
+                "label": "দুর্যোগ ব্যবস্থাপনা"
+            },
+            {
+                "value": "poribeshSongrokhon",
+                "label": "পরিবেশ সংরক্ষণ"
+            },
+            {
+                "value": "jolabayuPoriborton",
+                "label": "জলবায়ু পরিবর্তন"
+            },
+            {
+                "value": "bonSompod",
+                "label": "বন সম্পদ রক্ষা"
+            },
+            {
+                "value": "poribeshAin",
+                "label": "পরিবেশ আইন"
+            }
+        ],
+        "samajikPoriborton": [
+            {
+                "value": "samajikPoriborton",
+                "label": "বাংলাদেশের সামাজিক পরিবর্তন"
+            },
+            {
+                "value": "nariKhomota",
+                "label": "নারীর ক্ষমতায়ন"
+            },
+            {
+                "value": "shikkhaBiplob",
+                "label": "শিক্ষার বিপ্লব"
+            },
+            {
+                "value": "grameenUnnoyon",
+                "label": "গ্রামীণ উন্নয়ন"
+            },
+            {
+                "value": "tathyaProjukti",
+                "label": "তথ্য প্রযুক্তির প্রভাব"
+            },
+            {
+                "value": "samajikNirapotta",
+                "label": "সামাজিক নিরাপত্তা"
+            }
+        ],
+        "samajikSomossa": [
+            {
+                "value": "samajikSomossa",
+                "label": "বাংলাদেশের সামাজিক সমস্যা ও প্রতিকার"
+            },
+            {
+                "value": "darridro",
+                "label": "দারিদ্র্য"
+            },
+            {
+                "value": "jonosonkha",
+                "label": "জনসংখ্যা বৃদ্ধি"
+            },
+            {
+                "value": "nariNirjaton",
+                "label": "নারী নির্যাতন"
+            },
+            {
+                "value": "shikkhaOshomota",
+                "label": "শিক্ষায় অসমতা"
+            },
+            {
+                "value": "poribeshDushon",
+                "label": "পরিবেশ দূষণ"
+            }
+        ],
+        "boishwikoBongladesh": [
+            {
+                "value": "boishwikoBongladesh",
+                "label": "বৈশ্বিকায়ন ও বাংলাদেশ"
+            },
+            {
+                "value": "globalizationEffect",
+                "label": "বৈশ্বিকায়নের প্রভাব"
+            },
+            {
+                "value": "arthoNiti",
+                "label": "অর্থনৈতিক বৈশ্বিকায়ন"
+            },
+            {
+                "value": "sangskritikProyab",
+                "label": "সাংস্কৃতিক প্রভাব"
+            },
+            {
+                "value": "projukti",
+                "label": "প্রযুক্তির ভূমিকা"
+            },
+            {
+                "value": "challenges",
+                "label": "চ্যালেঞ্জসমূহ"
+            }
+        ]
     }
 }

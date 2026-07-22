@@ -1,5 +1,6 @@
 import { useState } from "react";
-// import "../../../.."
+import { Calendar } from 'lucide-react';
+import "../../css/addBudgetForm.css"
 const AddBudgetForm = ({ handleAddBudget, month }) => {
 
     const [formData, setFormData] = useState({
@@ -7,7 +8,6 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
         amount: "",
         category: "",
     });
-
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,11 +18,9 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
         const form = e.target;
         const amount = form.amount.value;
         const month = form.month.value;
-        const category = form.category.value;
         const data = {
             amount: parseInt(amount),
             month,
-            category
         };
         handleAddBudget(data)
         setFormData({ name: "", amount: "", category: "" }); // reset form
@@ -35,14 +33,17 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
         >
             <h2 className="text-lg font-semibold">Add Budget</h2>
 
-            <input
-                type="month"
-                name="month"
-                defaultValue={month}
-                onChange={handleChange}
-                required
-                className="w-full p-2 rounded input-style"
-            />
+            <div className="relative">
+                <input
+                    type="month"
+                    name="month"
+                    defaultValue={month}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-2 rounded input-style"
+                    style={{ colorScheme: "light dark" }} />
+                <Calendar className="absolute right-2 top-2" />
+            </div>
 
             <input
                 type="number"
@@ -51,15 +52,6 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
                 onChange={handleChange}
                 placeholder="Amount"
                 required
-                className="w-full p-2 rounded input-style "
-            />
-
-            <input
-                type="text"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                placeholder="Category (optional)"
                 className="w-full p-2 rounded input-style "
             />
 

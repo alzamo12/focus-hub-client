@@ -45,7 +45,7 @@ const EditNote = () => {
             if (data.success) {
                 toast.success("Your note updated successfully");
                 queryClient.invalidateQueries({ queryKey: ['noteDetails', 'note'] });
-                navigate(`/note/${id}`)
+                navigate(`/dashboard/note/${id}`)
             };
             console.log(data);
         },
