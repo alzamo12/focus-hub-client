@@ -92,8 +92,10 @@ const Budget = () => {
     };
 
     const handleAddBudget = (data) => {
+        const { amount, ...rest } = data
         const newData = {
-            ...data,
+            ...rest,
+            amount: amount + parseInt(budget?.amount),
             userEmail: user?.email
         };
         addBudgetAsync(newData)

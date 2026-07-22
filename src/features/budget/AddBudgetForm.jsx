@@ -18,9 +18,11 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
         const form = e.target;
         const amount = form.amount.value;
         const month = form.month.value;
+        const category = form.category.value;
         const data = {
-            amount,
-            month
+            amount: parseInt(amount),
+            month,
+            category
         };
         handleAddBudget(data)
         setFormData({ name: "", amount: "", category: "" }); // reset form
@@ -63,7 +65,7 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
 
             <button
                 type="submit"
-                className= "btn btn-secondary dark:bg-black dark:border-accent text-white cursor-pointer font-bold px-4 py-2 rounded "
+                className="btn btn-secondary dark:bg-black dark:border-accent text-white cursor-pointer font-bold px-4 py-2 rounded "
             >
                 Add Budget
             </button>
