@@ -24,13 +24,13 @@ const EditNote = () => {
         queryKey: ['noteDetails', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/notes/${id}`);
-            if (res.data) {
-                const cleanHTML = DOMPurify.sanitize(res.data.content);
+            if (res.data.success) {
+                const cleanHTML = DOMPurify.sanitize(res.data.data.content);
                 setCurrentNote(cleanHTML)
-                setTitle(res.data.title)
+                setTitle(res.data.data.title)
                 setSub({
-                    value: res.data.subject,
-                    label: res.data.subject
+                    value: res.data.data.subject,
+                    label: res.data.data.subject
                 })
             }
             return res.data
@@ -42,17 +42,21 @@ const EditNote = () => {
             return res.data
         },
         onSuccess: (data) => {
+            if (data.success) {
+                toast.success("Your note updated successfully");
+                queryClient.invalidateQueries({ queryKey: ['noteDetails', 'note'] });
+                navigate(`/note/${id}`)
+            };
             console.log(data);
-            toast.success("Your note updated successfully");
-            queryClient.invalidateQueries({ queryKey: ['noteDetails', 'note'] });
-            navigate(`/note/${id}`)
+        },
+        onError: (err) => {
+            toast.error(err.message)
         }
     })
     if (isLoading) return <LoadingSpinner />
     console.log(note)
 
-    const handleEditNote = async (id) => {
-        // const cleanHTML = DOMPurify.sanitize(currentNote);
+    const handleEditNote = async () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(currentNote, "text/html");
         // console.log(doc.body.textContent)
@@ -99,8 +103,6 @@ const EditNote = () => {
         // console.log(noteData);
         noteEditAsync(noteData)
     };
-
-
     return (
         <div className='max-w-screen-2xl ' >
             <h2 className="text-2xl font-bold text-center my-4 text-base-200 ">📒 Edit Note</h2>

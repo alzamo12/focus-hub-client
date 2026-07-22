@@ -3,7 +3,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import combineDateTime from "../../utils/combineDateTime";
-import AddTaskForm from "./AddTaskForm";
+import AddTaskForm from "../../components/Forms/AddTaskForm";
 
 
 const AddTask = () => {
@@ -28,10 +28,10 @@ const AddTask = () => {
             return res.data;
         },
         onSuccess: (result) => {
-            queryClient.invalidateQueries(["tasks"]);
             console.log(result)
-            if (result?.acknowledged) {
+            if (result?.success) {
                 toast.success('Your data has inserted successfully')
+                queryClient.invalidateQueries(["tasks"]);
             }
         },
         onError: (err) => {
@@ -52,7 +52,6 @@ const AddTask = () => {
     };
     return (
         <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">
-            {/* <AddClassForm /> */}
             <h2 className="card-title mb-4">Describe Your Goal!</h2>
             <AddTaskForm
                 handleAddTask={handleAddTask}
@@ -60,8 +59,8 @@ const AddTask = () => {
                 register={register}
                 control={control}
                 buttonText={`Add Task`}
-                // subjects={subjects}
-                // level={level}
+            // subjects={subjects}
+            // level={level}
             />
         </div>
     );

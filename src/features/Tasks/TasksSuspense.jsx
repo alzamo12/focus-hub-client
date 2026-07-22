@@ -15,15 +15,15 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
         queryKey: ['task', user?.email, activeTab, pageView, page, limit],
         queryFn: async () => {
             const res = await axiosSecure.get(`/tasks?email=${user?.email}&type=${activeTab}&view=${pageView}&page=${page}&limit=${limit}`);
-            if (res.data.totalPages) {
-                setTotalPages(res.data.totalPages);
+            if (res.data.success) {
+                setTotalPages(res.data.data.totalPages);
             }
             return res.data
         },
         suspense: true
     });
     console.log(tasksData)
-    const { tasks = [], view = 'flat', type } = tasksData || {};
+    const { tasks = [], view = 'flat', type } = tasksData.data || {};
 
     // delete a task by id
     const { mutateAsync: deleteAsync } = useMutation({
@@ -32,12 +32,16 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
             return res.data
         },
         onSuccess: (data) => {
-            if (data.deletedCount > 0) {
+            if (data.success) {
                 toast.success('your task has deleted successfully');
                 queryClient.invalidateQueries({ queryKey: ['task'] })
             }
-            // queryClient.invalidateQueries(['task'])
             console.log(data)
+        },
+        onError: (err) => {
+            const message = err.response.data.message || 'Internal error';
+            toast.error(message);
+            console.log(err.response.data)
         }
     });
 
@@ -52,7 +56,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            if (result.isConfirmed) {     
+            if (result.isConfirmed) {
                 deleteAsync(id);
             }
         });

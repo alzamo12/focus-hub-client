@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import AddClassForm from '../../components/Class/AddClassForm';
+import AddClassForm from '../../components/Forms/AddClassForm';
 import { toast } from 'react-toastify';
 import { formatTime } from '../../utils/formatTime';
 import combineDateTime from '../../utils/combineDateTime';
@@ -22,20 +22,15 @@ const subjects = [
 ];
 const EditClass = ({ cls, activeTab }) => {
     const { _id, userEmail, module, instructor, room, building, subject, date, startTime, endTime } = cls;
-    // console.log(cls)
     const queryClient = useQueryClient();
-    // const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const {
         register,
         handleSubmit,
         control,
-        // formState: { errors },
     } = useForm({
-        // resolver: zodResolver(classSchema),
         defaultValues: {
-            // instructor: "Zakir"
             module: module,
             instructor: instructor,
             room: room,
@@ -53,12 +48,15 @@ const EditClass = ({ cls, activeTab }) => {
             return res?.data
         },
         onSuccess: async (data) => {
-            toast.success("class updated successfully");
             console.log(data)
-            queryClient.invalidateQueries(["classes", user?.email, activeTab])
+            if (data.success) {
+                toast.success("class updated successfully");
+                queryClient.invalidateQueries(["classes", user?.email, activeTab])
+            }
         },
         onError: (err) => {
             console.log(err)
+            toast.error(err.message)
         }
     })
 
@@ -90,7 +88,7 @@ const EditClass = ({ cls, activeTab }) => {
                 control={control}
                 subjects={subjects}
                 buttonText={`Edit Class`}
-                />
+            />
         </div>
     );
 };

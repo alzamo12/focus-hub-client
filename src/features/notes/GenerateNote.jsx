@@ -1,20 +1,14 @@
 import React from 'react';
-import GenerateForm from '../../components/GenerateQuestions/GenerateForm';
+import GenerateForm from '../../components/Forms/GenerateForm';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import ReactMarkdown from "react-markdown";
-// import remarkMath from "remark-math";
-// import rehypeKatex from "rehype-katex";
-// import remarkGfm from "remark-gfm";
-// import "katex/dist/katex.min.css";
 import ReactQuill from 'react-quill-new';
 import NoteViewer from '../../components/NoteViewer/NoteViewer';
 import "react-quill-new/dist/quill.bubble.css";
-// import 'react-quill-new/dist/quill.snow.css';
 import { useState } from 'react';
 import DOMPurify from "dompurify";
-// import "../../css/noteform.css"
 
 const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
@@ -24,7 +18,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const { data: generatedNote, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.post("/ai/generate-notes", data);
-            const clean = res?.data?.text
+            const clean = res?.data?.data
                 .replace(/^```json\s*/i, "")
                 .replace(/\s*```$/, "");
 
@@ -48,10 +42,6 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
         mutateAsync(generateNotesData)
     };
 
-    // const cleanNoteContent = DOMPurify.sanitize(note?.content ?? "", {
-    //     ADD_ATTR: ["style"],
-    // });
-
     const formats = [
         "header",
         "bold",
@@ -71,14 +61,10 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
     ];
 
     return (
-        <div
-        // className='overflow-hidden min-h-dvh lg:min-h-full'
-        >
-
+        <div>
             <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <GenerateForm
                 formType="notes"
-                // isPending={isPending}
                 retryAfter={0}
                 handleSubmit={handleSubmit} />
             <div className='my-10 relative w-full p-4 border border-primary 
@@ -97,16 +83,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                     className='btn bg-primary text-black font-bold border-none'
                                 >Save</button>
                             </div>
-                            {/* <p className='whitespace-pre-line'>{generatedNote?.text}</p> */}
-                            {/* <div className="markdown-body"> */}
-                            {/* <ReactMarkdown
-                                    remarkPlugins={[remarkMath, remarkGfm]}
-                                    rehypePlugins={[rehypeKatex]}
-                                >
-                                    {generatedNote?.text}
-                                </ReactMarkdown> */}
                             <article className="prose prose-lg max-w-none ">
-
                                 <ReactQuill
                                     value={note}
                                     readOnly
@@ -114,9 +91,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                     formats={formats}
                                     className=''
                                 />
-                                {/* <NoteViewer html={generatedNote?.text}/> */}
                             </article>
-                            {/* </div> */}
                         </div>
                 }
             </div>

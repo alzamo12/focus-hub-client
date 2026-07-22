@@ -1,10 +1,11 @@
 
-const ErrorHandler = () => {
+const ErrorHandler = ({ error }) => {
+    console.log('error handler', error)
     return (
         <div className="gap-4 flex items-center">
-            <span>Oh no, something went wrong!</span> <br />
+            <span>{error.message}</span> <br />
             <button
-                className="btn btn-primary text-red-600 border border-red-600"
+                className="btn btn-ghost text-red-600 border border-red-600"
                 onClick={() => window.location.reload()}>
                 Try again
             </button>

@@ -38,7 +38,14 @@ const ClassScheduleTracker = () => {
                 />
 
                 {/* show classes with proper parent component and suspense */}
-                <ErrorBoundary fallback={<ErrorHandler />}>
+                <ErrorBoundary
+                    fallbackRender={({ error, resetErrorBoundary }) => (
+                        <ErrorHandler
+                            error={error}
+                            resetErrorBoundary={resetErrorBoundary}
+                        />
+                    )}
+                >
                     <Suspense fallback={<LoadingSpinner />}>
                         <Classes
                             activeTab={activeTab}
@@ -49,17 +56,6 @@ const ClassScheduleTracker = () => {
                     </Suspense>
                 </ErrorBoundary>
             </div>
-            {/* <div className="join items-center justify-center mt-8 md:md-0">
-                <button
-                    onClick={() => { setPage(page - 1) }}
-                    disabled={page === 1}
-                    className="join-item btn">«</button>
-                <button className="join-item btn">{page} &nbsp; / &nbsp; {totalPage}</button>
-                <button
-                    onClick={() => { setPage(page + 1) }}
-                    disabled={page === totalPage}
-                    className="join-item btn">»</button>
-            </div> */}
             <Pagination
                 setPage={setPage}
                 page={page}

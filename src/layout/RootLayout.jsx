@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
 import DesktopNavbar from "../components/navbar/DesktopNavbar";
-import MobileNavbar from "../components/navbar/MobileNavbar";
 import DesktopSidebar from "../components/sidebar/DesktopSidebar";
-import MobileSidebar from "../components/sidebar/MobileSidebar";
 import useAuth from "../hooks/useAuth";
 import { ToastContainer } from 'react-toastify';
 

@@ -1,4 +1,5 @@
-import TaskCard from '../../features/Tasks/TaskCard';
+// import TaskCard from '../../features/Tasks/TaskCard';
+import TaskCard from "../../components/Tasks/TaskCard";
 import useSortedData from '../../hooks/useSortedData';
 
 const TasksGrid = ({ type, tasks, activeTab, handleDelete, handleEdit }) => {

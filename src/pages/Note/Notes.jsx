@@ -9,7 +9,6 @@ import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
 import useTittle from '../../hooks/useTittle';
 import axios from 'axios';
 import DOMPurify from "dompurify";
-
 import 'react-quill-new/dist/quill.snow.css';
 import NoteTab from '../../features/notes/NoteTab';
 import NoteCards from '../../features/notes/NoteCards';
@@ -17,18 +16,8 @@ import GenerateNote from '../../features/notes/GenerateNote';
 import { useRef } from 'react';
 import Pagination from '../../components/Pagination/Pagination';
 import { dataURLToFile } from '../../utils/dataURLToFile';
-// import NoteForm from "../../components/Forms/NoteForm"
 const NoteForm = React.lazy(() => import('../../components/Forms/NoteForm'));
 
-// function dataURLtoFile(dataurl, filename) {
-//     const arr = dataurl.split(",");
-//     const mime = arr[0].match(/:(.*?);/)[1];
-//     const bstr = atob(arr[1]);
-//     let n = bstr.length;
-//     const u8arr = new Uint8Array(n);
-//     while (n--) u8arr[n] = bstr.charCodeAt(n);
-//     return new File([u8arr], filename, { type: mime });
-// };
 const subjects = [
     { value: "Physics", label: "Physics" },
     { value: "Math", label: "Math" },
@@ -40,62 +29,68 @@ const Notes = () => {
     const [currentNote, setCurrentNote] = useState("");
     const [title, setTitle] = useState("");
     const noteRef = useRef(null);
-    // const [isEditing, setIsEditing] = useState(null);
     const [activeTab, setActiveTab] = useState("create_note");
     const [sub, setSub] = useState(null);
     const [selectedSub, setSelectedSub] = useState(null);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    // const [totalPages, setTotalPages] = useState(1);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
-    // const handleGenerateImageLink = useGenerateImageLink();
     const limit = 5;
     useTittle("Notes")
 
 
+    // add note in database
     const { mutateAsync: addNoteAsync } = useMutation({
         mutationFn: async (noteData) => {
             const res = await axiosSecure.post(`/notes`, noteData);
             return res.data
         }, onSuccess: (data) => {
-            toast.success("note added successfully")
+            if (data.success) {
+                toast.success("note added successfully")
+                queryClient.invalidateQueries({ queryKey: ['note'] })
+            }
             console.log(data)
-            queryClient.invalidateQueries({ queryKey: ['note'] })
         }, onError: (err) => {
             console.log(err)
+            const message = err.response.data.message || "Internal server error";
+            toast.error(message);
         }
     });
 
+    // delete note from db
     const { mutateAsync: deleteNoteAsync } = useMutation({
         mutationFn: async (id) => {
             const res = await axiosSecure.delete(`/notes/${id}`);
             return res.data
         },
         onSuccess: async (data) => {
+            if (data.success) {
+                toast.success("Note deleted Successfully");
+                queryClient.invalidateQueries({ queryKey: ['note'] })
+            }
             console.log(data);
-            toast.success("Note deleted Successfully");
-            queryClient.invalidateQueries({ queryKey: ['note'] })
         },
         onError: async (err) => {
             console.log(err);
-            toast.error("Couldn't delete note. Please try again later")
+            const message = err.response.data.message || 'Internal server error';
+            toast.error(message)
         }
     });
 
-    const { data: notes, isLoading, isPending } = useQuery({
+    // get notes
+    const { data: { notesData = {}, totalPages = 1 } = {}, isLoading, isPending } = useQuery({
         queryKey: ['note', user.email, selectedSub, page, limit],
         queryFn: async () => {
             const res = await axiosSecure.get(`/notes?email=${user?.email}&subject=${selectedSub?.value}&page=${page}&limit=${limit}`);
 
-            if (res.data.totalPages) {
-                setTotalPages(res.data.totalPages)
-            }
-
-            return res.data
+            // if (res.data.success) {
+            //     setTotalPages(res.data.data.totalPages)
+            // }
+            return res.data.data
         }
     });
-
 
     const handleSaveNote = async () => {
         const parser = new DOMParser();
@@ -194,14 +189,7 @@ const Notes = () => {
         setCurrentNote(delta);
         setActiveTab("create_note")
     };
-    // const { notesData, totalPages } = notes || {};
-
-    console.log('this is notes data', notes)
-
-    // if (isLoading || isPending) {
-    //     return <LoadingSpinner />
-    // }
-
+    console.log('this is notes data', notesData)
 
     return (
         <div className='max-w-screen-2xl overflow-y-hidden dark:text-white' >
@@ -234,7 +222,7 @@ const Notes = () => {
                                         subjects={subjects}
                                         selectedSub={selectedSub}
                                         setSelectedSub={setSelectedSub}
-                                        notes={notes?.notesData}
+                                        notes={notesData}
                                         handleEditNote={handleEditNote}
                                         handleDeleteNote={handleDeleteNote}
                                         isLoading={isLoading}

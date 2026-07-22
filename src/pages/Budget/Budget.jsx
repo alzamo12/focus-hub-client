@@ -26,20 +26,21 @@ const Budget = () => {
             return res.data
         },
         onSuccess: (data) => {
-            if (data.acknowledged) {
+            console.log(data)
+            if (data.success) {
                 toast.success("Budget added successfully")
-                console.log(data)
                 queryClient.invalidateQueries({ queryKey: ["budget"] })
             }
         },
         onError: async (err) => {
-            toast.error(err.message)
+            const message = err.response.data.message || 'Internal server error';
+            toast.error(message)
             console.log(err)
         }
     });
 
     // get budget of a specific month -- fetch budget
-    const { data: budget, isLoading: budgetLoading } = useQuery({
+    const { data: { data: budget = {} } = {}, isLoading: budgetLoading } = useQuery({
         queryKey: ['budget', month],
         queryFn: async () => {
             const res = await axiosSecure.get(`/budget?email=${user.email}&month=${month}`);
@@ -49,7 +50,7 @@ const Budget = () => {
     })
 
     // fetch expense
-    const { data: myExpenses, isLoading: expensesLoding } = useQuery({
+    const { data: { data: myExpenses = {} } = {}, isLoading: expensesLoding } = useQuery({
         queryKey: ["expense", budget?._id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/expenses?budgetId=${budget?._id}`);
@@ -63,21 +64,22 @@ const Budget = () => {
     // add expense
     const { mutateAsync: addExpensesAsync } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.post("/expense", data);
+            const res = await axiosSecure.post("/expenses", data);
             return res.data
         },
         onSuccess: (data) => {
-            if (data.acknowledged) {
+            if (data.success) {
                 toast.success("Expense added successfully");
                 queryClient.invalidateQueries({ queryKey: ["expense"] })
             }
             console.log(data)
+        },
+        onError: err => {
+            console.log(err)
+            const message = err.response.data.message;
+            toast.error(message)
         }
     });
-
-    // const addExpense = (newExpense) => {
-    //     setExpenses([...expenses, newExpense]);
-    // };
 
     const addExpense = (data) => {
         const newData = {
@@ -104,7 +106,7 @@ const Budget = () => {
 
     return (
         <div className="my-8">
-                <h2 className="font-bold dark:text-white text-center text-3xl">Plan Your Budget</h2>
+            <h2 className="font-bold dark:text-white text-center text-3xl">Plan Your Budget</h2>
             <div className="mx-auto my-12 space-y-6 flex flex-col md:flex-row justify-between">
 
                 <div className="w-full md:w-4/12">

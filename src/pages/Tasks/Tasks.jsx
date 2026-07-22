@@ -29,44 +29,21 @@ const Tasks = () => {
 
     return (
         <div className="w-full mx-auto bg-[--color-base-100] min-h-screen grid dark:text-white" >
-            {/* name of each tab group should be unique */}
-
             <div>
-                {/* <div className="flex gap-10">
-                    {/* next and prev classes tab /}
-                    <div className="tabs tabs-border mb-10">
-                        <input
-                            type="radio"
-                            name="my_tabs_2"
-                            checked={activeTab === "next"}
-                            onChange={() => handleActiveTab("next")}
-                            className="tab"
-                            aria-label="Next Classes" />
-                        <input
-                            type="radio"
-                            name="my_tabs_2"
-                            checked={activeTab === "prev"}
-                            onChange={() => handleActiveTab("prev")}
-                            className="tab"
-                            aria-label="Previous Classes"
-                        />
-                    </div>
-                    {/* make a view toggle button /}
-                    <select onChange={handlePageView} defaultValue="Flat" className="select">
-                        <option>Flat</option>
-                        <option>Group</option>
-                    </select>
-                </div> */}
                 <TabAndView
                     handleActiveTab={handleActiveTab}
                     handlePageView={handlePageView}
                     activeTab={activeTab}
                 />
-
-
-
                 {/* Class List */}
-                <ErrorBoundary fallback={<ErrorHandler />}>
+                <ErrorBoundary
+                    fallbackRender={({ error, resetErrorBoundary }) => (
+                        <ErrorHandler
+                            error={error}
+                            resetErrorBoundary={resetErrorBoundary}
+                        />
+                    )}
+                >
                     <Suspense fallback={<LoadingSpinner />} >
                         <TasksSuspense
                             setTotalPages={setTotalPages}
@@ -77,17 +54,6 @@ const Tasks = () => {
                     </Suspense>
                 </ErrorBoundary>
             </div>
-            {/* <div className="join items-center justify-center mt-8 md:md-0">
-                <button
-                    onClick={() => { setPage(page - 1) }}
-                    disabled={page === 1}
-                    className="join-item btn">«</button>
-                <button className="join-item btn">{page} &nbsp; / &nbsp; {totalPages}</button>
-                <button
-                    onClick={() => { setPage(page + 1) }}
-                    disabled={page === totalPages}
-                    className="join-item btn">»</button>
-            </div> */}
             <Pagination
                 setPage={setPage}
                 page={page}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LoadingSpinner from "../../components/Spinner/LoadingSpinner"
-import GenerateForm from '../../components/GenerateQuestions/GenerateForm';
+import GenerateForm from '../../components/Forms/GenerateForm';
 import { toast } from "react-toastify"
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -56,10 +56,12 @@ const GenerateQuestions = () => {
     const { data: questionsData, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.post(`/ai/generate-questions`, data);
-            return res.data
+            return res.data.data
         },
-        onSuccess: () => {
-            toast.success("Data get successfully");
+        onSuccess: (data) => {
+            if (data.success) {
+                toast.success("Data got successfully");
+            }
         },
         onError: (err) => {
             console.log(err)
@@ -82,7 +84,7 @@ const GenerateQuestions = () => {
         }
     });
 
-    const handleSubmit = ({subject, chapter, level, subTopic, type, language}) => {
+    const handleSubmit = ({ subject, chapter, level, subTopic, type, language }) => {
         // setLoading(true)
         const questionInfo = {
             subject: subject.value,
@@ -93,7 +95,7 @@ const GenerateQuestions = () => {
             language: language.value
         };
         // setQuestionInfo(questionInfo);
-// console.log(questionInfo)
+        // console.log(questionInfo)
         mutateAsync(questionInfo)
     };
     // console.log(questionInfo)

@@ -3,21 +3,6 @@ import TasksGrid from './TasksGrid';
 import useSortedData from '../../hooks/useSortedData';
 
 const GroupTaskUI = ({ type, tasks, handleDelete, handleEdit, activeTab }) => {
-    // const sortedData = [...tasks].sort(
-    //     (a, b) => new Date(a.startTime) - new Date(b.startTime)
-    // );
-    // const sortedData = [...tasks].sort((a, b) => {
-    //     const dateA = new Date(a.startTime);
-    //     const dateB = new Date(b.startTime);
-
-    //     if (type.toLowerCase() === "next") {
-    //         return dateA - dateB; // ascending
-    //     } else if (type.toLowerCase() === "prev") {
-    //         return dateB - dateA; // descending
-    //     } else {
-    //         return 0; // no change if type is unknown
-    //     }
-    // });
     const sortedData = useSortedData({ tasks, type });
     console.log(sortedData)
     return (

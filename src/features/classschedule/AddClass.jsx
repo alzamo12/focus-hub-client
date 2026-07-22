@@ -3,7 +3,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import Timekeeper from "react-timekeeper";
 import { toast } from 'react-toastify';
-import AddClassForm from '../../components/Class/AddClassForm';
+import AddClassForm from '../../components/Forms/AddClassForm';
 import combineDateTime from '../../utils/combineDateTime';
 
 const Days = ["monday", "tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -22,10 +22,10 @@ const AddClass = () => {
             return res.data;
         },
         onSuccess: (result) => {
-            queryClient.invalidateQueries(["classes"]);
             console.log(result)
-            if (result?.acknowledged) {
+            if (result.success) {
                 toast.success('Your data has inserted successfully')
+                queryClient.invalidateQueries(["classes"]);
             }
         },
         onError: (err) => {
@@ -40,11 +40,9 @@ const AddClass = () => {
         register,
         handleSubmit,
         control,
-        // formState: { errors },
     } = useForm({
-        // resolver: zodResolver(classSchema),
         defaultValues: {
-            instructor: "Zakir"
+            // instructor: "Zakir"
         },
     });
 
@@ -60,15 +58,6 @@ const AddClass = () => {
         { value: "economics", label: "Economics" },
         { value: "geography", label: "Geography" }
     ];
-    // const days = [
-    //     { value: "monday", label: "Monday" },
-    //     { value: "tuesday", label: "Tuesday" },
-    //     { value: "wednesday", label: "Wednesday" },
-    //     { value: "thursday", label: "Thursday" },
-    //     { value: "friday", label: "Friday" },
-    //     { value: "saturday", label: "Saturday" },
-    //     { value: "sunday", label: "Sunday" }
-    // ];
 
     const onSubmit = (data) => {
 
@@ -76,10 +65,8 @@ const AddClass = () => {
             ...data,
             startTime: combineDateTime(data.date, data.startTime),
             endTime: combineDateTime(data.date, data.endTime)
-        }
-        // console.log(data)
+        };
         mutateAsync(updatedData);
-        // console.log(data)
     };
     return (
         <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">
@@ -92,7 +79,7 @@ const AddClass = () => {
                 control={control}
                 subjects={subjects}
                 buttonText="Add Class"
-                />
+            />
         </div>
     );
 };

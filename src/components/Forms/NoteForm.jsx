@@ -63,44 +63,9 @@ function MobileToolbar() {
     );
 }
 const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, handleNote, btnText }) => {
-
     const customStyles = useInputStyles();
-    // const isMobile = window.innerWidth < 768;
     const quillRef = useRef(null);
 
-    // const modules = {
-    //     toolbar: {
-    //         container: [
-    //             [{ header: [1, 2, 3, false] }],
-    //             ["bold", "italic", "underline", "strike"],
-    //             [{ color: [] }, { background: [] }], // <-- Add this line for color
-    //             [{ list: "ordered" }, { list: "bullet" }],
-    //             ["link", "image"],
-    //             ["table"],
-
-    //             // ["increaseImageSize", "decreaseImageSize"],
-    //             ["clean"],
-    //         ],
-    //         handlers: {
-    //             table() {
-    //                 this.quill.getModule("table").insertTable(3, 3);
-    //             },
-    //         },
-    //     },
-    //     table: true,
-    //     // imageResize: {
-    //     //     parchment: Quill.import("parchment"),
-    //     //     modules: ["Resize", "DisplaySize"], // "Toolbar" not supported in v2
-    //     //     handleStyle: {
-    //     //         border: "2px solid #4A90E2",
-    //     //         width: "12px",
-    //     //         height: "12px",
-    //     //         backgroundColor: "white",
-    //     //         borderRadius: "50%",
-    //     //     },
-    //     // },
-
-    // };
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [showTableMenu, setShowTableMenu] = useState(false);
     useEffect(() => {
@@ -177,7 +142,6 @@ const NoteForm = ({ currentNote, setCurrentNote, title, setTitle, sub, setSub, h
             },
         },
         table: true,
-        // imageResize: { ... }
     };
 
     const formats = [

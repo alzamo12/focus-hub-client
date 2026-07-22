@@ -12,17 +12,16 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     const queryClient = useQueryClient();
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const limit = 5;
-    // const timezone = "Nothing";
 
     // Fetch user all Classes
     const { data: classesData } = useQuery({
         queryKey: ["classes", user?.email, activeTab, pageView, page, limit],
         queryFn: async () => {
             const res = await axiosSecure.get(`/classes?email=${user?.email}&type=${activeTab}&view=${pageView}&timezone=${timezone}&page=${page}&limit=${limit}`);
-            if (res.data.totalPages) {
-                setTotalPage(res.data.totalPages);
+            if (res.data.success) {
+                setTotalPage(res.data.data.totalPages);
             };
-            return res.data;
+            return res.data
         },
         suspense: true,
         refetchOnWindowFocus: false,
@@ -30,7 +29,7 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     });
     // console.log(error)
 
-    const { classes = [], view = '', type } = classesData || {};
+    const { classes = [], view = '', type } = classesData?.data || {};
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
@@ -38,7 +37,7 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
             return res.data
         },
         onSuccess: (data) => {
-            if (data.deletedCount > 0) {
+            if (data.success) {
                 toast.success('your class has deleted successfully');
                 queryClient.invalidateQueries(['classes'])
             }
@@ -94,7 +93,7 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
                 break;
             default:
                 content = (
-                    <div>Invalid View</div>
+                    <div className=''>Invalid View</div>
                 );
         }
     } else {

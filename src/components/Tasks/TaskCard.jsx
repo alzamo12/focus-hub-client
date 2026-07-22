@@ -1,45 +1,14 @@
 import { format } from 'date-fns';
-import EditClass from '../../features/classschedule/EditClass';
 import { formatTime } from '../../utils/formatTime';
-import EditTask from './EditTask';
 import SidebarButton from '../../components/buttons/SidebarModelOpenButton/SidebarButton';
 import { NotebookPen } from 'lucide-react';
+import EditTask from '../../features/Tasks/EditTask';
 
 const TaskCard = ({ task, handleDelete }) => {
     const startTime = formatTime(task?.startTime);
     const endTime = formatTime(task?.endTime);
     return (
-        // <div>
-        //     <div
-        //         key={task._id}
-        //         className="p-4 rounded-xl flex justify-between items-center shadow-2xl bg-primary"
-        //     >
-        //         <div>
-        //             <h3 className="font-bold text-lg text-[--color-primary]">{task.subject}</h3>
-        //             <p className="text-[--color-accent]">{format(task?.date, 'MM/dd/yyyy')} | {startTime} - {endTime}</p>
-        //             <p className="text-sm text-[--color-accent]">Instructor: {task.instructor}</p>
-        //         </div>
-        //         <div className="flex flex-col  gap-2">
-        //             <button
-        //                 onClick={() => handleDelete(task._id)}
-        //                 className="btn btn-sm bg-red-500 text-white hover:bg-red-600">Delete</button>
-
-        //             <button
-        //                 onClick={() => handleEdit(task._id)}
-        //                 className="btn btn-sm bg-red-500 text-white hover:bg-red-600">Edit</button>
-        //         </div>
-        //     </div>
-
-        //     {/* Edit Class Modal */}
-        //     <dialog id={`my_module_${task._id}`} className="modal">
-        //         <div className="modal-box max-w-4xl mx-auto">
-        //             <EditTask task={task} />
-        //         </div>
-        //         <form method="dialog" className="modal-backdrop">
-        //             <button>close</button>
-        //         </form>
-        //     </dialog>
-        // </div>
+    
         <div className=''>
             <div
                 key={task._id}
@@ -58,15 +27,6 @@ const TaskCard = ({ task, handleDelete }) => {
                     <h3 className="font-bold text-base md:text-lg text-[--color-primary]"><u>Sub:</u> {task?.subject}</h3>
                     <p className="text-sm text-[--color-accent]">{format(task?.date, 'MM/dd/yyyy')} | {startTime} - {endTime}</p>
                     <div className="badge badge-soft badge-info mt-2 dark:text-primary">{task.level}</div>
-
-                    {/* <div className='flex gap-10 space-y-1 lg:w-3/5 justify-between mt-2'>
-                        <div className="badge badge-soft badge-info">{task.level}</div>
-                        <button
-                            className='cursor-pointer'
-                            onClick={() => document.getElementById(`my_task_description_${task._id}`).showModal()}
-                        ><NotebookPen width={20} height={25} />
-                        </button> */}
-                    {/* </div> */}
                 </div>
                 <div className="flex justify-between w-full lg:w-auto mt-4 lg:mt-0 flex-row lg:flex-col gap-2">
                     <button
@@ -86,7 +46,6 @@ const TaskCard = ({ task, handleDelete }) => {
             <dialog id={`my_task_${task._id}`} className="modal">
                 <div className="modal-box max-w-4xl mx-auto p-0">
                     {/*  */}
-                    {/* <EditClass activeTab={activeTab} cls={task} /> */}
                     <EditTask task={task} />
                 </div>
                 <form method="dialog" className="modal-backdrop">

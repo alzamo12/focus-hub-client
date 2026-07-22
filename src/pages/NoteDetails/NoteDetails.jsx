@@ -15,7 +15,7 @@ const NoteDetails = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const { data: note, isLoading } = useQuery({
+    const { data: { data: note = {} } = {}, isLoading } = useQuery({
         queryKey: ['noteDetails', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/notes/${id}`);
@@ -29,14 +29,16 @@ const NoteDetails = () => {
             return res.data
         },
         onSuccess: async (data) => {
+            if (data.success) {
+                toast.success("Note deleted Successfully");
+                queryClient.invalidateQueries({ queryKey: ['note'] })
+                navigate("/notes")
+            }
             console.log(data);
-            toast.success("Note deleted Successfully");
-            queryClient.invalidateQueries({ queryKey: ['note'] })
-            navigate("/notes")
         },
         onError: async (err) => {
             console.log(err);
-            toast.error("Couldn't delete note. Please try again later")
+            toast.error(err.message)
         }
     });
 
@@ -59,7 +61,6 @@ const NoteDetails = () => {
 
     if (isLoading) return <LoadingSpinner />
 
-    // const cleanNoteContent = DOMPurify.sanitize(note?.content);
     const cleanNoteContent = DOMPurify.sanitize(note?.content ?? "", {
         ADD_ATTR: ["style"],
     });
@@ -95,7 +96,7 @@ const NoteDetails = () => {
                 value={cleanNoteContent}
                 readOnly
                 theme="bubble"
-                // className='dark:b'
+            // className='dark:b'
             />
             {/* <NoteViewer html={cleanNoteContent}/> */}
             <p className="text-gray-400 text-sm">

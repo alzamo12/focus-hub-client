@@ -7,15 +7,19 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import LoadingSpinner from '../../components/Spinner/LoadingSpinner';
 import '../../css/calendar.css'
+import { useState } from 'react';
 const Dashboard = () => {
     // State Management
     const axiosSecure = useAxiosSecure();
+    const [currentDate, setCurrentDate] = useState(new Date());
+
     // Fake Backend API Base URL
 
-    const { data: { classes = [], tasks = [] } = {}, isLoading } = useQuery({
-        queryKey: ['dashboardData'],
+    const { data: { data: { classes = [], tasks = [] } = {} } = {}, isLoading } = useQuery({
+        queryKey: ['dashboardData', "calendar-events", currentDate.getFullYear(), currentDate.getMonth()],
         queryFn: async () => {
-            const result = await axiosSecure.get('/dashboard');
+            const result = await axiosSecure.get(`/dashboard?year=${currentDate.getFullYear()}&month=${currentDate.getMonth() + 1}`);
+            console.log(result)
             return result.data;
         }
     });
@@ -42,28 +46,6 @@ const Dashboard = () => {
         }
     }));
 
-    const handleDateClick = () => {
-        alert("Date has clicked")
-    };
-
-    const renderEventContent = (eventInfo) => {
-        <>
-            <dialog id="my_modal_1" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">{eventInfo?.title}</h3>
-                    <p className="py-4">{eventInfo.start}</p>
-                    <p className="py-4">{eventInfo.end}</p>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
-        </>
-    }
-
     const events = [...classEvents, ...taskEvents];
 
     console.log(isLoading, classes, tasks);
@@ -84,6 +66,11 @@ const Dashboard = () => {
                 events={events}
                 // contentHeight="auto"
                 contentHeight="auto"
+                initialDate={currentDate}
+
+                datesSet={(info) => {
+                    setCurrentDate(info.view.currentStart);
+                }}
             />
         </div>
     );
