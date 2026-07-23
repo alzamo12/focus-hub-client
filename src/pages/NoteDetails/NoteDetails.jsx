@@ -34,7 +34,7 @@ const NoteDetails = () => {
                 queryClient.invalidateQueries({ queryKey: ['note'] })
                 navigate("/dashboard/notes")
             }
-            console.log(data);
+            // console.log(data);
         },
         onError: async (err) => {
             console.log(err);
@@ -64,7 +64,7 @@ const NoteDetails = () => {
     const cleanNoteContent = DOMPurify.sanitize(note?.content ?? "", {
         ADD_ATTR: ["style"],
     });
-    console.log('clean', cleanNoteContent, 'not-clean', note.content)
+    // console.log('clean', cleanNoteContent, 'not-clean', note.content)
 
     return (
         <div

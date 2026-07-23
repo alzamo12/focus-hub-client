@@ -9,22 +9,87 @@ import NoteViewer from '../../components/NoteViewer/NoteViewer';
 import "react-quill-new/dist/quill.bubble.css";
 import { useState } from 'react';
 import DOMPurify from "dompurify";
+import { useEffect } from 'react';
+import { useRef } from 'react';
+import { toast } from 'react-toastify';
 
 const GenerateNote = ({ handleGeneratedSaveNote }) => {
     const axiosSecure = useAxiosSecure();
+    const hasRestoredRef = useRef(false);
     const [note, setNote] = useState(null);
+    const [retryAfter, setRetryAfter] = useState(0);
+    // step-1: update retryAfter state on every second
+    useEffect(() => {
+        if (retryAfter <= 0) return;
+        const interval = setInterval(() => {
+            setRetryAfter((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval)
+                    return 0
+                };
+                return prev - 1
+            })
+        }, 1000)
+        return () => clearInterval(interval);
+    }, [retryAfter]);
 
+    useEffect(() => {
+        // return on first render
+        if (!hasRestoredRef.current) return;
+
+        if (retryAfter > 0) {
+            localStorage.setItem(
+                "ai_retry_until",
+                Date.now() + retryAfter * 1000
+            );
+        } else {
+            localStorage.removeItem("ai_retry_until");
+        }
+    }, [retryAfter]);
+
+    // step-3: on first mount get the retry after value from LS
+    useEffect(() => {
+        const retryUntil = localStorage.getItem("ai_retry_until");
+        if (retryUntil) {
+            const diff = Math.ceil((retryUntil - Date.now()) / 1000);
+            if (diff > 0) setRetryAfter(diff);
+        }
+        hasRestoredRef.current = true;
+    }, []);
 
     const { data: generatedNote, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.post("/ai/generate-notes", data);
-            const clean = res?.data?.data
+
+            return res.data
+        },
+        onSuccess: (data) => {
+            const clean = data.data
                 .replace(/^```json\s*/i, "")
                 .replace(/\s*```$/, "");
 
             const delta = JSON.parse(clean);
-            setNote(delta)
-            return res.data
+            setNote(delta);
+            setRetryAfter(30)
+        },
+        onError: (err) => {
+            console.log(err)
+            const status = err?.response?.status;
+            switch (status) {
+                case 503:
+                    toast.error(err.response?.data?.message);
+                    break;
+                case 429: {
+                    // const retryAfter = err.response.data.retryAfter;
+                    const { message, retryAfter } = err.response.data;
+                    setRetryAfter(retryAfter);
+                    // console.log(message)
+                    toast.error(message)
+                    break
+                }
+                default:
+                    toast.error("Please try again later")
+            }
         }
     });
 
@@ -65,7 +130,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
             <h2 className="card-title relative mt-4 md:mt-0 text-2xl flex items-center justify-center font-bold">Generate questions</h2>
             <GenerateForm
                 formType="notes"
-                retryAfter={0}
+                retryAfter={retryAfter}
                 handleSubmit={handleSubmit} />
             <div className='my-10 relative w-full p-4 border border-primary 
             rounded-lg min-h-50 bg-white  shadow-lg'>
@@ -79,7 +144,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                             <div className='flex justify-between'>
                                 <h2 className="card-title font-bold mb-4 text-black ">Here is the answer:</h2>
                                 <button
-                                    onClick={() => handleGeneratedSaveNote(generatedNote?.text)}
+                                    onClick={() => handleGeneratedSaveNote(generatedNote?.data)}
                                     className='btn bg-primary text-black font-bold border-none'
                                 >Save</button>
                             </div>
@@ -89,7 +154,7 @@ const GenerateNote = ({ handleGeneratedSaveNote }) => {
                                     readOnly
                                     theme="bubble"
                                     formats={formats}
-                                    className=''
+                                    className='dark:text-black'
                                 />
                             </article>
                         </div>

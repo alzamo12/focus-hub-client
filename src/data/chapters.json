@@ -380,5 +380,377 @@
             "value": "boishwikoBongladesh",
             "label": "বৈশ্বিকায়ন ও বাংলাদেশ"
         }
+    ],
+    "accounting": [
+        {
+            "label": "Introduction to Accounting",
+            "value": "introductionToAccounting"
+        },
+        {
+            "label": "Transaction",
+            "value": "transaction"
+        },
+        {
+            "label": "Double Entry System",
+            "value": "doubleEntrySystem"
+        },
+        {
+            "label": "Capital and Revenue Transaction",
+            "value": "capitalAndRevenueTransaction"
+        },
+        {
+            "label": "Accounts",
+            "value": "accounts"
+        },
+        {
+            "label": "Journal",
+            "value": "journal"
+        },
+        {
+            "label": "Ledger",
+            "value": "ledger"
+        },
+        {
+            "label": "Cash Book",
+            "value": "cashBook"
+        },
+        {
+            "label": "Trial Balance",
+            "value": "trialBalance"
+        },
+        {
+            "label": "Financial Statements",
+            "value": "financialStatements"
+        },
+        {
+            "label": "Purchase Price of Products, Product Costs and Selling Price",
+            "value": "purchasePriceProductCostsSellingPrice"
+        },
+        {
+            "label": "Account of Family and Self Employment Initiative",
+            "value": "accountOfFamilyAndSelfEmploymentInitiative"
+        }
+    ],
+    "financeAndBanking": [
+        {
+            "value": "financeAndBusinessFinance",
+            "label": "Finance and Business Finance"
+        },
+        {
+            "value": "sourcesOfFinance",
+            "label": "Sources of Finance"
+        },
+        {
+            "value": "shareBondAndDebenture",
+            "label": "Share, Bond and Debenture"
+        },
+        {
+            "value": "timeValueOfMoney",
+            "label": "Time Value of Money"
+        },
+        {
+            "value": "riskAndUncertainty",
+            "label": "Risk and Uncertainty"
+        },
+        {
+            "value": "capitalBudgeting",
+            "label": "Capital Budgeting"
+        },
+        {
+            "value": "costOfCapital",
+            "label": "Cost of Capital"
+        },
+        {
+            "value": "currencyBankAndBanking",
+            "label": "Currency, Bank and Banking"
+        },
+        {
+            "value": "bankingBusinessAndTypes",
+            "label": "Banking Business and Types"
+        },
+        {
+            "value": "commercialBanks",
+            "label": "Commercial Banks"
+        },
+        {
+            "value": "bankDeposit",
+            "label": "Bank Deposit"
+        },
+        {
+            "value": "bankAndClient",
+            "label": "Bank and Client"
+        },
+        {
+            "value": "centralBank",
+            "label": "Central Bank"
+        }
+    ],
+    "businessEntrepreneurship": [
+        {
+            "value": "introductionToBusiness",
+            "label": "Introduction to Business"
+        },
+        {
+            "value": "businessEntrepreneurshipAndEntrepreneur",
+            "label": "Business Entrepreneurship and Entrepreneur"
+        },
+        {
+            "value": "selfEmployment",
+            "label": "Self-employment"
+        },
+        {
+            "value": "businessBasedOnOwnership",
+            "label": "Business Based on Ownership"
+        },
+        {
+            "value": "legalAspectsOfBusiness",
+            "label": "Legal Aspects of Business"
+        },
+        {
+            "value": "businessPlan",
+            "label": "Business Plan"
+        },
+        {
+            "value": "industriesOfBangladesh",
+            "label": "Industries of Bangladesh"
+        },
+        {
+            "value": "managementOfBusinessOrganization",
+            "label": "Management of Business Organization"
+        },
+        {
+            "value": "marketing",
+            "label": "Marketing"
+        },
+        {
+            "value": "assistanceForEntrepreneurshipDevelopment",
+            "label": "Assistance for Entrepreneurship Development"
+        },
+        {
+            "value": "ethicsAndSocialResponsibilitiesInBusiness",
+            "label": "Ethics and Social Responsibilities in Business"
+        },
+        {
+            "value": "lessonsFromSuccessfulEntrepreneurs",
+            "label": "Lessons to learn from the Lives of Successful Entrepreneurs"
+        }
+    ],
+    "science": [
+        {
+            "value": "healthyLifeBetterLiving",
+            "label": "Healthy Life, Better Living"
+        },
+        {
+            "value": "waterForLife",
+            "label": "Water for Life"
+        },
+        {
+            "value": "allAboutHeartAndOthers",
+            "label": "All about Heart and others"
+        },
+        {
+            "value": "startingANewLife",
+            "label": "Starting a New Life"
+        },
+        {
+            "value": "lightForSight",
+            "label": "Light for Sight"
+        },
+        {
+            "value": "polymer",
+            "label": "Polymer"
+        },
+        {
+            "value": "useOfAcidBaseAndSalt",
+            "label": "Use of Acid, Base and Salt"
+        },
+        {
+            "value": "ourResources",
+            "label": "Our Resources"
+        },
+        {
+            "value": "livingWithDisaster",
+            "label": "Living with Disaster"
+        },
+        {
+            "value": "letUsKnowForce",
+            "label": "Let Us Know Force"
+        },
+        {
+            "value": "electricityInDailyLife",
+            "label": "Electricity in Daily Life"
+        }
+    ],
+    "ict": [
+        {
+            "value": "informationAndCommunicationTechnologyAndOurBangladesh",
+            "label": "Information and Communication Technology and Our Bangladesh"
+        },
+        {
+            "value": "computerMaintenanceAndCyberSecurity",
+            "label": "Computer Maintenance and Cyber Security"
+        },
+        {
+            "value": "internetAndIntroductionToWeb",
+            "label": "Internet and Introduction to Web"
+        },
+        {
+            "value": "myWritingsAndAccounts",
+            "label": "My Writings and Accounts"
+        },
+        {
+            "value": "multimediaAndGraphics",
+            "label": "Multimedia and Graphics"
+        },
+        {
+            "value": "problemSolvingThroughProgramming",
+            "label": "Problem Solving through Programming"
+        }
+    ],
+    "economics": [
+        {
+            "value": "introductionToEconomics",
+            "label": "Introduction to Economics"
+        },
+        {
+            "value": "theImportantIdeasOfEconomics",
+            "label": "The Important Ideas of Economics"
+        },
+        {
+            "value": "utilityDemandSupplyAndEquilibrium",
+            "label": "Utility, Demand, Supply, and Equilibrium"
+        },
+        {
+            "value": "productionAndOrganization",
+            "label": "Production and Organization"
+        },
+        {
+            "value": "market",
+            "label": "Market"
+        },
+        {
+            "value": "nationalIncomeAndItsMeasurement",
+            "label": "National Income and Its Measurement"
+        },
+        {
+            "value": "moneyAndBankingSystem",
+            "label": "Money and Banking System"
+        },
+        {
+            "value": "theEconomyOfBangladesh",
+            "label": "The Economy of Bangladesh"
+        },
+        {
+            "value": "importantEconomicIssuesInBangladesh",
+            "label": "Important Economic Issues in Bangladesh"
+        },
+        {
+            "value": "thePublicFinanceOfBangladeshGovernment",
+            "label": "The Public Finance of Bangladesh Government"
+        }
+    ],
+    "agriculture": [
+        {
+            "value": "agriculturalTechnology",
+            "label": "Agricultural Technology"
+        },
+        {
+            "value": "agriculturalInputs",
+            "label": "Agricultural Inputs"
+        },
+        {
+            "value": "agricultureAndClimate",
+            "label": "Agriculture and Climate"
+        },
+        {
+            "value": "agriculturalProduction",
+            "label": "Agricultural Production"
+        },
+        {
+            "value": "afforestation",
+            "label": "Afforestation"
+        },
+        {
+            "value": "agriculturalCooperatives",
+            "label": "Agricultural Co-operatives"
+        },
+        {
+            "value": "householdFarming",
+            "label": "Household Farming"
+        }
+    ],
+    "homeScience": [
+        {
+            "value": "homeManagement",
+            "label": "Home Management"
+        },
+        {
+            "value": "homeManager",
+            "label": "Home Manager"
+        },
+        {
+            "value": "homeResource",
+            "label": "Home Resource"
+        },
+        {
+            "value": "homeResourceManagement",
+            "label": "Home Resource Management"
+        },
+        {
+            "value": "interiorDecorationOfHome",
+            "label": "Interior Decoration of Home"
+        },
+        {
+            "value": "growthAndDevelopmentOfChild",
+            "label": "Growth and Development of Child"
+        },
+        {
+            "value": "childDevelopmentAndFamilyEnvironment",
+            "label": "Child Development & Family Environment"
+        },
+        {
+            "value": "psychoSocialProblemsOfAdolescence",
+            "label": "Psycho-Social Problems of Adolescence- Remedies and Prevention"
+        },
+        {
+            "value": "retardedChild",
+            "label": "Retarded Child"
+        },
+        {
+            "value": "functionsOfFoodAndNutrients",
+            "label": "Functions of Food and Nutrients"
+        },
+        {
+            "value": "digestionOfFoodsAndPlanningOfMeals",
+            "label": "Digestion of Foods and Planning of Meals"
+        },
+        {
+            "value": "disciplinedLifestyleAndMealPlanning",
+            "label": "Disciplined Lifestyle and Meal Planning"
+        },
+        {
+            "value": "preparingAndServingOfFood",
+            "label": "Preparing and Serving of Food"
+        },
+        {
+            "value": "textileFibres",
+            "label": "Textile Fibres"
+        },
+        {
+            "value": "artElementsAndArtPrinciplesOfTextile",
+            "label": "Art Elements and Art Principles of Textile"
+        },
+        {
+            "value": "printingAndColouringInClothing",
+            "label": "Printing and Colouring in Clothing"
+        },
+        {
+            "value": "drafting",
+            "label": "Drafting"
+        },
+        {
+            "value": "clothingCareAndTidinessInClothing",
+            "label": "Clothing Care & Tidiness in Clothing"
+        }
     ]
 }

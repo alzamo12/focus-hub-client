@@ -12,7 +12,7 @@ const GenerateQuestions = () => {
     const [retryAfter, setRetryAfter] = useState(0);
     const hasRestoredRef = useRef(false);
     useTittle("Generate Questions")
-
+    // console.log(retryAfter)
     // step-1: update retryAfter state on every second
     useEffect(() => {
         if (retryAfter <= 0) return;
@@ -56,11 +56,12 @@ const GenerateQuestions = () => {
     const { data: questionsData, mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.post(`/ai/generate-questions`, data);
-            return res.data.data
+            return res.data
         },
         onSuccess: (data) => {
             if (data.success) {
                 toast.success("Data got successfully");
+                setRetryAfter(30)
             }
         },
         onError: (err) => {
@@ -74,7 +75,7 @@ const GenerateQuestions = () => {
                     // const retryAfter = err.response.data.retryAfter;
                     const { message, retryAfter } = err.response.data;
                     setRetryAfter(retryAfter);
-                    console.log(message)
+                    // console.log(message)
                     toast.error(message)
                     break
                 }
@@ -118,7 +119,7 @@ const GenerateQuestions = () => {
                         :
                         <div>
                             <h2 className="card-title font-bold mb-4 ">Here is the answer:</h2>
-                            <p className='whitespace-pre-line '>{questionsData}</p>
+                            <p className='whitespace-pre-line '>{questionsData?.data}</p>
                         </div>
                 }
             </div>

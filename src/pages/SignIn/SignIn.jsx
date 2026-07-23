@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 import useTittle from "../../hooks/useTittle";
-
+import { toast } from "react-toastify"
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { signIn } = useAuth();
@@ -18,10 +18,15 @@ const SignIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        // console.log(email, password)
         signIn(email, password)
             .then(() => {
+                // toast.success('User logged in Successfully')
                 navigate(from, { state: { from: "login" } })
+
+            })
+            .catch((err) => {
+                toast.error(err.message || 'Please try again later')
             })
     };
 

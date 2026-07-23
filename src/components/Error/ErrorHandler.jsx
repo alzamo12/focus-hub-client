@@ -1,6 +1,6 @@
 
 const ErrorHandler = ({ error }) => {
-    console.log('error handler', error)
+    // console.log('error handler', error)
     return (
         <div className="gap-4 flex items-center">
             <span>{error.message}</span> <br />

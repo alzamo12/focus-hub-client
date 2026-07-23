@@ -48,7 +48,7 @@ const EditClass = ({ cls, activeTab }) => {
             return res?.data
         },
         onSuccess: async (data) => {
-            console.log(data)
+            // console.log(data)
             if (data.success) {
                 toast.success("class updated successfully");
                 queryClient.invalidateQueries(["classes", user?.email, activeTab])

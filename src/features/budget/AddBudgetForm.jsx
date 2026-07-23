@@ -18,10 +18,12 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
         const form = e.target;
         const amount = form.amount.value;
         const month = form.month.value;
+        // console.log(amount, month)
         const data = {
             amount: parseInt(amount),
             month,
         };
+        // console.log(amount)
         handleAddBudget(data)
         setFormData({ name: "", amount: "", category: "" }); // reset form
     };
@@ -40,8 +42,10 @@ const AddBudgetForm = ({ handleAddBudget, month }) => {
                     defaultValue={month}
                     onChange={handleChange}
                     required
+                    readOnly
                     className="w-full p-2 rounded input-style"
-                    style={{ colorScheme: "light dark" }} />
+                    // style={{ colorScheme: "light dark" }}
+                     />
                 <Calendar className="absolute right-2 top-2" />
             </div>
 

@@ -1,11 +1,12 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
-
+import { getAuth } from "firebase/auth";
+import app from "../services/firebase/firebase.config";
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000/api",
+    // baseURL: "http://localhost:5000/api",
     // baseURL: "https://focus-hub-server.onrender.com/",
-    // baseURL: "https://focus-hub-server.vercel.app/api"
+    baseURL: "https://focus-hub-server.vercel.app/api"
 })
 const useAxiosSecure = () => {
     const { user, logout, isLoading } = useAuth();
@@ -17,9 +18,15 @@ const useAxiosSecure = () => {
     // console.log('secure axios', user.email)
     // add a request interceptors
     axiosSecure.interceptors.request.use(
-        function (config) {
-            const accessToken = user?.accessToken;
-            config.headers.authorization = `Bearer ${accessToken}`
+        async function (config) {
+            const auth = getAuth(app);
+            const currentUser = auth.currentUser;
+
+            if (currentUser) {
+                const token = await currentUser.getIdToken();
+                config.headers.authorization = `Bearer ${token}`
+            }
+            // const accessToken = user?.accessToken;
             return config;
         },
         function (error) {

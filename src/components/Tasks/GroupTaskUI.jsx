@@ -4,7 +4,7 @@ import useSortedData from '../../hooks/useSortedData';
 
 const GroupTaskUI = ({ type, tasks, handleDelete, handleEdit, activeTab }) => {
     const sortedData = useSortedData({ tasks, type });
-    console.log(sortedData)
+    // console.log(sortedData)
     return (
         <div>
             {sortedData?.map((day) => (

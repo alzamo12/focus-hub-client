@@ -26,7 +26,7 @@ const Budget = () => {
             return res.data
         },
         onSuccess: (data) => {
-            console.log(data)
+            // console.log(data)
             if (data.success) {
                 toast.success("Budget added successfully")
                 queryClient.invalidateQueries({ queryKey: ["budget"] })
@@ -44,7 +44,7 @@ const Budget = () => {
         queryKey: ['budget', month],
         queryFn: async () => {
             const res = await axiosSecure.get(`/budget?email=${user.email}&month=${month}`);
-            console.log('this is budget', res.data)
+            // console.log('this is budget', res.data)
             return res.data
         }
     })
@@ -54,7 +54,7 @@ const Budget = () => {
         queryKey: ["expense", budget?._id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/expenses?budgetId=${budget?._id}`);
-            console.log('your expenses', res.data)
+            // console.log('your expenses', res.data)
             return res.data
         },
         refetchOnWindowFocus: false,
@@ -72,7 +72,7 @@ const Budget = () => {
                 toast.success("Expense added successfully");
                 queryClient.invalidateQueries({ queryKey: ["expense"] })
             }
-            console.log(data)
+            // console.log(data)
         },
         onError: err => {
             console.log(err)
@@ -92,14 +92,16 @@ const Budget = () => {
     };
 
     const handleAddBudget = (data) => {
-        const { amount, ...rest } = data
+        const { amount, month } = data;
         const newData = {
-            ...rest,
-            amount: amount + parseInt(budget?.amount),
+            month,
+            amount: amount + parseInt(budget?.amount ? budget.amount : 0),
             userEmail: user?.email
         };
+        // console.log(newData, budget?.amount)
         addBudgetAsync(newData)
     };
+    // console.log('budget email', user?.email)
 
 
     if (expensesLoding || budgetLoading) {

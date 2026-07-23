@@ -22,7 +22,7 @@ const AddClass = () => {
             return res.data;
         },
         onSuccess: (result) => {
-            console.log(result)
+            // console.log(result)
             if (result.success) {
                 toast.success('Your data has inserted successfully')
                 queryClient.invalidateQueries(["classes"]);
@@ -46,18 +46,7 @@ const AddClass = () => {
         },
     });
 
-    const subjects = [
-        { value: "math", label: "Math" },
-        { value: "english", label: "English" },
-        { value: "bangla", label: "Bangla" },
-        { value: "physics", label: "Physics" },
-        { value: "chemistry", label: "Chemistry" },
-        { value: "biology", label: "Biology" },
-        { value: "ict", label: "ICT" },
-        { value: "religion", label: "Religion" },
-        { value: "economics", label: "Economics" },
-        { value: "geography", label: "Geography" }
-    ];
+
 
     const onSubmit = (data) => {
 
@@ -77,7 +66,7 @@ const AddClass = () => {
                 onSubmit={onSubmit}
                 register={register}
                 control={control}
-                subjects={subjects}
+                // subjects={subjects}
                 buttonText="Add Class"
             />
         </div>

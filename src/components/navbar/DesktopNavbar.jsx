@@ -8,6 +8,7 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
     const { toggleTheme, theme } = useTheme();
     // console.log(user)
     const handleLogout = () => {
+        // console.log("logou")
         logout();
     }
     return (
@@ -49,9 +50,7 @@ const DesktopNavbar = ({ timeString, dateString, setDrawerOpen }) => {
                         {/* Profile */}
                         <div className="flex items-center gap-3">
                             {/* Avatar placeholder */}
-                            {/* <div role='button' tabIndex={0} className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-sm font-bold text-neutral-900">
-                                <img className='w-12 h-12 rounded-full' src={photoURL} alt="" />
-                            </div> */}
+                         
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">

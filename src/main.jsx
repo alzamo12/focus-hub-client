@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ThemeProvider from './providers/themeProvider/ThemeProvider.jsx'
 
 const queryClient = new QueryClient();
-
+// window.auth = auth;
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

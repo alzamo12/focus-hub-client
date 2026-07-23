@@ -9,19 +9,8 @@ import DateInput from '../../components/Inputs/add_Class_And_Task_Form_Inputs/Da
 import Clock from '../../components/Inputs/add_Class_And_Task_Form_Inputs/Clock';
 import SelectInput from '../../components/Inputs/add_Class_And_Task_Form_Inputs/SelectInput';
 import AddButton from '../../components/buttons/addClassAndTaskSubmitButton/AddButton';
+import subjects from "../../data/subjects.json";
 
-const subjects = [
-    { value: "math", label: "Math" },
-    { value: "english", label: "English" },
-    { value: "bangla", label: "Bangla" },
-    { value: "physics", label: "Physics" },
-    { value: "chemistry", label: "Chemistry" },
-    { value: "biology", label: "Biology" },
-    { value: "ict", label: "ICT" },
-    { value: "religion", label: "Religion" },
-    { value: "economics", label: "Economics" },
-    { value: "geography", label: "Geography" }
-];
 const level = [
     { value: "easy", label: "Easy" },
     { value: "medium", label: "Medium" },

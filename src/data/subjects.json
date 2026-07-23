@@ -34,5 +34,33 @@
     {
         "value": "bgs",
         "label": "Bangladesh and Global Studies"
+    },
+    {
+        "value": "accounting",
+        "label": "Accounting"
+    },
+    {
+        "value": "financeAndBanking",
+        "label": "Finance And Banking"
+    },
+    {
+        "value": "businessEntrepreneurship",
+        "label": "Business Entrepreneurship"
+    },
+    {
+        "value": "science",
+        "label": "Science"
+    },
+    {
+        "value": "ict",
+        "label": "ICT"
+    },
+    {
+        "value": "agriculture",
+        "label": "Agriculture"
+    },
+    {
+        "value": "homeScience",
+        "label": "Home Science"
     }
 ]

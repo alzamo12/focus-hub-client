@@ -30,6 +30,7 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
     // console.log(error)
 
     const { classes = [], view = '', type } = classesData?.data || {};
+    // console.log(classesData.data)
 
     const { mutateAsync: deleteAsync } = useMutation({
         mutationFn: async (id) => {
@@ -41,12 +42,12 @@ const Classes = ({ pageView, activeTab, page, setTotalPage }) => {
                 toast.success('your class has deleted successfully');
                 queryClient.invalidateQueries(['classes'])
             }
-            console.log(data)
+            // console.log(data)
         }
     })
 
     const handleDelete = (id) => {
-        console.log("class delete hit");
+        // console.log("class delete hit");
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",

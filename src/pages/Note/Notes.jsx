@@ -52,7 +52,7 @@ const Notes = () => {
                 toast.success("note added successfully")
                 queryClient.invalidateQueries({ queryKey: ['note'] })
             }
-            console.log(data)
+            // console.log(data)
         }, onError: (err) => {
             console.log(err)
             const message = err.response.data.message || "Internal server error";
@@ -71,7 +71,7 @@ const Notes = () => {
                 toast.success("Note deleted Successfully");
                 queryClient.invalidateQueries({ queryKey: ['note'] })
             }
-            console.log(data);
+            // console.log(data);
         },
         onError: async (err) => {
             console.log(err);
@@ -96,7 +96,7 @@ const Notes = () => {
     const handleSaveNote = async () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(currentNote, "text/html");
-        console.log(doc.body.textContent)
+        // console.log(doc.body.textContent)
         if (!sub) return toast.error("Please select a subject")
         if (!title) return toast.error("Please give a title")
         if (!doc.body.textContent) return toast.error("Please write something on your note")
@@ -104,7 +104,7 @@ const Notes = () => {
 
         // const images = doc.querySelectorAll("img");
         const images = Array.from(doc.querySelectorAll("img"));
-        console.log("Total images:", images.length);
+        // console.log("Total images:", images.length);
 
         const uploadImages = images.map(async (img) => {
             const src = img.src;
@@ -125,7 +125,7 @@ const Notes = () => {
 
             // 5. Replace src with Cloudinary URL
             img.src = response.data.secure_url;
-            console.log(img.src)
+            // console.log(img.src)
         });
 
         await Promise.all(uploadImages)
@@ -143,7 +143,7 @@ const Notes = () => {
             title,
             content: updatedHtml
         };
-        console.log(noteData)
+        // console.log(noteData)
         // console.log(images)
         addNoteAsync(noteData)
         // P(noteData)
@@ -190,7 +190,7 @@ const Notes = () => {
         setCurrentNote(delta);
         setActiveTab("create_note")
     };
-    console.log('this is notes data', notesData)
+    // console.log('this is notes data', notesData)
 
     return (
         <div className='max-w-screen-2xl overflow-y-hidden dark:text-white' >

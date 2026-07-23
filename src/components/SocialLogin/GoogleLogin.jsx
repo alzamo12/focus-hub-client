@@ -1,20 +1,23 @@
 import useAuth from '../../hooks/useAuth';
-import {  useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import LoadingSpinner from '../Spinner/LoadingSpinner';
 
 const GoogleLogin = () => {
-    const { googleLogin } = useAuth();
+    const { googleLogin, user: authUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/dashboard";
     // const { mutate } = useCreateUser(from);
     const axiosPublic = useAxiosPublic();
+    // const { user: authUser } = useAuth();
 
 
     const handleSocialLogin = () => {
         googleLogin()
             .then(async (result) => {
                 const user = result?.user;
+                if (!user) return;
                 const userData = {
                     name: user?.displayName,
                     email: user?.email,
@@ -22,13 +25,16 @@ const GoogleLogin = () => {
                 };
                 try {
                     const res = await axiosPublic.post("/users", userData);
-                    console.log(res?.data)
+                    // console.log(res?.data)
                 }
-                catch {
-                    // console.log(err)
+                catch (err) {
+                    console.log(err)
                 }
                 finally {
-                    navigate(from)
+                    if (user) {
+                        // console.log(authUser)
+                        navigate(from)
+                    }
                 }
             })
             .catch(err => {

@@ -195,7 +195,9 @@ const GenerateForm = ({ formType, handleSubmit, retryAfter, isPending }) => {
                 {retryAfter > 0 ?
                     <span>retry after {retryAfter} seconds</span>
                     :
-                    <span>Generate Questions</span>
+                    // <span>Generate Questions</span>
+                    formType === 'questions' ? 'Generate Questions' :
+                        formType === 'notes' && 'Generate Notes'
                 }
             </button>
         </div>

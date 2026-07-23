@@ -47,14 +47,14 @@ const EditNote = () => {
                 queryClient.invalidateQueries({ queryKey: ['noteDetails', 'note'] });
                 navigate(`/dashboard/note/${id}`)
             };
-            console.log(data);
+            // console.log(data);
         },
         onError: (err) => {
             toast.error(err.message)
         }
     })
     if (isLoading) return <LoadingSpinner />
-    console.log(note)
+    // console.log(note)
 
     const handleEditNote = async () => {
         const parser = new DOMParser();
@@ -65,7 +65,7 @@ const EditNote = () => {
         if (!doc.body.textContent) return toast.error("Please write something on your note")
 
         const images = Array.from(doc.querySelectorAll("img"));
-        console.log("Total images:", images.length);
+        // console.log("Total images:", images.length);
 
         const uploadImages = images.map(async (img) => {
             const src = img.src;
@@ -86,7 +86,7 @@ const EditNote = () => {
 
             // 5. Replace src with Cloudinary URL
             img.src = response.data.secure_url;
-            console.log(img.src)
+            // console.log(img.src)
         });
 
         await Promise.all(uploadImages)

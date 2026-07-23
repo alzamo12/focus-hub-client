@@ -33,15 +33,29 @@ const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        return signOut(auth)
+        // console.log("logout function called");
+
+        try {
+            await signOut(auth)
+                .then(() => {
+                    setUser(null)
+                    // console.log('logout', user)
+                })
+            // console.log("firebase logout successful");
+        } catch (error) {
+            console.log("logout error", error);
+        }
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+            }
             setLoading(false)
-            setUser(currentUser)
-            console.log(currentUser)
-            console.log('token', currentUser?.accessToken)
+            // setUser(currentUser)
+            // console.log(currentUser)
+            // console.log('token', currentUser?.accessToken)
             // console.log(currentUser)
         })
         return () => {

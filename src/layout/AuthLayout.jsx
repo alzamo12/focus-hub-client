@@ -3,12 +3,14 @@ import { Link, Outlet } from 'react-router';
 import SignIn from '../pages/SignIn/SignIn';
 import DesktopNavbar from '../components/navbar/DesktopNavbar';
 import useTheme from '../hooks/useTheme';
+import { ToastContainer } from 'react-toastify';
 
 const AuthLayout = () => {
-        const { toggleTheme, theme } = useTheme();
+    const { toggleTheme, theme } = useTheme();
 
     return (
         <div className="min-h-screen bg-base-100 flex flex-col">
+            <ToastContainer />
             <header className="w-full px-4 py-3 border-b border-base-200 bg-base-100">
                 <div className="max-w-5xl mx-auto flex items-center justify-between">
                     <Link to="/" className="flex items-center gap-3">

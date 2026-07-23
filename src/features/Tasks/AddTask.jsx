@@ -28,7 +28,7 @@ const AddTask = () => {
             return res.data;
         },
         onSuccess: (result) => {
-            console.log(result)
+            // console.log(result)
             if (result?.success) {
                 toast.success('Your data has inserted successfully')
                 queryClient.invalidateQueries(["tasks"]);
@@ -48,7 +48,7 @@ const AddTask = () => {
             endTime: combineDateTime(data.date, data.endTime)
         }
         addTaskAsync(updatedData);
-        console.log(updatedData)
+        // console.log(updatedData)
     };
     return (
         <div className="bg-white dark:bg-black border-2 border-primary p-6 w-full mx-auto h-auto">

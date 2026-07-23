@@ -35,7 +35,7 @@ const EditTask = ({ task }) => {
             return res.data
         },
         onSuccess: async (data) => {
-            console.log(data)
+            // console.log(data)
             if (data.success) {
                 toast.success("Data updated Successfully")
                 queryClient.invalidateQueries({ queryKey: ['task'] });

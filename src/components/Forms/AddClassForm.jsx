@@ -6,8 +6,8 @@ import DateInput from '../Inputs/add_Class_And_Task_Form_Inputs/DateInput';
 import Clock from '../Inputs/add_Class_And_Task_Form_Inputs/Clock';
 import SelectInput from '../Inputs/add_Class_And_Task_Form_Inputs/SelectInput';
 import AddButton from '../buttons/addClassAndTaskSubmitButton/AddButton';
-
-const AddClassForm = ({ handleSubmit, onSubmit, register, control, subjects, buttonText }) => {
+import subjects from "../../data/subjects.json";
+const AddClassForm = ({ handleSubmit, onSubmit, register, control, buttonText }) => {
 
     const inputCommonStyles = "input input-bordered w-full bg-white dark:bg-black border-primary dark:text-white"
 

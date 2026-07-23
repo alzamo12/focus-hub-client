@@ -22,7 +22,7 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
         },
         suspense: true
     });
-    console.log(tasksData)
+    // console.log(tasksData)
     const { tasks = [], view = 'flat', type } = tasksData.data || {};
 
     // delete a task by id
@@ -36,12 +36,12 @@ const TasksSuspense = ({ setTotalPages, activeTab, pageView, page }) => {
                 toast.success('your task has deleted successfully');
                 queryClient.invalidateQueries({ queryKey: ['task'] })
             }
-            console.log(data)
+            // console.log(data)
         },
         onError: (err) => {
             const message = err.response.data.message || 'Internal error';
             toast.error(message);
-            console.log(err.response.data)
+            // console.log(err.response.data)
         }
     });
 

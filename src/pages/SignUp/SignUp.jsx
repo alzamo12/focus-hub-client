@@ -1,16 +1,18 @@
 // src/pages/SignUp.jsx
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "../../components/SocialLogin/GoogleLogin";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useTittle from "../../hooks/useTittle";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const { createUser, updateUser } = useAuth();
+    const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
     useTittle("Sign Up")
     function onSubmit(data) {
@@ -22,10 +24,12 @@ const SignUp = () => {
                 updateUser(name, photo)
                 // console.log(result)
                 const res = await axiosPublic.post('/users', data);
-                console.log(res?.data)
+                // console.log(res?.data)
+                navigate("/dashboard")
             })
             .catch(err => {
                 console.log(err)
+                toast.error(err.message || 'Please try again later')
                 // todo: show an error msg to the user
             })
     }
@@ -106,8 +110,8 @@ const SignUp = () => {
 
                 {/* Sign Up button */}
                 <div>
-                    <button type="submit" 
-                    className="btn btn-secondary dark:btn-primary w-full rounded-lg text-white">
+                    <button type="submit"
+                        className="btn btn-secondary dark:btn-primary w-full rounded-lg text-white">
                         Sign Up
                     </button>
                 </div>
